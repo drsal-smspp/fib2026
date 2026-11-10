@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Penjurian FIB 2.0 · Juri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: borang juri satu lajur, mesra telefon; palet poster FIB 2.0 */
+:root{
+  --navy:#17163a; --navy-2:#211f4f; --navy-3:#2c2a63; --cream:#fff8ec; --ink:#16133d; --muted:#b7b3db;
+  --pink:#c2006b; --yellow:#ffc93c; --teal:#00b3a6; --orange:#e8650a; --purple:#5b2bd6; --blue:#1f5fd1;
+  --ok:#3ddc97; --warn:#ffb020; --bad:#ff6b6b;
+  --f-display:"Baloo 2",ui-rounded,system-ui,sans-serif; --f-body:"Poppins",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--navy);color:var(--cream);font-family:var(--f-body);font-size:15px;line-height:1.5}
+[hidden]{display:none!important}
+.wrap{max-width:760px;margin:0 auto;padding:20px max(16px,env(safe-area-inset-right,0px)) 120px max(16px,env(safe-area-inset-left,0px));display:grid;gap:16px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);font-weight:700}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,6vw,40px);line-height:1;margin:2px 0 0}
+h1 .v{color:var(--yellow)}
+h2{font-family:var(--f-display);font-weight:700;font-size:22px;margin:0;line-height:1.15}
+.sub{color:var(--muted);font-size:13px}
+.card{background:var(--navy-2);border:1px solid var(--navy-3);border-radius:18px;padding:18px;display:grid;gap:12px}
+label{font-size:13px;font-weight:600;color:var(--muted)}
+input,select,textarea{width:100%;font:inherit;color:var(--cream);background:var(--navy);border:1.5px solid var(--navy-3);border-radius:12px;padding:12px 14px}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:3px solid rgba(255,201,60,.45);outline-offset:1px;border-color:var(--yellow)}
+.btn{font:inherit;font-weight:700;border:0;border-radius:12px;padding:13px 18px;cursor:pointer;background:var(--yellow);color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.danger{background:var(--bad);color:var(--ink)}
+.resetbox{border-color:rgba(255,176,32,.5)}
+.btn.ghost{background:transparent;color:var(--cream);border:1.5px solid var(--navy-3)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.msg{font-size:14px;padding:11px 14px;border-radius:12px}
+.msg.ok{background:rgba(61,220,151,.15);color:var(--ok)}
+.msg.err{background:rgba(255,107,107,.15);color:var(--bad)}
+.who{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+.who b{color:var(--cream)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font:inherit;font-size:13px;padding:7px 12px;border-radius:99px;border:1.5px solid var(--navy-3);background:transparent;color:var(--cream);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.blist{display:grid;gap:10px}
+.bitem{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;text-align:left;font:inherit;color:inherit;background:var(--navy-2);border:1.5px solid var(--navy-3);border-radius:14px;padding:12px 14px;cursor:pointer}
+.bitem:hover{border-color:var(--yellow)}
+.bno{font-family:var(--f-display);font-weight:800;font-size:24px;color:var(--yellow);min-width:64px;text-align:center;line-height:1}
+.bno small{display:block;font-family:var(--f-body);font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.08em}
+.bprod{font-weight:600;line-height:1.25;min-width:0}
+.bprod span{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+.slots{display:flex;gap:5px}
+.slot{font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;background:var(--navy-3);color:var(--muted);white-space:nowrap}
+.slot.done{background:rgba(61,220,151,.18);color:var(--ok)}
+.slot.me{background:var(--yellow);color:var(--ink)}
+.binfo{display:grid;gap:6px}
+.binfo .big{font-family:var(--f-display);font-weight:800;font-size:28px;line-height:1.05}
+.binfo ol{margin:4px 0 0;padding-left:20px;font-size:13px;color:var(--muted)}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg button{font:inherit;font-weight:700;padding:12px;border-radius:12px;border:1.5px solid var(--navy-3);background:transparent;color:var(--cream);cursor:pointer;line-height:1.2}
+.seg button small{display:block;font-weight:400;font-size:11px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:var(--ink)}
+.seg button[aria-pressed="true"] small{color:var(--ink)}
+.crit{display:grid;gap:8px;padding:14px;border-radius:14px;background:var(--navy);border-left:6px solid var(--c)}
+.crit-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.crit-h b{font-size:14px;line-height:1.3}
+.crit-h .val{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+.crit-h .val small{font-size:16px;color:var(--muted)}
+.crit.set{box-shadow:inset 0 0 0 1.5px var(--c)}
+.crit-h .num{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.crit-h .num input{width:74px;padding:8px 10px;font-family:var(--f-display);font-weight:800;font-size:26px;line-height:1;text-align:center;border-radius:10px}
+.crit-h .num small{font-size:16px;color:var(--muted);font-weight:700}
+.lv{display:grid;gap:6px}
+.lvb{font:inherit;color:var(--cream);text-align:left;display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:start;padding:10px 12px;border-radius:12px;border:1.5px solid var(--navy-3);background:transparent;cursor:pointer}
+.lvb .lr{font-weight:700;font-size:13px;line-height:1.25}
+.lvb .lr small{display:block;font-family:var(--f-display);font-size:18px;font-weight:800;color:var(--c)}
+.lvb .ld{font-size:13px;color:var(--muted);line-height:1.4}
+.lvb[aria-pressed="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 16%,transparent)}
+.lvb[aria-pressed="true"] .ld{color:var(--cream)}
+.picks{display:flex;flex-wrap:wrap;gap:8px;padding:4px 0 2px}
+.picks button{font:inherit;font-family:var(--f-display);font-weight:800;font-size:20px;min-width:52px;height:48px;border-radius:12px;border:1.5px solid var(--navy-3);background:var(--navy-2);color:var(--cream);cursor:pointer}
+.picks button[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:var(--ink)}
+.guide ol{margin:0;padding-left:20px;display:grid;gap:4px;font-size:13px;color:var(--muted)}
+.guide ol b{color:var(--cream)}
+.need{font-size:12px;color:var(--warn);font-weight:600}
+@media (max-width:480px){.lvb{grid-template-columns:1fr;gap:2px}.lvb .lr small{display:inline;margin-left:6px}}
+.totalbar{position:fixed;left:0;right:0;bottom:0;background:var(--navy-2);border-top:1px solid var(--navy-3);padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));z-index:5}
+.totalbar .in{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.tot{font-family:var(--f-display);font-weight:800;font-size:40px;line-height:1;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tot small{font-size:18px;color:var(--muted)}
+.medal{font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--navy-3);white-space:nowrap}
+.totalbar .btn{white-space:nowrap;padding:13px 14px}
+@media (max-width:400px){.tot{font-size:32px}.totalbar .in{gap:10px}}
+.totalbar .btn{margin-left:auto}
+footer{font-size:12px;color:var(--muted);text-align:center;padding-top:8px}
+footer b{color:var(--cream)}
+@media (prefers-reduced-motion:no-preference){.bitem{transition:border-color .15s}}
+.prog{display:grid;gap:8px}
+.prog-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.prog-h b{font-size:18px}
+.pbar{height:10px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff2e93,#ffc93c);border-radius:99px;transition:width .4s}
+.bitem.done{opacity:.75}
+.myslot{font-size:11px;font-weight:700;letter-spacing:.06em;padding:4px 9px;border-radius:99px;background:rgba(255,46,147,.18);white-space:nowrap}
+.alldone{text-align:center;padding:28px 16px;display:grid;gap:6px}
+.alldone b{font-size:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Penjurian · Kelab Inovasi SM Sains Pasir Puteh</div>
+    <h1>Future Innovators Bootcamp <span class="v">2.0</span></h1>
+  </header>
+
+  <!-- Masuk -->
+  <section class="card" id="gate">
+    <h2>Log masuk juri</h2>
+    <form id="gateForm" style="display:grid;gap:12px">
+      <div style="display:grid;gap:6px"><label for="kod">Kod juri</label><input id="kod" type="password" autocomplete="off" required></div>
+      <div style="display:grid;gap:6px"><label for="namaSel">Nama juri</label><select id="namaSel" required><option value="">— Pilih nama anda —</option></select><input id="nama" type="text" maxlength="80" placeholder="Taip nama penuh" hidden></div>
+      <button class="btn" id="btnMasuk" type="submit">Masuk</button>
+    </form>
+    <div id="gateMsg" class="msg err" hidden></div>
+  </section>
+
+  <!-- Senarai booth -->
+  <section id="listView" hidden style="display:grid;gap:14px">
+    <div class="who"><span>Juri: <b id="whoName"></b></span><button class="chip" id="btnKeluar" type="button">Tukar juri</button></div>
+    <div id="listMsg" class="msg" hidden></div>
+    <div class="card prog"><div class="prog-h"><b id="progTxt"></b><span id="progPct"></span></div><div class="pbar"><i id="progBar"></i></div><div class="sub" id="progress"></div></div>
+    <div class="chips" role="group" aria-label="Tapis booth">
+      <button class="chip" data-f="saya" aria-pressed="true">Booth untuk dinilai</button>
+      <button class="chip" data-f="sudah" aria-pressed="false">Sudah dihantar</button>
+    </div>
+    <div class="blist" id="blist"></div>
+  </section>
+
+  <!-- Borang markah -->
+  <section id="formView" hidden style="display:grid;gap:14px">
+    <button class="chip" id="btnBack" type="button" style="justify-self:start">← Senarai booth</button>
+    <div class="card binfo" id="binfo"></div>
+    <div class="card resetbox" id="resetBox" hidden>
+      <div><b>Markah booth ini sudah dihantar</b> <span id="rbScore"></span></div>
+      <div class="sub">Anda boleh ubah markah di bawah dan tekan Kemas kini, atau reset untuk padam markah dan nilai semula dari awal.</div>
+      <div class="row" id="rbStep1"><button class="btn ghost" id="btnReset" type="button">Reset markah</button></div>
+      <div class="row" id="rbStep2" hidden><span class="need">Padam markah booth ini? Tindakan ini tidak boleh dibatalkan.</span><button class="btn danger" id="btnResetYa" type="button">Ya, reset</button><button class="btn ghost" id="btnResetBatal" type="button">Batal</button></div>
+    </div>
+    <div class="card">
+      <h2 id="slotTitle">Anda Juri ke berapa untuk booth ini?</h2>
+      <div class="seg" id="seg">
+        <button type="button" data-s="1" aria-pressed="false">Juri 1<small id="s1info">kosong</small></button>
+        <button type="button" data-s="2" aria-pressed="false">Juri 2<small id="s2info">kosong</small></button>
+      </div>
+      <div id="slotWarn" class="msg err" hidden></div>
+    </div>
+    <details class="card guide" open>
+      <summary><b>Panduan juri: menilai dengan adil</b></summary>
+      <ol>
+        <li><b>Baca deskriptor dahulu.</b> Pilih tahap yang paling sepadan dengan apa yang anda lihat, kemudian pilih markah dalam julat itu.</li>
+        <li><b>Nilai produk dan pembentangan sahaja</b> — bukan kelas, guru pembimbing, atau siapa murid itu.</li>
+        <li><b>Nilai setiap booth sendiri.</b> Jangan bandingkan dengan booth yang anda nilai sebelum ini.</li>
+        <li><b>Jika ragu-ragu antara dua tahap,</b> pilih tahap yang lebih rendah dan beri markah tertinggi dalam julatnya.</li>
+        <li><b>Markah penuh</b> hanya jika semua ciri tahap Cemerlang dipenuhi.</li>
+        <li><b>Tulis catatan ringkas</b> untuk menyokong markah anda.</li>
+      </ol>
+    </details>
+    <div class="card" id="crits"></div>
+    <div class="card">
+      <label for="catatan">Catatan juri (pilihan)</label>
+      <textarea id="catatan" rows="3" maxlength="500" placeholder="Kekuatan, cadangan penambahbaikan…"></textarea>
+    </div>
+    <div id="formMsg" class="msg" hidden></div>
+  </section>
+
+  <footer>Powered by <b>SMSPP YIC 2026</b></footer>
+</div>
+
+<div class="totalbar" id="totalbar" hidden>
+  <div class="in">
+    <div><div class="sub" style="font-size:11px;white-space:nowrap">JUMLAH</div><div class="tot"><span id="tot">0</span><small> / 100</small></div></div>
+    <span class="medal" id="medal">—</span>
+    <button class="btn" id="btnHantar" type="button" disabled>Hantar markah</button>
+  </div>
+</div>
+
+<script>
+const GAS_URL='https://script.google.com/macros/s/AKfycbxOr96JYjq4h_O0QIif97x35_FL_x3nt4LtdYPbC20uqe_yXn-J3_3VuF9dO32hfH6ATA/exec';
+const SENARAI_JURI=["Zetty Zuliahana Binti Mohamed Zamzuri", "Siti Nor Zulaikha Binti Zainuddin", "Nik Nur Arissa Sofea Binti Nik Azizi", "Nur Umairah Sofea Binti Abdul Rahman", "Wan Mirza Azeeza Binti Wan Mahidin", "Nik Wardahtul Fatihah Bt Nik Kamarullah", "Putri Alya Az-zahra Bt Mohamad Amro Safizan", "Puteri Aisyah Batrisyia Bt Syamsul Arif", "Madihah Najwa Bt Mohd Nawawi", "Hani Afrina Bt Mohamad Haslizan", "Nur Emilya Natasya Binti Mohd Fairul Akman", "Tuan Aqeela Damia binti Tuan Mohd Affendi", "Nurul Iman binti Mohd Bahrol Haisham", "Adreana Qaesara binti Mohd Norli", "Nur Alya Auni Binti Zainun"];
+const KRITERIA=[
+  {n:'Keaslian dan kreativiti idea',m:20,c:'#ff8a3d',L:[
+    ['Cemerlang',17,20,'Idea baharu dan unik, belum pernah dilihat. Cara penyelesaian kreatif dan tersendiri.'],
+    ['Baik',13,16,'Idea diubah suai daripada produk sedia ada dengan penambahbaikan yang jelas.'],
+    ['Sederhana',8,12,'Idea biasa dan hampir sama dengan produk sedia ada; sedikit sentuhan sendiri.'],
+    ['Lemah',0,7,'Meniru produk sedia ada; tiada unsur baharu.']]},
+  {n:'Impak inovasi',m:25,c:'#ff4fa8',L:[
+    ['Cemerlang',21,25,'Menyelesaikan masalah sebenar dengan jelas. Manfaat besar kepada murid, sekolah atau komuniti dan boleh digunakan secara meluas.'],
+    ['Baik',16,20,'Masalah jelas dan manfaat nyata kepada kumpulan sasaran.'],
+    ['Sederhana',10,15,'Masalah kurang jelas; manfaat terhad kepada sedikit pengguna.'],
+    ['Lemah',0,9,'Tidak jelas masalah yang diselesaikan; manfaat sukar dilihat.']]},
+  {n:'Fungsi, keberkesanan dan kualiti prototaip',m:20,c:'#2fd6c9',L:[
+    ['Cemerlang',17,20,'Prototaip berfungsi sepenuhnya semasa demo, kemas dan tahan lasak.'],
+    ['Baik',13,16,'Berfungsi dengan baik; ada masalah kecil sahaja.'],
+    ['Sederhana',8,12,'Sebahagian sahaja berfungsi atau masih model awal.'],
+    ['Lemah',0,7,'Tidak berfungsi atau tiada prototaip ditunjukkan.']]},
+  {n:'Reka bentuk dan pengalaman pengguna',m:10,c:'#a98bff',L:[
+    ['Cemerlang',9,10,'Menarik, mudah difahami dan boleh digunakan tanpa penerangan panjang.'],
+    ['Baik',7,8,'Menarik dan mudah digunakan selepas sedikit penerangan.'],
+    ['Sederhana',4,6,'Reka bentuk biasa; pengguna perlu banyak bantuan.'],
+    ['Lemah',0,3,'Sukar digunakan atau tidak kemas.']]},
+  {n:'Kreativiti booth pameran inovasi',m:10,c:'#ffc93c',L:[
+    ['Cemerlang',9,10,'Booth kreatif dan bertema; maklumat produk sangat jelas (poster, label, bahan sokongan).'],
+    ['Baik',7,8,'Booth kemas dan menarik; maklumat mencukupi.'],
+    ['Sederhana',4,6,'Booth ringkas; maklumat terhad.'],
+    ['Lemah',0,3,'Booth tidak tersusun; tiada hiasan atau maklumat.']]},
+  {n:'Pembentangan, demonstrasi dan soal jawab',m:15,c:'#5b9bff',L:[
+    ['Cemerlang',13,15,'Yakin dan jelas; semua ahli terlibat; demo lancar; soalan dijawab dengan tepat.'],
+    ['Baik',10,12,'Jelas dan lancar; kebanyakan soalan dijawab dengan baik.'],
+    ['Sederhana',6,9,'Kurang yakin atau bergantung pada seorang ahli; jawapan kurang tepat.'],
+    ['Lemah',0,5,'Tidak dapat menerangkan produk atau menjawab soalan.']]}
+];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>String(s||'').trim().toUpperCase().replace(/\s+/g,' ');
+let KOD='', NAMA='', D=null, filter='saya', cur=null, slot=0, vals=[null,null,null,null,null,null], busy=false;
+
+function store(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(_){}}
+function load(k){try{return localStorage.getItem(k)}catch(_){return null}}
+
+async function fetchData(){
+  const r=await (await fetch(GAS_URL+'?action=penjurian&kod='+encodeURIComponent(KOD),{cache:'no-store'})).json();
+  if(!r.ok) throw new Error(r.error||'gagal');
+  D=r; return r;
+}
+const scoresFor=no=>D.markah.filter(m=>m.no===no);
+const mine=no=>scoresFor(no).find(m=>norm(m.juri)===norm(NAMA));
+
+$('gateForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  KOD=$('kod').value.trim(); NAMA=$('namaSel').value==='__lain'?$('nama').value.trim():$('namaSel').value;
+  if(!KOD||!NAMA) return;
+  $('btnMasuk').disabled=true; $('btnMasuk').textContent='Menyemak…';
+  try{ await fetchData(); store('fib2_jkod',KOD); store('fib2_jnama',NAMA); enterList(); }
+  catch(err){ $('gateMsg').textContent= err.message==='kod'?'Kod juri tidak sah.':'Tidak dapat menghubungi pelayan. Semak internet.'; $('gateMsg').hidden=false; }
+  $('btnMasuk').disabled=false; $('btnMasuk').textContent='Masuk';
+});
+(()=>{ const sel=$('namaSel');
+  SENARAI_JURI.forEach((n,i)=>sel.add(new Option((i+1)+'. '+n,n)));
+  sel.add(new Option('Lain-lain (taip nama)','__lain'));
+  sel.addEventListener('change',()=>{ const o=sel.value==='__lain'; $('nama').hidden=!o; $('nama').required=o; if(o) $('nama').focus(); });
+})();
+(()=>{ const k=load('fib2_jkod'), n=load('fib2_jnama'); if(n){ if(SENARAI_JURI.includes(n)) $('namaSel').value=n; else { $('namaSel').value='__lain'; $('nama').hidden=false; $('nama').value=n; } } if(k&&n){ $('kod').value=k; $('gateForm').requestSubmit(); } })();
+$('btnKeluar').addEventListener('click',()=>{ store('fib2_jkod',null); $('listView').hidden=true; $('gate').hidden=false; $('kod').value=''; });
+
+function enterList(){
+  $('gate').hidden=true; $('formView').hidden=true; $('totalbar').hidden=true; $('listView').hidden=false;
+  $('whoName').textContent=NAMA; renderList();
+}
+function myBooths(){
+  const n=norm(NAMA), M=D.meta||{};
+  return D.booths.map(b=>{const m=M[b.no]||{}; const sl=norm(m.juri1)===n?1:norm(m.juri2)===n?2:0; return sl?{...b,mySlot:sl}:null;}).filter(Boolean);
+}
+const sentFor=b=>{const x=scoresFor(b.no).find(m=>m.slot===b.mySlot); return x&&norm(x.juri)===norm(NAMA)?x:null;};
+function renderList(){
+  const mb=myBooths(), done=mb.filter(sentFor), left=mb.filter(b=>!sentFor(b));
+  if(!mb.length){
+    $('progTxt').textContent='Tiada booth ditetapkan'; $('progPct').textContent=''; $('progBar').style.width='0';
+    $('progress').textContent='Nama anda belum ada dalam tugasan juri. Semak ejaan nama anda atau hubungi urus setia.';
+    $('blist').innerHTML=''; return;
+  }
+  $('progTxt').textContent='Selesai '+done.length+' / '+mb.length+' booth';
+  $('progPct').textContent=Math.round(done.length/mb.length*100)+'%';
+  $('progBar').style.width=(done.length/mb.length*100)+'%';
+  $('progress').textContent='Booth tugasan anda: '+mb.map(b=>b.kod||b.no).join(', ')+'. Booth yang sudah dihantar akan hilang daripada senarai.';
+  const list=filter==='sudah'?done:left;
+  $('blist').innerHTML=list.map(b=>{
+    const x=sentFor(b);
+    return `<button class="bitem ${x?'done':''}" data-no="${b.no}" type="button"><span class="bno"><small>${b.kod?esc(b.kod.split(' ')[0]):'BOOTH'}</small>${b.kod?esc(b.kod.split(' ').pop()):b.no}</span><span class="bprod">${esc(b.produk||'Produk belum dinamakan')}<span>${esc(b.kod||'')} · ${esc(b.subjek)}</span></span><span class="myslot">${x?'✓ '+x.jumlah+'/100':'Juri '+b.mySlot}</span></button>`;
+  }).join('') || (filter==='sudah'
+    ? '<div class="sub" style="text-align:center;padding:24px">Belum ada markah dihantar.</div>'
+    : '<div class="card alldone"><b>Tahniah, penjurian anda selesai!</b><span class="sub">Semua '+mb.length+' booth tugasan anda sudah dihantar. Terima kasih.</span></div>');
+}
+document.querySelectorAll('.chips .chip').forEach(c=>c.addEventListener('click',()=>{filter=c.dataset.f;document.querySelectorAll('.chips .chip').forEach(x=>x.setAttribute('aria-pressed',x===c));renderList();}));
+$('blist').addEventListener('click',e=>{const b=e.target.closest('.bitem'); if(b) openForm(+b.dataset.no);});
+$('btnBack').addEventListener('click',async()=>{ try{await fetchData();}catch(_){} enterList(); });
+
+function openForm(no){
+  cur=myBooths().find(b=>b.no===no); if(!cur) return;
+  const s=scoresFor(no), my=mine(no), meta=(D.meta||{})[no]||{};
+  $('binfo').innerHTML=`<div class="eyebrow">Booth ${esc(cur.kod||cur.no)}</div><div class="big">${esc(cur.produk||'Produk belum dinamakan')}</div><div class="sub">${esc(cur.subjek)} · Guru: ${esc(cur.guru)}${meta.kategori?' · Kategori: '+esc(meta.kategori):''}</div><ol>${cur.ahli.map(a=>`<li>${esc(a.nama)} <span style="opacity:.8">(${esc(a.kelas)})</span></li>`).join('')}</ol>`;
+  [1,2].forEach(n=>{const x=s.find(m=>m.slot===n); $('s'+n+'info').textContent= x ? (norm(x.juri)===norm(NAMA)?'markah anda':'oleh '+x.juri) : (meta['juri'+n]?'ditetapkan: '+meta['juri'+n]:'kosong');});
+  // pilih slot: markah sendiri > tugasan urus setia > slot kosong pertama
+  slot = cur.mySlot;
+  const myS = sentFor(cur);
+  vals = myS ? myS.k.slice() : [null,null,null,null,null,null];
+  $('catatan').value = myS ? myS.catatan : '';
+  $('resetBox').hidden=!myS; $('rbStep1').hidden=false; $('rbStep2').hidden=true; if(myS) $('rbScore').textContent='('+myS.jumlah+'/100)';
+  $('slotTitle').textContent='Anda dilantik sebagai Juri '+slot+' untuk booth ini';
+  $('seg').hidden=true;
+  renderCrits(); setSlot(slot);
+  $('formMsg').hidden=true;
+  $('listView').hidden=true; $('formView').hidden=false; $('totalbar').hidden=false; window.scrollTo(0,0);
+}
+function setSlot(n){
+  slot=n;
+  document.querySelectorAll('#seg button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.s===n));
+  const other=n?scoresFor(cur.no).find(m=>m.slot===n&&norm(m.juri)!==norm(NAMA)):null;
+  $('slotWarn').hidden=!other;
+  if(other) $('slotWarn').textContent='Juri '+n+' untuk booth ini sudah dihantar oleh '+other.juri+'. Jika anda hantar, markah itu akan digantikan.';
+  updateTotal();
+}
+
+const lvlOf=(i,v)=>v==null?-1:KRITERIA[i].L.findIndex(l=>v>=l[1]&&v<=l[2]);
+let openLv=[-1,-1,-1,-1,-1,-1];
+function renderCrits(){
+  openLv=vals.map((v,i)=>lvlOf(i,v));
+  $('crits').innerHTML='<h2>Markah mengikut rubrik</h2><div class="sub">Tekan tahap yang sepadan, kemudian tekan markah. Atau taip terus nombor dalam kotak.</div>'+KRITERIA.map((k,i)=>critHTML(k,i)).join('');
+}
+function critHTML(k,i){
+  const v=vals[i], ol=openLv[i];
+  return `<div class="crit ${v!=null?'set':''}" id="c${i}" style="--c:${k.c}">
+    <div class="crit-h"><b>${i+1}. ${esc(k.n)}</b><span class="num"><input id="in${i}" data-i="${i}" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" value="${v==null?'':v}" placeholder="–" aria-label="Markah ${esc(k.n)}, maksimum ${k.m}"><small>/ ${k.m}</small></span></div>
+    <div class="lv">${k.L.map((l,j)=>`<button type="button" class="lvb" data-i="${i}" data-l="${j}" aria-pressed="${ol===j}"><span class="lr">${l[0]}<small>${l[1]}–${l[2]}</small></span><span class="ld">${esc(l[3])}</span></button>${ol===j?`<div class="picks" role="group" aria-label="Pilih markah ${l[0]}">${Array.from({length:l[2]-l[1]+1},(_,x)=>l[2]-x).map(n=>`<button type="button" data-i="${i}" data-v="${n}" aria-pressed="${v===n}">${n}</button>`).join('')}</div>`:''}`).join('')}</div>
+    ${v==null?'<div class="need">Belum diberi markah</div>':''}
+  </div>`;
+}
+function redraw(i){ const el=$('c'+i); const tmp=document.createElement('div'); tmp.innerHTML=critHTML(KRITERIA[i],i); el.replaceWith(tmp.firstElementChild); updateTotal(); }
+$('crits').addEventListener('click',e=>{
+  const lb=e.target.closest('.lvb'), pk=e.target.closest('.picks button');
+  if(pk){ const i=+pk.dataset.i; vals[i]=+pk.dataset.v; openLv[i]=lvlOf(i,vals[i]); redraw(i); return; }
+  if(lb){ const i=+lb.dataset.i, j=+lb.dataset.l; openLv[i]= openLv[i]===j?-1:j; redraw(i); }
+});
+$('crits').addEventListener('change',e=>{
+  const inp=e.target.closest('input[data-i]'); if(!inp) return; const i=+inp.dataset.i, m=KRITERIA[i].m;
+  const raw=inp.value.replace(/\D/g,'');
+  if(raw===''){ vals[i]=null; } else { vals[i]=Math.max(0,Math.min(m,+raw)); }
+  openLv[i]=lvlOf(i,vals[i]); redraw(i);
+});
+$('crits').addEventListener('input',e=>{ const inp=e.target.closest('input[data-i]'); if(!inp) return; inp.value=inp.value.replace(/\D/g,''); const i=+inp.dataset.i; if(inp.value!==''&&+inp.value>KRITERIA[i].m) inp.value=KRITERIA[i].m; vals[i]=inp.value===''?null:+inp.value; updateTotal(); });
+function updateTotal(){
+  const t=vals.reduce((a,b)=>a+(b||0),0), left=vals.filter(v=>v==null).length;
+  $('tot').textContent=t; $('medal').textContent=left?left+' belum':'Lengkap'; $('medal').hidden=false;
+  $('btnHantar').disabled=busy||!slot||left>0;
+  $('btnHantar').textContent=left?'Belum lengkap':(sentFor(cur)?'Kemas kini markah':'Hantar markah');
+}
+$('btnHantar').addEventListener('click',async()=>{
+  if(!slot||busy) return;
+  busy=true; updateTotal(); $('btnHantar').textContent='Menghantar…';
+  try{
+    const r=await (await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'markah',kod:KOD,no:cur.no,slot,juri:NAMA,k:vals,catatan:$('catatan').value.trim()})})).json();
+    if(!r.ok) throw new Error(r.error);
+    busy=false;
+    try{await fetchData();}catch(_){}
+    enterList();
+    $('listMsg').className='msg ok'; $('listMsg').textContent='✓ '+(cur.kod||cur.no)+' selesai dinilai: '+r.jumlah+'/100'+(r.ganti?' (dikemas kini).':'. Booth ini sudah dikeluarkan daripada senarai anda.'); $('listMsg').hidden=false;
+    setTimeout(()=>$('listMsg').hidden=true,6000);
+  }catch(err){
+    busy=false; updateTotal();
+    $('formMsg').className='msg err'; $('formMsg').textContent=err.message==='kod'?'Kod juri tidak sah.':err.message==='julat'?'Markah di luar julat rubrik.':'Gagal menghantar. Semak internet dan cuba lagi — markah anda belum hilang.'; $('formMsg').hidden=false;
+  }
+});
+$('btnReset').addEventListener('click',()=>{$('rbStep1').hidden=true;$('rbStep2').hidden=false;});
+$('btnResetBatal').addEventListener('click',()=>{$('rbStep1').hidden=false;$('rbStep2').hidden=true;});
+$('btnResetYa').addEventListener('click',async()=>{
+  const b=$('btnResetYa'); b.disabled=true; b.textContent='Memadam…';
+  try{
+    const r=await (await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'padamMarkah',kod:KOD,no:cur.no,slot:cur.mySlot,juri:NAMA})})).json();
+    if(!r.ok&&r.error!=='tiada') throw new Error(r.error);
+    try{await fetchData();}catch(_){}
+    filter='saya'; document.querySelectorAll('.chips .chip').forEach(x=>x.setAttribute('aria-pressed',x.dataset.f==='saya'));
+    enterList();
+    $('listMsg').className='msg ok'; $('listMsg').textContent='Markah '+(cur.kod||cur.no)+' sudah direset. Booth ini kembali ke senarai untuk dinilai semula.'; $('listMsg').hidden=false;
+    setTimeout(()=>$('listMsg').hidden=true,6000);
+  }catch(err){ $('formMsg').className='msg err'; $('formMsg').textContent=err.message==='bukan'?'Anda hanya boleh reset markah anda sendiri.':'Gagal reset. Semak internet dan cuba lagi.'; $('formMsg').hidden=false; }
+  b.disabled=false; b.textContent='Ya, reset';
+});
+</script>
+</body>
+</html>

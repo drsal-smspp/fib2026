@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Pendaftaran FIB 2.0 · SMSPP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#f3f5f9; --surface:#ffffff; --ink:#14213d; --muted:#5b6782; --line:#dbe1ec;
+  --accent:#1f4fd1; --accent-ink:#ffffff; --spark:#f2a516; --spark-soft:#fff3d6;
+  --ok:#147a4b; --ok-soft:#e2f4ea; --danger:#b42318; --danger-soft:#fde8e6;
+  --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0d1424; --surface:#151f35; --ink:#e8edf7; --muted:#9aa7c2; --line:#26324d;
+  --accent:#6f95ff; --accent-ink:#0d1424; --spark:#f5b83d; --spark-soft:#3a2c0e;
+  --ok:#5fd39b; --ok-soft:#123326; --danger:#ff8a7e; --danger-soft:#3d1714; color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5}
+[hidden]{display:none!important}
+.wrap{max-width:1200px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right,0px)) 40px max(16px,env(safe-area-inset-left,0px));display:grid;gap:20px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;border-bottom:2px solid var(--ink);padding-bottom:14px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(26px,4.2vw,40px);line-height:1.05;margin:4px 0 0;text-wrap:balance}
+h1 .v{color:var(--spark)}
+.counts{display:flex;gap:8px;flex-wrap:wrap}
+.count{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 12px;min-width:76px}
+.count b{display:block;font-family:var(--f-display);font-size:22px;font-variant-numeric:tabular-nums;line-height:1.1}
+.count span{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.count.total{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.count.total span{color:inherit;opacity:.75}
+.grid{display:grid;grid-template-columns:minmax(0,410px) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:14px;min-width:0}
+.panel h2{font-family:var(--f-display);font-weight:600;font-size:19px;margin:0}
+.field{display:grid;gap:6px}
+.field label{font-size:13px;font-weight:600;display:flex;gap:8px;align-items:center}
+.opt{font-weight:400;color:var(--muted)}
+.step{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:12px;font-weight:600;flex:none}
+select,input{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:11px 12px}
+select:focus,input:focus,button:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 40%,transparent);outline-offset:1px;border-color:var(--accent)}
+select:disabled{opacity:.5}
+.card{border:2px dashed var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:8px;min-height:120px;align-content:center}
+.card.has{border-style:solid;border-color:var(--spark);background:var(--spark-soft)}
+.card .empty{color:var(--muted);font-size:14px;text-align:center}
+.card .nm{font-family:var(--f-display);font-weight:600;font-size:20px;line-height:1.2;text-wrap:balance}
+.kv{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted)}
+.kv b{color:var(--ink);font-weight:600}
+.ic{font-family:var(--f-mono);font-size:17px;letter-spacing:.04em}
+.btn{font:inherit;font-weight:600;border:0;border-radius:10px;padding:12px 16px;cursor:pointer;background:var(--accent);color:var(--accent-ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.pill{display:inline-flex;font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px;background:var(--ok-soft);color:var(--ok);width:max-content}
+.msg{font-size:13px;padding:10px 12px;border-radius:10px}
+.msg.ok{background:var(--ok-soft);color:var(--ok)}
+.msg.err{background:var(--danger-soft);color:var(--danger)}
+.sep{border:0;border-top:1px solid var(--line);margin:2px 0}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.toolbar input{flex:1 1 200px;width:auto}
+.chip{font:inherit;font-size:13px;padding:7px 12px;border-radius:99px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;max-height:70vh}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--bg);position:sticky;top:0;white-space:nowrap}
+td.n{font-variant-numeric:tabular-nums;color:var(--muted)}
+td.mono{font-family:var(--f-mono);font-size:12.5px;white-space:nowrap}
+td.nw{white-space:nowrap}
+td.dim{color:var(--muted)}
+tr:last-child td{border-bottom:0}
+.rm{font:inherit;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:8px;padding:4px 9px;cursor:pointer;white-space:nowrap}
+.rm.sure{background:var(--danger);color:#fff;border-color:var(--danger)}
+.tbl-empty{padding:28px 16px;text-align:center;color:var(--muted)}
+.status{font-size:12px;color:var(--muted)}
+.status a{color:var(--accent);font-weight:600}
+.gate{max-width:420px;margin:8vh auto 0;width:100%}
+footer{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;border-top:1px solid var(--line);padding-top:12px}
+footer b{color:var(--ink)}
+@media (prefers-reduced-motion:no-preference){.card.has{animation:pop .25s ease-out}@keyframes pop{from{transform:scale(.98)}to{transform:none}}}
+.tag{font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;background:var(--spark-soft);color:var(--ink);border:1px solid var(--spark)}
+.members{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:m}
+.members li{display:flex;gap:10px;align-items:center;justify-content:space-between;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;counter-increment:m}
+.members li:not(.empty-li)::before{content:counter(m);display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:12px;font-weight:600;flex:none}
+.members li.empty-li{border-style:dashed;color:var(--muted);font-size:13px;justify-content:center;text-align:center}
+.mi{display:grid;gap:2px;flex:1;min-width:0;font-size:13px;color:var(--muted)}
+.mi b{color:var(--ink);font-size:14px}
+.mono{font-family:var(--f-mono);font-size:12.5px}
+.adder{display:grid;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px}
+.adder select{background:var(--surface)}
+.adder-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.preview{border:2px solid var(--spark);background:var(--spark-soft);border-radius:10px;padding:10px 12px;display:grid;gap:4px}
+.preview .nm{font-family:var(--f-display);font-weight:600;font-size:17px;line-height:1.2}
+.glist{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;max-height:75vh;overflow:auto}
+.gcard{border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;gap:8px;align-content:start}
+.ghead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.gno{font-family:var(--f-display);font-weight:800;font-size:18px;color:var(--accent)}
+.gprod{font-weight:600;font-size:15px;min-width:0}
+.gprodrow{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ed{font:inherit;font-size:12px;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:8px;padding:4px 9px;cursor:pointer;white-space:nowrap}
+.pform{display:flex;gap:6px}
+.pform input{flex:1;min-width:0;padding:8px 10px}
+.pform .btn{padding:8px 12px}
+.gprod.dim{color:var(--muted);font-weight:400;font-style:italic}
+.gmem{margin:0;padding-left:20px;display:grid;gap:6px;font-size:13px}
+.gmem li span{display:block}
+.gmem li .mono,.gmem li .nw{color:var(--muted);font-size:12px;display:inline;margin-right:10px}
+
+/* Latar poster program */
+body{background:#17163a url("poster-taklimat.jpg") center top/cover no-repeat fixed}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(23,22,58,.86),rgba(23,22,58,.93))}
+body{position:relative;isolation:isolate}
+header{border-bottom-color:rgba(255,255,255,.85)}
+header .eyebrow,header .status{color:#c9cbe6}
+header h1{color:#ffffff}
+header .status a{color:#ffc93c}
+footer{border-top-color:rgba(255,255,255,.25);color:#c9cbe6}
+footer b{color:#ffffff}
+header .count.total{background:#ffc93c;color:#17163a;border-color:#ffc93c}
+header .count.total span{color:#17163a;opacity:.8}
+.gatewrap{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:20px;align-items:start}
+.gatewrap .gate{margin:0}
+@media (max-width:860px){.gatewrap{grid-template-columns:minmax(0,1fr)}}
+.posters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.posters a{display:block;border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .2s}
+.posters a:hover{transform:translateY(-3px)}
+.posters img{display:block;width:100%;height:auto}
+.postersec h2{font-family:var(--f-display);font-weight:600;font-size:19px;margin:0 0 12px;color:#fff}
+@media (prefers-reduced-motion:reduce){.posters a{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Kelab Inovasi · SM Sains Pasir Puteh</div>
+      <h1>Bengkel Future Innovators Bootcamp <span class="v">2.0</span></h1>
+      <div class="status" id="sheetStatus">Pendaftaran kumpulan · murid Tingkatan 1, 2 dan 3</div>
+    </div>
+    <div class="counts" aria-label="Bilangan berdaftar" id="counts" hidden>
+      <div class="count"><b id="cG">0</b><span>Kumpulan</span></div>
+      <div class="count"><b id="c1">0</b><span>Ahli T1</span></div>
+      <div class="count"><b id="c2">0</b><span>Ahli T2</span></div>
+      <div class="count"><b id="c3">0</b><span>Ahli T3</span></div>
+      <div class="count total"><b id="cT">0</b><span>Jumlah ahli</span></div>
+    </div>
+  </header>
+
+  <div class="gatewrap" id="gatewrap">
+  <section class="panel gate" id="gate">
+    <h2>Masukkan kod akses</h2>
+    <p class="status" style="margin:0">Senarai murid dan No. KP dilindungi. Dapatkan kod akses daripada urus setia program.</p>
+    <form id="gateForm" class="field">
+      <label for="kod">Kod akses</label>
+      <input id="kod" type="password" autocomplete="off" required>
+      <button class="btn" id="btnKod" type="submit">Buka</button>
+    </form>
+    <div id="gateMsg" class="msg err" hidden></div>
+  </section>
+  <div class="posters" aria-label="Poster program">
+      <a href="poster-taklimat.jpg" target="_blank" rel="noopener"><img src="poster-taklimat.jpg" alt="Poster Taklimat Program Future Innovators Bootcamp 2.0, Selasa 3 November 2026, 7.40 hingga 10.10 pagi, Masjid Rabiatul Adawiah"></a>
+      <a href="poster-ldk.jpg" target="_blank" rel="noopener"><img src="poster-ldk.jpg" alt="Poster 7 Modul LDK Future Innovators Bootcamp 2.0, 3 hingga 7 November 2026"></a>
+    </div>
+  </div>
+
+  <div class="grid" id="app" hidden>
+    <section class="panel" aria-labelledby="h-daftar">
+      <div class="toolbar" style="justify-content:space-between">
+        <h2 id="h-daftar">Daftar kumpulan</h2>
+        <span class="tag" id="nextNo">Kumpulan baharu</span>
+      </div>
+
+      <div class="field">
+        <label for="produk"><span class="step">1</span>Nama produk inovasi <span class="opt">(pilihan)</span></label>
+        <input id="produk" type="text" maxlength="150" placeholder="Contoh: Smart Wudhu Tap">
+      </div>
+      <div class="field">
+        <label for="subjek"><span class="step">2</span>Subjek</label>
+        <select id="subjek">
+          <option value="">— Pilih subjek —</option>
+          <option>Pendidikan Islam</option><option>Bahasa Melayu</option><option>Bahasa Inggeris</option><option>Bahasa Arab</option>
+          <option>Matematik</option><option>Sains</option><option>Sejarah</option><option>Geografi</option>
+          <option>Reka Bentuk dan Teknologi</option><option>Asas Sains Komputer</option><option>Pendidikan Seni Visual</option><option>Pendidikan Jasmani dan Kesihatan</option>
+          <option value="__lain">Lain-lain (nyatakan)</option>
+        </select>
+        <input id="subjekLain" type="text" maxlength="80" placeholder="Nyatakan subjek" hidden>
+      </div>
+      <div class="field">
+        <label for="guru"><span class="step">3</span>Guru pembimbing</label>
+        <input id="guru" type="text" maxlength="120" list="guruList" placeholder="Nama guru pembimbing">
+        <datalist id="guruList"></datalist>
+      </div>
+
+      <hr class="sep">
+      <div class="field">
+        <label><span class="step">4</span>Ahli kumpulan <span class="opt" id="ahliCount">(0 / 4)</span></label>
+        <ol class="members" id="members"></ol>
+      </div>
+      <div class="adder" id="adder">
+        <div class="adder-row">
+          <select id="selT" aria-label="Tingkatan">
+            <option value="">Tingkatan</option>
+            <option value="1">Tingkatan 1</option><option value="2">Tingkatan 2</option><option value="3">Tingkatan 3</option>
+          </select>
+          <select id="selK" disabled aria-label="Kelas"><option value="">Kelas</option></select>
+        </div>
+        <select id="selN" disabled aria-label="Nama murid"><option value="">— Pilih nama murid —</option></select>
+        <div class="preview" id="preview" hidden></div>
+        <button class="btn ghost" id="btnTambah" type="button" disabled>+ Tambah ahli</button>
+      </div>
+
+      <button class="btn" id="btnDaftar" disabled>Daftar kumpulan</button>
+      <div id="msg" class="msg" hidden></div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-senarai">
+      <div class="toolbar" style="justify-content:space-between">
+        <h2 id="h-senarai">Kumpulan berdaftar</h2>
+        <div class="toolbar">
+          <button class="btn ghost" id="btnCsv" type="button">CSV</button>
+          <button class="btn ghost" id="btnRefresh" type="button">Muat semula</button>
+        </div>
+      </div>
+      <input type="search" id="q" placeholder="Cari kumpulan, produk, guru, nama ahli atau No. KP" aria-label="Cari kumpulan">
+      <div class="glist" id="glist"></div>
+      <div class="tbl-empty" id="tblEmpty">Memuatkan senarai…</div>
+      <div class="status" id="lastSync"></div>
+    </section>
+  </div>
+
+  <section class="postersec" id="postersec" hidden>
+    <h2>Poster program</h2>
+    <div class="posters">
+      <a href="poster-taklimat.jpg" target="_blank" rel="noopener"><img src="poster-taklimat.jpg" alt="Poster Taklimat Program Future Innovators Bootcamp 2.0, Selasa 3 November 2026, 7.40 hingga 10.10 pagi, Masjid Rabiatul Adawiah"></a>
+      <a href="poster-ldk.jpg" target="_blank" rel="noopener"><img src="poster-ldk.jpg" alt="Poster 7 Modul LDK Future Innovators Bootcamp 2.0, 3 hingga 7 November 2026"></a>
+    </div>
+  </section>
+
+  <footer>
+    <span>Data murid: Senarai Nama Murid SMSPP, 18 Okt 2026 (Tingkatan 1–3, 334 murid)</span>
+    <span>Powered by <b>SMSPP YIC 2026</b></span>
+  </footer>
+</div>
+
+<script>
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxOr96JYjq4h_O0QIif97x35_FL_x3nt4LtdYPbC20uqe_yXn-J3_3VuF9dO32hfH6ATA/exec';
+const SHEET_URL = 'https://docs.google.com/spreadsheets/d/11_O6gN9w6Bmh9WaihIrbUrSg7yKOa2k5-Y-j6y6JbsA/edit';
+const MAKS = 4;
+const $ = id => document.getElementById(id);
+const fmtIC = s => s.length===12 ? s.slice(0,6)+'-'+s.slice(6,8)+'-'+s.slice(8) : s;
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let DATA=null, KOD='', groups=[], taken=new Map(), team=[], busy=false, editing=false;
+
+/* ---------- Kod akses ---------- */
+const b64 = s => Uint8Array.from(atob(s), c=>c.charCodeAt(0));
+async function unlock(code){
+  const enc = await (await fetch('data.enc.json',{cache:'no-store'})).json();
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(code), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64(enc.s),iterations:200000,hash:'SHA-256'}, base, {name:'AES-GCM',length:256}, false, ['decrypt']);
+  const pt = await crypto.subtle.decrypt({name:'AES-GCM',iv:b64(enc.i)}, key, b64(enc.c));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+async function tryCode(code, silent){
+  $('btnKod').disabled=true; $('btnKod').textContent='Membuka…';
+  try{
+    DATA = await unlock(code); KOD = code;
+    try{ localStorage.setItem('fib2_kod', code); }catch(_){}
+    $('gatewrap').hidden=true; $('postersec').hidden=false; $('app').hidden=false; $('counts').hidden=false;
+    start();
+  }catch(e){
+    if(!silent){ $('gateMsg').textContent='Kod akses tidak sah. Semak semula dengan urus setia.'; $('gateMsg').hidden=false; }
+    try{ localStorage.removeItem('fib2_kod'); }catch(_){}
+  }finally{ $('btnKod').disabled=false; $('btnKod').textContent='Buka'; }
+}
+$('gateForm').addEventListener('submit', e=>{ e.preventDefault(); tryCode($('kod').value.trim()); });
+try{ const k=localStorage.getItem('fib2_kod'); if(k) tryCode(k,true); }catch(_){}
+
+/* ---------- Pilih ahli ---------- */
+const selT=$('selT'), selK=$('selK'), selN=$('selN'), selSub=$('subjek');
+const inTeam = ic => team.some(a=>a.ic===ic);
+function fillKelas(){
+  const t=selT.value;
+  selK.innerHTML='<option value="">Kelas</option>';
+  if(t) Object.keys(DATA[t]).sort().forEach(k=>selK.add(new Option(t+' '+k,k)));
+  selK.disabled=!t; fillNama();
+}
+function fillNama(){
+  const t=selT.value,k=selK.value,keep=selN.value;
+  selN.innerHTML='<option value="">— Pilih nama murid —</option>';
+  if(t&&k){
+    DATA[t][k].forEach(([n,ic])=>{
+      const f=fmtIC(ic), g=taken.get(f);
+      const o=new Option((g?'✓ ':'')+n+(g?' — '+g:'')+(inTeam(f)?' — dalam senarai':''),ic);
+      if(g||inTeam(f)) o.disabled=true;
+      selN.add(o);
+    });
+    if(keep && !selN.querySelector('option[value="'+keep+'"]:disabled')) selN.value=keep;
+  }
+  selN.disabled=!(t&&k); showPreview();
+}
+function picked(){
+  const t=selT.value,k=selK.value,ic=selN.value;
+  if(!(t&&k&&ic)) return null;
+  const s=DATA[t][k].find(x=>x[1]===ic);
+  return s?{nama:s[0],ic:fmtIC(s[1]),tingkatan:t,kelas:k}:null;
+}
+function showPreview(){
+  const p=picked(), box=$('preview');
+  if(!p){ box.hidden=true; }
+  else{ box.hidden=false; box.innerHTML=`<div class="nm">${esc(p.nama)}</div><div class="kv"><span class="ic">${p.ic}</span><span>Kelas <b>${p.tingkatan} ${esc(p.kelas)}</b></span></div>`; }
+  validate();
+}
+function renderTeam(){
+  $('members').innerHTML = team.length ? team.map((a,i)=>`<li><div class="mi"><b>${esc(a.nama)}</b><span class="mono">${a.ic}</span><span>${a.tingkatan} ${esc(a.kelas)}</span></div><button class="rm" type="button" data-i="${i}" aria-label="Buang ${esc(a.nama)}">Buang</button></li>`).join('')
+    : '<li class="empty-li">Belum ada ahli. Pilih tingkatan, kelas dan nama di bawah, kemudian tekan Tambah ahli.</li>';
+  $('ahliCount').textContent='('+team.length+' / '+MAKS+')';
+  $('adder').hidden = team.length>=MAKS;
+  fillNama(); validate();
+}
+$('btnTambah').addEventListener('click',()=>{
+  const p=picked(); if(!p||team.length>=MAKS||inTeam(p.ic)||taken.has(p.ic)) return;
+  team.push(p); selN.value=''; renderTeam();
+});
+$('members').addEventListener('click',e=>{ const b=e.target.closest('.rm'); if(!b) return; team.splice(+b.dataset.i,1); renderTeam(); });
+selT.addEventListener('change',fillKelas);
+selK.addEventListener('change',fillNama);
+selN.addEventListener('change',showPreview);
+selSub.addEventListener('change',()=>{ $('subjekLain').hidden = selSub.value!=='__lain'; validate(); });
+['subjekLain','guru','produk'].forEach(id=>$(id).addEventListener('input',validate));
+function subjekVal(){ return selSub.value==='__lain' ? $('subjekLain').value.trim() : selSub.value; }
+function validate(){
+  const p=picked();
+  $('btnTambah').disabled = !p || team.length>=MAKS || inTeam(p.ic) || taken.has(p.ic);
+  $('btnDaftar').disabled = busy || !team.length || !subjekVal() || !$('guru').value.trim();
+  $('btnDaftar').textContent = busy ? 'Menyimpan…' : (team.length ? 'Daftar kumpulan ('+team.length+' ahli)' : 'Daftar kumpulan');
+}
+function say(text,ok){ const m=$('msg'); m.textContent=text; m.className='msg '+(ok?'ok':'err'); m.hidden=false; clearTimeout(say.t); say.t=setTimeout(()=>m.hidden=true,7000); }
+
+/* ---------- Google Sheet ---------- */
+async function api(body){
+  const r = await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({...body,kod:KOD})});
+  return r.json();
+}
+async function load(){
+  try{
+    const r = await (await fetch(GAS_URL+'?kod='+encodeURIComponent(KOD),{cache:'no-store'})).json();
+    if(!r.ok) throw new Error(r.error);
+    const kn=g=>{const n=parseInt(String(g.kod||'').replace(/\D/g,''),10);return isNaN(n)?1000+g.no:n;};
+    groups = r.groups.sort((a,b)=>kn(a)-kn(b));
+    taken = new Map(); groups.forEach(g=>g.ahli.forEach(a=>taken.set(a.ic,g.kod||('Kumpulan '+g.no))));
+    team = team.filter(a=>!taken.has(a.ic));
+    $('lastSync').textContent='Dikemas kini '+new Date().toLocaleTimeString('ms-MY')+' · data disimpan dalam Google Sheet';
+    const gl=[...new Set(groups.map(g=>g.guru).filter(Boolean))].sort();
+    $('guruList').innerHTML=gl.map(x=>`<option value="${esc(x)}">`).join('');
+    renderTeam(); render();
+  }catch(e){ $('lastSync').textContent='Tidak dapat memuatkan senarai daripada Google Sheet. Semak internet dan tekan Muat semula.'; if(!groups.length){$('tblEmpty').textContent='Senarai belum dapat dimuatkan.';$('tblEmpty').hidden=false;} }
+}
+$('btnDaftar').addEventListener('click',async()=>{
+  if(!team.length) return;
+  busy=true; validate();
+  const body={action:'daftar',produk:$('produk').value.trim(),subjek:subjekVal(),guru:$('guru').value.trim(),ahli:team};
+  try{
+    const r=await api(body);
+    if(r.ok){
+      say('Kumpulan '+r.no+' berjaya didaftarkan ('+team.length+' ahli) dan disimpan dalam Google Sheet.',true);
+      team=[]; $('produk').value=''; selN.value='';
+      await load();
+    } else if(r.error==='sudah'){ say('Sudah berdaftar dalam kumpulan lain: '+(r.detail||[]).join(', '),false); await load(); }
+    else say(r.error==='data'?'Maklumat tidak lengkap: pastikan subjek, guru dan sekurang-kurangnya seorang ahli.':'Pendaftaran gagal. Cuba lagi.',false);
+  }catch(e){ say('Tidak dapat menghubungi Google Sheet. Tekan Muat semula dan semak senarai sebelum cuba lagi.',false); }
+  busy=false; validate();
+});
+
+/* ---------- Senarai kumpulan ---------- */
+function lbl(no){const g=groups.find(x=>x.no===+no);return g&&g.kod?g.kod:'Kumpulan '+no;}
+function render(){
+  const cnt={1:0,2:0,3:0}; let total=0;
+  groups.forEach(g=>g.ahli.forEach(a=>{ const t=String(a.tingkatan).replace(/\D/g,''); cnt[t]=(cnt[t]||0)+1; total++; }));
+  $('cG').textContent=groups.length; $('c1').textContent=cnt[1]; $('c2').textContent=cnt[2]; $('c3').textContent=cnt[3]; $('cT').textContent=total;
+  const q=$('q').value.trim().toUpperCase();
+  const vis=groups.filter(g=>!q || ['KUMPULAN '+g.no,g.kod,g.produk,g.subjek,g.guru,...g.ahli.flatMap(a=>[a.nama,a.ic,a.ic.replace(/-/g,''),a.kelas])].join(' ').toUpperCase().includes(q));
+  $('glist').innerHTML=vis.map(g=>`<article class="gcard">
+    <div class="ghead"><span class="gno">${g.kod?esc(g.kod):'Kumpulan '+g.no}</span><button class="rm" data-no="${g.no}" type="button">Batal</button></div>
+    <div class="gprodrow"><div class="gprod ${g.produk?'':'dim'}">${esc(g.produk||'Produk belum dinamakan')}</div><button class="ed" data-no="${g.no}" type="button">${g.produk?'Tukar produk':'Isi produk'}</button></div>
+    <form class="pform" data-no="${g.no}" hidden><input type="text" maxlength="150" value="${esc(g.produk)}" placeholder="Nama produk inovasi" aria-label="Nama produk kumpulan ${g.no}"><button class="btn" type="submit">Simpan</button></form>
+    <div class="kv"><span>Subjek <b>${esc(g.subjek)}</b></span><span>Guru <b>${esc(g.guru)}</b></span></div>
+    <ol class="gmem">${g.ahli.map(a=>`<li><span>${esc(a.nama)}</span><span class="mono">${esc(a.ic)}</span><span class="nw">${esc(a.kelas)}</span></li>`).join('')}</ol>
+  </article>`).join('');
+  $('tblEmpty').hidden=vis.length>0;
+  $('tblEmpty').textContent=groups.length?'Tiada padanan untuk carian ini.':'Belum ada kumpulan. Kumpulan yang didaftarkan akan tersenarai di sini.';
+}
+$('q').addEventListener('input',render);
+$('btnRefresh').addEventListener('click',load);
+$('glist').addEventListener('submit',async e=>{
+  e.preventDefault(); const f=e.target.closest('.pform'); if(!f) return;
+  const btn=f.querySelector('button'), val=f.querySelector('input').value.trim();
+  btn.disabled=true; btn.textContent='…'; editing=false;
+  try{ const r=await api({action:'produk',no:+f.dataset.no,produk:val});
+    say(r.ok?'Produk '+lbl(f.dataset.no)+' disimpan dalam Google Sheet.':'Gagal menyimpan produk.',r.ok);
+  }catch(_){ say('Tidak dapat menghubungi Google Sheet.',false); }
+  load();
+});
+$('glist').addEventListener('click',async e=>{
+  const ed=e.target.closest('.ed');
+  if(ed){ const f=$('glist').querySelector('.pform[data-no="'+ed.dataset.no+'"]'); f.hidden=!f.hidden; editing=!f.hidden; if(!f.hidden) f.querySelector('input').focus(); return; }
+  const b=e.target.closest('.rm'); if(!b) return;
+  if(!b.classList.contains('sure')){ b.classList.add('sure'); b.textContent='Pasti batal kumpulan?'; setTimeout(()=>{ if(b.isConnected){b.classList.remove('sure');b.textContent='Batal';} },3000); return; }
+  b.disabled=true; b.textContent='…';
+  try{
+    const r=await api({action:'batal',no:+b.dataset.no});
+    if(r.ok){ say(lbl(b.dataset.no)+' dibatalkan (status BATAL dalam Google Sheet).',true); }
+    else say('Gagal membatalkan kumpulan.',false);
+  }catch(_){ say('Tidak dapat menghubungi Google Sheet.',false); }
+  load();
+});
+$('btnCsv').addEventListener('click',()=>{
+  const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+  const rows=[]; groups.forEach(g=>g.ahli.forEach((a,i)=>rows.push([g.no,q(g.kod||''),i+1,q(g.produk),q(g.subjek),q(g.guru),q(a.nama),q(a.ic),q(a.tingkatan),q(a.kelas)].join(','))));
+  const csv='﻿KUMPULAN,KOD BOOTH,BIL AHLI,PRODUK INOVASI,SUBJEK,GURU PEMBIMBING,NAMA AHLI,NO. KP,TINGKATAN,KELAS\n'+rows.join('\n');
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='Kumpulan_FIB_2.0.csv'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+});
+
+function start(){
+  $('sheetStatus').innerHTML='Pendaftaran kumpulan · rekod disimpan automatik dalam <a href="'+SHEET_URL+'" target="_blank" rel="noopener">Google Sheet</a>';
+  renderTeam(); load(); setInterval(()=>{ if(!document.hidden && !busy && !editing) load(); }, 30000);
+}
+</script>
+</body>
+</html>

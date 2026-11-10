@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Dashboard Penjurian FIB 2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: papan keputusan langsung — ringkasan di atas, kedudukan + anugerah khas di bawah; palet poster FIB 2.0 */
+:root{
+  --navy:#17163a; --navy-2:#211f4f; --navy-3:#2c2a63; --cream:#fff8ec; --ink:#16133d; --muted:#b7b3db;
+  --pink:#c2006b; --yellow:#ffc93c; --teal:#00b3a6; --orange:#e8650a; --purple:#7b4dff; --blue:#3d7bff;
+  --gold:#ffc93c; --silver:#d9dce8; --bronze:#e8a06a; --ok:#3ddc97; --warn:#ffb020; --bad:#ff6b6b;
+  --f-display:"Baloo 2",ui-rounded,system-ui,sans-serif; --f-body:"Poppins",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--navy);color:var(--cream);font-family:var(--f-body);font-size:15px;line-height:1.5}
+[hidden]{display:none!important}
+.wrap{max-width:1360px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right,0px)) 48px max(16px,env(safe-area-inset-left,0px));display:grid;gap:20px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px 24px;border-bottom:2px solid rgba(255,248,236,.8);padding-bottom:14px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);font-weight:700}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,4.4vw,48px);line-height:1;margin:4px 0 0}
+h1 .v{color:var(--yellow)}
+h2{font-family:var(--f-display);font-weight:700;font-size:24px;margin:0;line-height:1.15}
+.sub{color:var(--muted);font-size:13px}
+.card{background:var(--navy-2);border:1px solid var(--navy-3);border-radius:18px;padding:18px;display:grid;gap:14px;min-width:0}
+input,select{font:inherit;color:var(--cream);background:var(--navy);border:1.5px solid var(--navy-3);border-radius:10px;padding:10px 12px;width:100%}
+input:focus,select:focus,button:focus-visible{outline:3px solid rgba(255,201,60,.45);outline-offset:1px;border-color:var(--yellow)}
+.btn{font:inherit;font-weight:700;border:0;border-radius:12px;padding:11px 16px;cursor:pointer;background:var(--yellow);color:var(--ink);white-space:nowrap}
+.btn.ghost{background:transparent;color:var(--cream);border:1.5px solid var(--navy-3)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.msg{font-size:14px;padding:11px 14px;border-radius:12px}
+.msg.ok{background:rgba(61,220,151,.15);color:var(--ok)}
+.msg.err{background:rgba(255,107,107,.15);color:var(--bad)}
+.gate{max-width:420px;width:100%;margin:6vh auto 0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--navy-2);border:1px solid var(--navy-3);border-radius:16px;padding:14px 16px;display:grid;gap:2px}
+.kpi b{font-family:var(--f-display);font-weight:800;font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
+.kpi span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.kpi.gold b{color:var(--gold)} .kpi.silver b{color:var(--silver)} .kpi.bronze b{color:var(--bronze)}
+.bar{height:8px;border-radius:99px;background:var(--navy-3);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;background:var(--teal)}
+.grid2{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:1000px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:inherit;font-size:13px;padding:6px 12px;border-radius:99px;border:1.5px solid var(--navy-3);background:transparent;color:var(--cream);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--cream);color:var(--ink);border-color:var(--cream)}
+.tbl{overflow-x:auto;border-radius:12px;border:1px solid var(--navy-3)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:720px}
+th,td{padding:10px 10px;text-align:left;border-bottom:1px solid var(--navy-3);vertical-align:middle}
+th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--navy);position:sticky;top:0;white-space:nowrap}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.main{cursor:pointer}
+tr.main:hover td{background:rgba(255,255,255,.03)}
+tr:last-child td{border-bottom:0}
+.rank{font-family:var(--f-display);font-weight:800;font-size:20px;color:var(--muted);width:40px}
+.rank.top{color:var(--yellow)}
+.prod b{display:block;line-height:1.25}
+.prod span{font-size:12px;color:var(--muted)}
+.avg{font-family:var(--f-display);font-weight:800;font-size:24px;line-height:1}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap}
+.p-Emas{background:var(--gold);color:var(--ink)} .p-Perak{background:var(--silver);color:var(--ink)} .p-Gangsa{background:var(--bronze);color:var(--ink)} .p-Penyertaan{background:var(--navy-3);color:var(--cream)}
+.p-wait{background:transparent;border:1px dashed var(--muted);color:var(--muted)}
+.kat{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.k-Fizikal{background:rgba(194,0,107,.25);color:#ff7cc0} .k-Digital{background:rgba(232,101,10,.25);color:#ffad70} .k-AI{background:rgba(0,179,166,.25);color:#5fe8dd}
+.rsrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btn.sm{padding:7px 12px;font-size:12px;border-color:rgba(255,107,107,.6);color:var(--bad)}
+.flag{color:var(--warn);font-size:12px;font-weight:600}
+.jcell{font-variant-numeric:tabular-nums}
+.jcell small{display:block;font-size:11px;color:var(--muted);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tr.detail td{background:var(--navy);padding:14px 16px}
+.crits{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 18px}
+.cr{display:grid;gap:4px;font-size:12px}
+.cr .t{display:flex;justify-content:space-between;gap:8px}
+.cr .t b{font-variant-numeric:tabular-nums}
+.cr .b{height:8px;border-radius:99px;background:var(--navy-3);overflow:hidden}
+.cr .b i{display:block;height:100%}
+.note{font-size:12px;color:var(--muted);margin-top:10px}
+.awards{display:grid;gap:10px}
+.aw{border-radius:14px;padding:14px 16px;display:grid;gap:4px;background:var(--navy);border-left:6px solid var(--c)}
+.aw .an{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--c)}
+.aw .wn{font-family:var(--f-display);font-weight:800;font-size:22px;line-height:1.1}
+.aw .wd{font-size:12px;color:var(--muted)}
+.aw .ru{font-size:12px;color:var(--muted);border-top:1px solid var(--navy-3);padding-top:6px;margin-top:4px}
+.aw.empty .wn{color:var(--muted);font-size:16px;font-family:var(--f-body);font-weight:500}
+.admin table{min-width:640px}
+.admin td input,.admin td select{padding:7px 9px;font-size:13px}
+.thr{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.thr label{font-size:12px;color:var(--muted);font-weight:600;display:grid;gap:4px}
+.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:end}
+@media (max-width:760px){.podium{grid-template-columns:minmax(0,1fr)}}
+.pod{border-radius:16px;padding:16px;display:grid;gap:6px;background:var(--navy);border-top:6px solid var(--c);min-width:0}
+.pod .pl{font-family:var(--f-display);font-weight:800;font-size:15px;letter-spacing:.06em;color:var(--c);text-transform:uppercase}
+.pod .pk{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1}
+.pod .pp{font-weight:600;line-height:1.25}
+.pod .ps{font-size:12px;color:var(--muted)}
+.pod .pa{font-family:var(--f-display);font-weight:800;font-size:40px;line-height:1;color:var(--c);font-variant-numeric:tabular-nums}
+.pod.p1{padding-block:24px} .pod.empty .pk{color:var(--muted);font-size:18px;font-family:var(--f-body);font-weight:500}
+.rk{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;font-family:var(--f-display);font-weight:800;font-size:17px;background:var(--navy-3);color:var(--cream)}
+.rk.r1{background:var(--gold);color:var(--ink)} .rk.r2{background:var(--silver);color:var(--ink)} .rk.r3{background:var(--bronze);color:var(--ink)}
+tr.sep td{background:var(--navy);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:8px 10px}
+.jp{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.jr{background:var(--navy);border-radius:12px;padding:10px 12px;display:grid;gap:5px;font-size:13px;min-width:0}
+.jr .jt{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.jr .jt b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jr .jt span{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.jr .jb{font-size:11px;color:var(--muted)}
+.jr.ok .jt span{color:var(--ok)}
+footer{font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;border-top:1px solid var(--navy-3);padding-top:12px}
+footer b{color:var(--cream)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Dashboard penjurian · Kelab Inovasi SM Sains Pasir Puteh</div>
+      <h1>Future Innovators Bootcamp <span class="v">2.0</span></h1>
+      <div class="sub" id="sync">Markah dikira terus daripada Google Sheet · purata dua juri setiap booth</div>
+    </div>
+    <div class="toolbar" id="topActions" hidden>
+      <button class="btn ghost" id="btnCsv" type="button">Muat turun CSV</button>
+      <button class="btn ghost" id="btnRefresh" type="button">Muat semula</button>
+    </div>
+  </header>
+
+  <section class="card gate" id="gate">
+    <h2>Masukkan kod</h2>
+    <p class="sub" style="margin:0">Kod juri untuk melihat keputusan. Kod urus setia untuk menetapkan kategori, juri, markah video dan pemenang Duta.</p>
+    <form id="gateForm" style="display:grid;gap:10px"><input id="kod" type="password" autocomplete="off" aria-label="Kod" required><button class="btn" id="btnMasuk" type="submit">Buka dashboard</button></form>
+    <div id="gateMsg" class="msg err" hidden></div>
+  </section>
+
+  <div id="app" hidden style="display:grid;gap:20px">
+    <div class="kpis" id="kpis"></div>
+    <section class="card">
+      <div class="toolbar"><h2>Tiga teratas</h2><span class="sub">Disusun ikut purata markah dua juri</span></div>
+      <div class="podium" id="podium"></div>
+    </section>
+    <div class="grid2">
+      <section class="card">
+        <div class="toolbar">
+          <h2>Kedudukan booth</h2>
+          <div class="chips" role="group" aria-label="Tapis kategori">
+            <button class="chip" data-k="" aria-pressed="true">Semua</button>
+            <button class="chip" data-k="Fizikal" aria-pressed="false">Fizikal</button>
+            <button class="chip" data-k="Digital" aria-pressed="false">Digital</button>
+            <button class="chip" data-k="AI" aria-pressed="false">AI</button>
+          </div>
+        </div>
+        <div class="tbl"><table>
+          <thead><tr><th>Ranking</th><th>Booth</th><th>Produk</th><th class="num">Juri 1</th><th class="num">Juri 2</th><th class="num">Purata</th><th>Pingat</th></tr></thead>
+          <tbody id="tb"></tbody>
+        </table></div>
+        <div class="sub">Ranking disusun ikut purata dua juri; jika sama, markah Impak kemudian Pembentangan menjadi penentu. Tekan baris untuk melihat markah setiap kriteria. ⚠ menandakan beza markah dua juri melebihi 15.</div>
+      </section>
+      <section class="card">
+        <h2>Anugerah khas</h2>
+        <div class="awards" id="awards"></div>
+        <div class="sub" id="thrInfo"></div>
+      </section>
+    </div>
+
+    <section class="card">
+      <div class="toolbar"><h2>Kemajuan juri</h2><span class="sub" id="jpSum"></span></div>
+      <div class="jp" id="jp"></div>
+    </section>
+
+    <section class="card admin" id="admin" hidden>
+      <div class="toolbar"><h2>Tetapan urus setia</h2><button class="btn" id="btnSave" type="button">Simpan tetapan</button></div>
+      <div class="thr">
+        <label>Emas (purata ≥)<input id="tEMAS" type="number" min="0" max="100" step="1"></label>
+        <label>Perak (purata ≥)<input id="tPERAK" type="number" min="0" max="100" step="1"></label>
+        <label>Gangsa (purata ≥)<input id="tGANGSA" type="number" min="0" max="100" step="1"></label>
+        <label style="grid-column:span 2">Penerima Best Duta Award<input id="tDUTA" type="text" maxlength="120" placeholder="Nama Duta FIB"></label>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th>Booth</th><th>Produk</th><th>Kategori</th><th>Juri 1 (tugasan)</th><th>Juri 2 (tugasan)</th><th class="num">Markah video /100</th></tr></thead>
+        <tbody id="atb"></tbody>
+      </table></div>
+      <datalist id="juriList"></datalist>
+      <div id="saveMsg" class="msg" hidden></div>
+    </section>
+  </div>
+
+  <footer>
+    <span>Rubrik: Keaslian 20 · Impak 25 · Fungsi &amp; prototaip 20 · Reka bentuk &amp; UX 10 · Kreativiti booth 10 · Pembentangan 15</span>
+    <span>Powered by <b>SMSPP YIC 2026</b></span>
+  </footer>
+</div>
+
+<script>
+const GAS_URL='https://script.google.com/macros/s/AKfycbxOr96JYjq4h_O0QIif97x35_FL_x3nt4LtdYPbC20uqe_yXn-J3_3VuF9dO32hfH6ATA/exec';
+const SENARAI_JURI=["Zetty Zuliahana Binti Mohamed Zamzuri", "Siti Nor Zulaikha Binti Zainuddin", "Nik Nur Arissa Sofea Binti Nik Azizi", "Nur Umairah Sofea Binti Abdul Rahman", "Wan Mirza Azeeza Binti Wan Mahidin", "Nik Wardahtul Fatihah Bt Nik Kamarullah", "Putri Alya Az-zahra Bt Mohamad Amro Safizan", "Puteri Aisyah Batrisyia Bt Syamsul Arif", "Madihah Najwa Bt Mohd Nawawi", "Hani Afrina Bt Mohamad Haslizan", "Nur Emilya Natasya Binti Mohd Fairul Akman", "Tuan Aqeela Damia binti Tuan Mohd Affendi", "Nurul Iman binti Mohd Bahrol Haisham", "Adreana Qaesara binti Mohd Norli", "Nur Alya Auni Binti Zainun"];
+const KRITERIA=[
+  {n:'Keaslian & kreativiti idea',m:20,c:'#e8650a'},
+  {n:'Impak inovasi',m:25,c:'#c2006b'},
+  {n:'Fungsi & kualiti prototaip',m:20,c:'#00b3a6'},
+  {n:'Reka bentuk & UX',m:10,c:'#7b4dff'},
+  {n:'Kreativiti booth',m:10,c:'#ffc93c'},
+  {n:'Pembentangan & soal jawab',m:15,c:'#3d7bff'}
+];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const f1=n=>(Math.round(n*10)/10).toFixed(1).replace(/\.0$/,'');
+let confirmRs=null, KOD='', D=null, rows=[], katF='', open=new Set(), dirty=false;
+
+function lsGet(k){try{return localStorage.getItem(k)}catch(_){return null}}
+function lsSet(k,v){try{v==null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(_){}}
+
+async function fetchData(){
+  const r=await (await fetch(GAS_URL+'?action=penjurian&kod='+encodeURIComponent(KOD),{cache:'no-store'})).json();
+  if(!r.ok) throw new Error(r.error||'gagal');
+  D=r; compute(); return r;
+}
+function medal(avg){const T=D.tetapan; if(avg>=+T.EMAS) return 'Emas'; if(avg>=+T.PERAK) return 'Perak'; if(avg>=+T.GANGSA) return 'Gangsa'; return 'Penyertaan';}
+function compute(){
+  rows=D.booths.map(b=>{
+    const s=D.markah.filter(m=>m.no===b.no);
+    const j1=s.find(m=>m.slot===1)||null, j2=s.find(m=>m.slot===2)||null;
+    const got=[j1,j2].filter(Boolean);
+    const avg=got.length?got.reduce((a,m)=>a+m.jumlah,0)/got.length:null;
+    const crit=KRITERIA.map((k,i)=>got.length?got.reduce((a,m)=>a+m.k[i],0)/got.length:null);
+    const meta=(D.meta||{})[b.no]||{};
+    return {...b,j1,j2,n:got.length,avg,crit,kategori:meta.kategori||'',video:meta.video,meta,
+      beza:(j1&&j2)?Math.abs(j1.jumlah-j2.jumlah):0, medal:avg==null?null:medal(avg)};
+  });
+}
+// kedudukan: purata, kemudian impak, kemudian pembentangan
+const byScore=(a,b)=>(b.avg??-1)-(a.avg??-1)||(b.crit[1]??0)-(a.crit[1]??0)||(b.crit[5]??0)-(a.crit[5]??0)||kn(a)-kn(b);
+function kn(r){const n=parseInt(String(r.kod||'').replace(/\D/g,''),10);return isNaN(n)?1000+r.no:n;}
+const bk=r=>esc(r.kod||('Kumpulan '+r.no));
+
+function render(){
+  const total=rows.length, full=rows.filter(r=>r.n===2).length, part=rows.filter(r=>r.n===1).length;
+  const scored=rows.filter(r=>r.n>0);
+  const cnt=m=>scored.filter(r=>r.medal===m).length;
+  $('kpis').innerHTML=`
+    <div class="kpi"><b>${full}<span style="font-size:20px;color:var(--muted)"> / ${total}</span></b><span>Booth lengkap 2 juri</span><div class="bar"><i style="width:${total?full/total*100:0}%"></i></div></div>
+    <div class="kpi"><b>${part}</b><span>Menunggu juri 2</span></div>
+    <div class="kpi"><b>${total-full-part}</b><span>Belum dinilai</span></div>
+    <div class="kpi gold"><b>${cnt('Emas')}</b><span>Emas</span></div>
+    <div class="kpi silver"><b>${cnt('Perak')}</b><span>Perak</span></div>
+    <div class="kpi bronze"><b>${cnt('Gangsa')}</b><span>Gangsa</span></div>
+    <div class="kpi"><b>${scored.length?f1(scored.reduce((a,r)=>a+r.avg,0)/scored.length):'–'}</b><span>Purata keseluruhan</span></div>`;
+  const T=D.tetapan;
+  $('thrInfo').textContent='Pingat: Emas ≥ '+T.EMAS+' · Perak ≥ '+T.PERAK+' · Gangsa ≥ '+T.GANGSA+' (purata dua juri).';
+  const list=rows.filter(r=>!katF||r.kategori===katF).sort(byScore);
+  // ranking dengan kedudukan seri (purata sama berkongsi nombor)
+  let rank=0, prev=null, seen=0;
+  list.forEach(r=>{ if(r.n>0){ seen++; const key=f1(r.avg); if(key!==prev){rank=seen;prev=key;} r.rank=rank; } else r.rank=null; });
+  const scoredList=list.filter(r=>r.n>0);
+  $('podium').innerHTML=[0,1,2].map(i=>{const r=scoredList[i], c=['var(--gold)','var(--silver)','var(--bronze)'][i], lbl=['Tempat pertama','Tempat kedua','Tempat ketiga'][i];
+    if(!r) return `<div class="pod empty p${i+1}" style="--c:${c}"><div class="pl">${lbl}</div><div class="pk">Menunggu markah</div></div>`;
+    return `<div class="pod p${i+1}" style="--c:${c}"><div class="pl">${lbl}${r.rank!==i+1?' (seri)':''}</div><div class="pk">${bk(r)}</div><div class="pp">${esc(r.produk||'Produk belum dinamakan')}</div><div class="ps">${esc(r.subjek)}${r.n===1?' · baru 1 juri':''}</div><div class="pa">${f1(r.avg)}<small style="font-size:16px;color:var(--muted)"> / 100</small></div></div>`;}).join('');
+  let sepDone=false;
+  $('tb').innerHTML=list.map(r=>{
+    let sep='';
+    if(r.n===0&&!sepDone){ sepDone=true; sep='<tr class="sep"><td colspan="7">Belum dinilai</td></tr>'; }
+    const jc=j=>j?`<td class="num jcell">${f1(j.jumlah)}<small title="${esc(j.juri)}">${esc(j.juri)}</small></td>`:'<td class="num jcell" style="color:var(--muted)">–</td>';
+    const pill=r.n===0?'<span class="pill p-wait">Belum dinilai</span>':`<span class="pill p-${r.medal}">${r.medal}</span>${r.n===1?' <span class="pill p-wait">1 juri</span>':''}`;
+    const main=`<tr class="main" data-no="${r.no}"><td class="rank">${r.rank?`<span class="rk ${r.rank<=3?'r'+r.rank:''}">${r.rank}</span>`:''}</td><td style="white-space:nowrap"><b>${bk(r)}</b></td>
+      <td class="prod"><b>${esc(r.produk||'Produk belum dinamakan')}</b><span>${esc(r.subjek)}${r.kategori?` · <span class="kat k-${r.kategori}">${r.kategori}</span>`:''}</span></td>
+      ${jc(r.j1)}${jc(r.j2)}<td class="num"><span class="avg">${r.avg==null?'–':f1(r.avg)}</span>${r.beza>15?'<br><span class="flag">⚠ beza '+f1(r.beza)+'</span>':''}</td><td>${pill}</td></tr>`;
+    const det=open.has(r.no)?`<tr class="detail"><td colspan="7"><div class="crits">${KRITERIA.map((k,i)=>`<div class="cr"><div class="t"><span>${k.n}</span><b>${r.crit[i]==null?'–':f1(r.crit[i])} / ${k.m}</b></div><div class="b"><i style="width:${r.crit[i]==null?0:r.crit[i]/k.m*100}%;background:${k.c}"></i></div></div>`).join('')}</div>
+      <div class="note">Ahli: ${esc(r.ahli.map(a=>a.nama+' ('+a.kelas+')').join(', '))} · Guru: ${esc(r.guru)}</div>
+      ${[r.j1,r.j2].filter(j=>j&&j.catatan).map(j=>`<div class="note"><b style="color:var(--cream)">${esc(j.juri)}:</b> ${esc(j.catatan)}</div>`).join('')}
+      ${D.role==='admin'?`<div class="rsrow">${[r.j1,r.j2].filter(Boolean).map(j=>`<button class="btn ghost sm" type="button" data-reset="${r.no}" data-slot="${j.slot}">${confirmRs===r.no+'-'+j.slot?'Sahkan: padam markah Juri '+j.slot+'?':'Reset markah Juri '+j.slot+' ('+esc(j.juri)+')'}</button>`).join('')}</div>`:''}</td></tr>`:'';
+    return sep+main+det;
+  }).join('');
+  renderJuri();
+  renderAwards();
+  $('sync').textContent='Dikemas kini '+new Date().toLocaleTimeString('ms-MY')+' · purata dua juri setiap booth · dikemas kini setiap 20 saat';
+}
+$('tb').addEventListener('click',async e=>{const rb=e.target.closest('[data-reset]'); if(rb){ const key=rb.dataset.reset+'-'+rb.dataset.slot; if(confirmRs!==key){confirmRs=key;render();return;} rb.disabled=true; rb.textContent='Memadam…'; try{const r=await (await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'padamMarkah',kod:KOD,no:+rb.dataset.reset,slot:+rb.dataset.slot})})).json(); if(!r.ok&&r.error!=='tiada') throw 0;}catch(_){alertMsg('Gagal reset markah. Cuba lagi.');} confirmRs=null; try{await fetchData();}catch(_){} render(); return; } const tr=e.target.closest('tr.main'); if(!tr) return; const n=+tr.dataset.no; open.has(n)?open.delete(n):open.add(n); render();});
+document.querySelectorAll('.chips .chip').forEach(c=>c.addEventListener('click',()=>{katF=c.dataset.k;document.querySelectorAll('.chips .chip').forEach(x=>x.setAttribute('aria-pressed',x===c));render();}));
+
+function renderJuri(){
+  const N=s=>String(s||'').trim().toUpperCase().replace(/\s+/g,' ');
+  const M=D.meta||{}, by={};
+  D.booths.forEach(b=>{const m=M[b.no]||{};[1,2].forEach(sl=>{const j=m['juri'+sl]; if(!j) return; const k=N(j); (by[k]=by[k]||{nama:j,tugas:[]}).tugas.push({b,sl});});});
+  const list=Object.values(by).map(x=>{const done=x.tugas.filter(t=>D.markah.some(m=>m.no===t.b.no&&m.slot===t.sl&&N(m.juri)===N(x.nama))); return {...x,done,left:x.tugas.filter(t=>!done.includes(t))};});
+  const order=SENARAI_JURI.map(N);
+  list.sort((a,b)=>{const ia=order.indexOf(N(a.nama)), ib=order.indexOf(N(b.nama)); return (ia<0?99:ia)-(ib<0?99:ib);});
+  const tot=list.reduce((a,x)=>a+x.tugas.length,0), dn=list.reduce((a,x)=>a+x.done.length,0);
+  $('jpSum').textContent=list.length+' juri · '+dn+' / '+tot+' penilaian dihantar';
+  $('jp').innerHTML=list.map(x=>`<div class="jr ${x.left.length?'':'ok'}"><div class="jt"><b title="${esc(x.nama)}">${esc(x.nama)}</b><span>${x.done.length} / ${x.tugas.length}</span></div><div class="bar" style="margin:0"><i style="width:${x.done.length/x.tugas.length*100}%"></i></div><div class="jb">${x.left.length?'Belum: '+x.left.map(t=>esc(t.b.kod||t.b.no)).join(', '):'Selesai semua booth'}</div></div>`).join('') || '<div class="sub">Belum ada tugasan juri.</div>';
+}
+function top2(list,key){
+  const s=list.filter(r=>r.n>0&&key(r)!=null).sort((a,b)=>key(b)-key(a)||(b.avg-a.avg)||kn(a)-kn(b));
+  return s.slice(0,2);
+}
+function renderAwards(){
+  const scored=rows.filter(r=>r.n>0);
+  const AW=[
+    {t:'Best Digital Innovation',c:'#ffad70',pick:top2(scored.filter(r=>r.kategori==='Digital'),r=>r.avg),v:r=>'Purata '+f1(r.avg),need:'Tiada booth berkategori Digital yang dinilai lagi. Tetapkan kategori dalam tetapan urus setia.'},
+    {t:'Best AI-Powered Innovation',c:'#5fe8dd',pick:top2(scored.filter(r=>r.kategori==='AI'),r=>r.avg),v:r=>'Purata '+f1(r.avg),need:'Tiada booth berkategori AI yang dinilai lagi. Tetapkan kategori dalam tetapan urus setia.'},
+    {t:'Best Hands-On Learning Innovation',c:'#ff7cc0',pick:top2(scored.filter(r=>r.kategori==='Fizikal'),r=>r.avg),v:r=>'Purata '+f1(r.avg),need:'Tiada booth berkategori Fizikal yang dinilai lagi. Tetapkan kategori dalam tetapan urus setia.'},
+    {t:'Best Booth Design',c:'#ffc93c',pick:top2(scored,r=>r.crit[4]),v:r=>'Kreativiti booth '+f1(r.crit[4])+'/10',need:'Belum ada markah.'},
+    {t:'Best Pitching Team',c:'#3d7bff',pick:top2(scored,r=>r.crit[5]),v:r=>'Pembentangan '+f1(r.crit[5])+'/15',need:'Belum ada markah.'},
+    {t:'Best Innovation Video',c:'#b18cff',pick:top2(rows.filter(r=>r.video!=null&&r.video!==''),r=>+r.video),v:r=>'Video '+f1(+r.video)+'/100',need:'Masukkan markah video dalam tetapan urus setia.',noN:true}
+  ];
+  const html=AW.map(a=>{
+    let pick=a.pick; if(a.noN) pick=rows.filter(r=>r.video!=null&&r.video!=='').sort((x,y)=>+y.video-+x.video||(y.avg??0)-(x.avg??0)).slice(0,2);
+    if(!pick.length) return `<div class="aw empty" style="--c:${a.c}"><div class="an">${a.t}</div><div class="wn">${a.need}</div></div>`;
+    const w=pick[0], r2=pick[1];
+    const tie=r2&&a.v(r2)===a.v(w)?' <span class="flag">· seri dengan '+bk(r2)+', semak markah</span>':'';
+    return `<div class="aw" style="--c:${a.c}"><div class="an">${a.t}</div><div class="wn">${bk(w)} · ${esc(w.produk||'Produk belum dinamakan')}</div><div class="wd">${a.v(w)}${w.n===1?' · 1 juri':''}${tie}</div>${r2?`<div class="ru">Kedua: ${bk(r2)} · ${esc(r2.produk||'')} (${a.v(r2)})</div>`:''}</div>`;
+  });
+  const duta=String(D.tetapan.DUTA||'').trim();
+  html.push(`<div class="aw ${duta?'':'empty'}" style="--c:#3ddc97"><div class="an">Best Duta Award</div><div class="wn">${duta?esc(duta):'Dipilih oleh urus setia. Masukkan nama dalam tetapan.'}</div></div>`);
+  $('awards').innerHTML=html.join('');
+}
+
+/* ---------- Urus setia ---------- */
+function renderAdmin(){
+  if(!$('juriList').options.length) $('juriList').innerHTML=SENARAI_JURI.map(n=>`<option value="${esc(n)}">`).join('');
+  if(D.role!=='admin'){ $('admin').hidden=true; return; }
+  $('admin').hidden=false;
+  if(dirty) return; // jangan ganggu suntingan yang belum disimpan
+  ['EMAS','PERAK','GANGSA','DUTA'].forEach(k=>$('t'+k).value=D.tetapan[k]??'');
+  $('atb').innerHTML=D.booths.map(b=>{const m=(D.meta||{})[b.no]||{};return `<tr data-no="${b.no}"><td style="white-space:nowrap"><b>${bk(b)}</b></td><td>${esc(b.produk||'—')}</td>
+    <td><select data-f="kategori" aria-label="Kategori booth ${b.no}"><option value="">—</option>${['Fizikal','Digital','AI'].map(k=>`<option ${m.kategori===k?'selected':''}>${k}</option>`).join('')}</select></td>
+    <td><input data-f="juri1" list="juriList" value="${esc(m.juri1||'')}" aria-label="Juri 1 booth ${b.no}"></td>
+    <td><input data-f="juri2" list="juriList" value="${esc(m.juri2||'')}" aria-label="Juri 2 booth ${b.no}"></td>
+    <td class="num"><input data-f="video" type="number" min="0" max="100" step="0.5" value="${m.video==null?'':m.video}" aria-label="Markah video booth ${b.no}" style="max-width:100px"></td></tr>`;}).join('');
+}
+$('admin').addEventListener('input',()=>{dirty=true;});
+$('btnSave').addEventListener('click',async()=>{
+  const meta={};
+  document.querySelectorAll('#atb tr').forEach(tr=>{const o={}; tr.querySelectorAll('[data-f]').forEach(el=>o[el.dataset.f]=el.value.trim()); meta[tr.dataset.no]=o;});
+  const tet={EMAS:+$('tEMAS').value,PERAK:+$('tPERAK').value,GANGSA:+$('tGANGSA').value,DUTA:$('tDUTA').value.trim()};
+  if(!(tet.EMAS>tet.PERAK&&tet.PERAK>tet.GANGSA)){ $('saveMsg').className='msg err'; $('saveMsg').textContent='Had Emas mesti lebih tinggi daripada Perak, dan Perak lebih tinggi daripada Gangsa.'; $('saveMsg').hidden=false; return; }
+  $('btnSave').disabled=true; $('btnSave').textContent='Menyimpan…';
+  try{
+    const r=await (await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'tetapan',kod:KOD,tetapan:tet,meta})})).json();
+    if(!r.ok) throw new Error(r.error);
+    dirty=false; await fetchData(); render(); renderAdmin();
+    $('saveMsg').className='msg ok'; $('saveMsg').textContent='Tetapan disimpan dalam Google Sheet.'; $('saveMsg').hidden=false;
+  }catch(e){ $('saveMsg').className='msg err'; $('saveMsg').textContent=e.message==='admin'?'Hanya kod urus setia boleh menyimpan tetapan.':'Gagal menyimpan. Cuba lagi.'; $('saveMsg').hidden=false; }
+  $('btnSave').disabled=false; $('btnSave').textContent='Simpan tetapan';
+});
+
+$('btnCsv').addEventListener('click',()=>{
+  const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+  const head=['KEDUDUKAN','KOD BOOTH','KUMPULAN','PRODUK','SUBJEK','KATEGORI','JURI 1','MARKAH J1','JURI 2','MARKAH J2',...KRITERIA.map(k=>k.n.toUpperCase()+' (PURATA)'),'PURATA','PINGAT','MARKAH VIDEO'];
+  let rank=0;
+  const lines=rows.slice().sort(byScore).map(r=>{ if(r.n) rank++; return [r.n?rank:'',q(r.kod||''),r.no,q(r.produk),q(r.subjek),q(r.kategori),q(r.j1?r.j1.juri:''),r.j1?r.j1.jumlah:'',q(r.j2?r.j2.juri:''),r.j2?r.j2.jumlah:'',...r.crit.map(c=>c==null?'':f1(c)),r.avg==null?'':f1(r.avg),q(r.medal||''),r.video??''].join(','); });
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob(['﻿'+head.map(q).join(',')+'\n'+lines.join('\n')],{type:'text/csv'})); a.download='Keputusan_Penjurian_FIB_2.0.csv'; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+});
+$('btnRefresh').addEventListener('click',async()=>{try{await fetchData();render();renderAdmin();}catch(_){}});
+
+$('gateForm').addEventListener('submit',async e=>{
+  e.preventDefault(); KOD=$('kod').value.trim();
+  $('btnMasuk').disabled=true; $('btnMasuk').textContent='Membuka…';
+  try{
+    await fetchData(); lsSet('fib2_dkod',KOD);
+    $('gate').hidden=true; $('app').hidden=false; $('topActions').hidden=false;
+    render(); renderAdmin();
+    setInterval(async()=>{ if(document.hidden) return; try{await fetchData();render();renderAdmin();}catch(_){ $('sync').textContent='Sambungan terputus seketika, mencuba semula…'; } },20000);
+  }catch(err){ $('gateMsg').textContent=err.message==='kod'?'Kod tidak sah.':'Tidak dapat menghubungi pelayan.'; $('gateMsg').hidden=false; lsSet('fib2_dkod',null); }
+  $('btnMasuk').disabled=false; $('btnMasuk').textContent='Buka dashboard';
+});
+(()=>{const k=lsGet('fib2_dkod'); if(k){$('kod').value=k;$('gateForm').requestSubmit();}})();
+function alertMsg(t){ $('sync').textContent=t; }
+</script>
+</body>
+</html>
