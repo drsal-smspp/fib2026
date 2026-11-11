@@ -302,10 +302,12 @@ function top2(list,key){
 }
 function renderAwards(){
   const scored=rows.filter(r=>r.n>0);
+  // Jika urus setia ada tetapkan kategori, hadkan kepada kategori itu; jika tiada, semua booth dipertimbang
+  const pool=k=>{const t=scored.filter(r=>r.kategori===k);return t.length?t:scored;};
   const AW=[
-    {t:'Best Digital Innovation',c:'#ffad70',pick:top2(scored.filter(r=>r.kategori==='Digital'),r=>r.avg),v:r=>'Purata '+f1(r.avg),need:'Tiada booth berkategori Digital yang dinilai lagi. Tetapkan kategori dalam tetapan urus setia.'},
-    {t:'Best AI-Powered Innovation',c:'#5fe8dd',pick:top2(scored.filter(r=>r.kategori==='AI'),r=>r.avg),v:r=>'Purata '+f1(r.avg),need:'Tiada booth berkategori AI yang dinilai lagi. Tetapkan kategori dalam tetapan urus setia.'},
-    {t:'Best Hands-On Learning Innovation',c:'#ff7cc0',pick:top2(scored.filter(r=>r.kategori==='Fizikal'),r=>r.avg),v:r=>'Purata '+f1(r.avg),need:'Tiada booth berkategori Fizikal yang dinilai lagi. Tetapkan kategori dalam tetapan urus setia.'},
+    {t:'Best Digital Innovation',c:'#ffad70',pick:top2(pool('Digital'),r=>r.crit[3]),v:r=>'Reka bentuk &amp; UX '+f1(r.crit[3])+'/10',need:'Belum ada markah.'},
+    {t:'Best AI-Powered Innovation',c:'#5fe8dd',pick:top2(pool('AI'),r=>r.crit[0]),v:r=>'Keaslian &amp; kreativiti '+f1(r.crit[0])+'/20',need:'Belum ada markah.'},
+    {t:'Best Hands-On Learning Innovation',c:'#ff7cc0',pick:top2(pool('Fizikal'),r=>r.crit[2]),v:r=>'Fungsi &amp; prototaip '+f1(r.crit[2])+'/20',need:'Belum ada markah.'},
     {t:'Best Booth Design',c:'#ffc93c',pick:top2(scored,r=>r.crit[4]),v:r=>'Kreativiti booth '+f1(r.crit[4])+'/10',need:'Belum ada markah.'},
     {t:'Best Pitching Team',c:'#3d7bff',pick:top2(scored,r=>r.crit[5]),v:r=>'Pembentangan '+f1(r.crit[5])+'/15',need:'Belum ada markah.'},
     {t:'Best Innovation Video',c:'#b18cff',pick:top2(rows.filter(r=>r.video!=null&&r.video!==''),r=>+r.video),v:r=>'Video '+f1(+r.video)+'/100',need:'Masukkan markah video dalam tetapan urus setia.',noN:true}
@@ -314,7 +316,7 @@ function renderAwards(){
     let pick=a.pick; if(a.noN) pick=rows.filter(r=>r.video!=null&&r.video!=='').sort((x,y)=>+y.video-+x.video||(y.avg??0)-(x.avg??0)).slice(0,2);
     if(!pick.length) return `<div class="aw empty" style="--c:${a.c}"><div class="an">${a.t}</div><div class="wn">${a.need}</div></div>`;
     const w=pick[0], r2=pick[1];
-    const tie=r2&&a.v(r2)===a.v(w)?' <span class="flag">· seri dengan '+bk(r2)+', semak markah</span>':'';
+    const tie=r2&&a.v(r2)===a.v(w)&&r2.avg===w.avg?' <span class="flag">· seri dengan '+bk(r2)+', semak markah</span>':'';
     return `<div class="aw" style="--c:${a.c}"><div class="an">${a.t}</div><div class="wn">${bk(w)} · ${esc(w.produk||'Produk belum dinamakan')}</div><div class="wd">${a.v(w)}${w.n===1?' · 1 juri':''}${tie}</div>${r2?`<div class="ru">Kedua: ${bk(r2)} · ${esc(r2.produk||'')} (${a.v(r2)})</div>`:''}</div>`;
   });
   const duta=String(D.tetapan.DUTA||'').trim();
