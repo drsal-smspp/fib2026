@@ -321,7 +321,6 @@ function show(i){
   $('pc').textContent=(cur+1)+' / '+pages.length;
   $('prev').disabled=cur===0;$('next').disabled=cur===pages.length-1;
   try{sessionStorage.setItem('fib_ebook_pg',cur);}catch(_){}
-  if(window.pageTurn) pageTurn();
 }
 $('prev').addEventListener('click',()=>show(cur-1));
 $('next').addEventListener('click',()=>show(cur+1));
@@ -340,55 +339,16 @@ fetch(GAS_URL+'?action=awam',{cache:'no-store'}).then(r=>r.json()).then(r=>{
 /* ---------- Kerlipan ---------- */
 (function(){const s=$('sparkle');for(let i=0;i<40;i++){const e=document.createElement('i');e.style.left=Math.random()*100+'%';e.style.top=Math.random()*100+'%';e.style.animationDelay=(Math.random()*4)+'s';e.style.animationDuration=(3+Math.random()*3)+'s';s.appendChild(e);}})();
 
-/* ---------- Muzik sentimental (dijana terus, tanpa fail) ----------
-   Piano lembut + pad, progresi Am–F–C–G / Dm–Am–F–E, 64 bpm, gema bilik. */
-let AC=null,master=null,playing=false,timer=null,nextT=0,step=0;
-const N=n=>440*Math.pow(2,(n-69)/12);
-const PROG=[[57,60,64],[53,57,60],[48,52,55],[55,59,62],[50,53,57],[57,60,64],[53,57,60],[52,56,59]];
-const MEL=[76,74,72,74, 72,69,72,67, 67,69,72,74, 74,72,71,67, 69,72,74,77, 76,72,69,72, 72,74,76,72, 71,68,71,76];
-function initAudio(){
-  AC=new (window.AudioContext||window.webkitAudioContext)();
-  master=AC.createGain();master.gain.value=0;
-  const verb=AC.createConvolver();const len=AC.sampleRate*3.2,ir=AC.createBuffer(2,len,AC.sampleRate);
-  for(let c=0;c<2;c++){const d=ir.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.6);}
-  verb.buffer=ir;const wet=AC.createGain();wet.gain.value=.45;const dry=AC.createGain();dry.gain.value=.7;
-  const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=3200;
-  master.connect(lp);lp.connect(dry);lp.connect(verb);verb.connect(wet);dry.connect(AC.destination);wet.connect(AC.destination);
-}
-function piano(n,t,dur,vel){
-  const g=AC.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vel,t+.01);g.gain.exponentialRampToValueAtTime(vel*.35,t+.35);g.gain.exponentialRampToValueAtTime(.0008,t+dur);
-  [[1,'triangle',1],[2,'sine',.35],[3,'sine',.12]].forEach(([m,type,a])=>{const o=AC.createOscillator();o.type=type;o.frequency.value=N(n)*m;const og=AC.createGain();og.gain.value=a;o.connect(og);og.connect(g);o.start(t);o.stop(t+dur+.05);});
-  g.connect(master);
-}
-function pad(ch,t,dur){
-  ch.forEach(n=>{[-4,4].forEach(dt=>{const o=AC.createOscillator();o.type='sine';o.frequency.value=N(n-12);o.detune.value=dt;const g=AC.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.022,t+1.2);g.gain.linearRampToValueAtTime(.018,t+dur-.6);g.gain.linearRampToValueAtTime(0,t+dur+.4);o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.5);});});
-}
-const BEAT=60/64;
-function schedule(){
-  while(nextT<AC.currentTime+1.2){
-    const bar=Math.floor(step/4)%PROG.length,b=step%4,ch=PROG[bar];
-    if(b===0){pad(ch,nextT,BEAT*4);piano(ch[0]-12,nextT,BEAT*4,.16);}
-    const arp=[ch[0],ch[1],ch[2],ch[1]+12];
-    piano(arp[b],nextT,BEAT*1.8,.09);piano(arp[(b+2)%4],nextT+BEAT/2,BEAT*1.6,.06);
-    const m=MEL[step%MEL.length];if(b!==3||step%8<4)piano(m,nextT,BEAT*2.2,.13);
-    nextT+=BEAT;step++;
-  }
-}
-function startMusic(){
-  if(!AC)initAudio();
-  AC.resume();if(!playing){nextT=AC.currentTime+.1;timer=setInterval(schedule,200);schedule();}
-  playing=true;master.gain.cancelScheduledValues(AC.currentTime);master.gain.setTargetAtTime(.9,AC.currentTime,.8);
-  document.body.classList.remove('paused');$('btnMusic').setAttribute('aria-pressed','true');$('musicLbl').textContent='Muzik';
-}
-function stopMusic(){
-  if(!AC)return;master.gain.setTargetAtTime(0,AC.currentTime,.4);
-  setTimeout(()=>{if(!playing){clearInterval(timer);}},1500);playing=false;
-  document.body.classList.add('paused');$('btnMusic').setAttribute('aria-pressed','false');$('musicLbl').textContent='Senyap';
-}
-window.pageTurn=()=>{if(!AC||!playing)return;const t=AC.currentTime;piano(84,t,1.4,.05);piano(91,t+.08,1.2,.035);};
+/* ---------- Muzik latar (muzik-fib.mp3, berulang) ---------- */
+const BG=new Audio('muzik-fib.mp3');BG.loop=true;BG.preload='auto';BG.volume=0;
+let playing=false,fadeT=null;
+function fadeTo(v,ms){clearInterval(fadeT);const st=BG.volume,t0=performance.now();fadeT=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/ms);BG.volume=Math.max(0,Math.min(1,st+(v-st)*k));if(k>=1){clearInterval(fadeT);if(v===0)BG.pause();}},50);}
+function setUI(on){document.body.classList.toggle('paused',!on);$('btnMusic').setAttribute('aria-pressed',on?'true':'false');$('musicLbl').textContent=on?'Muzik':'Senyap';}
+function startMusic(){playing=true;setUI(true);const p=BG.play();if(p&&p.catch)p.catch(()=>{playing=false;setUI(false);});fadeTo(.85,2500);}
+function stopMusic(){playing=false;setUI(false);fadeTo(0,800);}
 $('btnMusic').addEventListener('click',()=>playing?stopMusic():startMusic());
-$('btnOpen').addEventListener('click',()=>{$('intro').hidden=true;try{startMusic();}catch(_){document.body.classList.add('paused');}$('next').focus();});
-document.addEventListener('visibilitychange',()=>{if(AC&&playing){document.hidden?AC.suspend():AC.resume();}});
+$('btnOpen').addEventListener('click',()=>{$('intro').hidden=true;startMusic();$('next').focus();});
+document.addEventListener('visibilitychange',()=>{if(!playing)return;if(document.hidden)BG.pause();else BG.play().catch(()=>{});});
 </script>
 </body>
 </html>
