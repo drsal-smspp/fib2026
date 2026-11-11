@@ -175,9 +175,9 @@ footer b{color:var(--cream)}
     <section class="card admin" id="admin" hidden>
       <div class="toolbar"><h2>Tetapan urus setia</h2><button class="btn" id="btnSave" type="button">Simpan tetapan</button></div>
       <div class="thr">
-        <label>Emas (purata ≥)<input id="tEMAS" type="number" min="0" max="100" step="1"></label>
-        <label>Perak (purata ≥)<input id="tPERAK" type="number" min="0" max="100" step="1"></label>
-        <label>Gangsa (purata ≥)<input id="tGANGSA" type="number" min="0" max="100" step="1"></label>
+        <label>Bilangan Emas<input id="tEMAS" type="number" min="0" max="50" step="1"></label>
+        <label>Bilangan Perak<input id="tPERAK" type="number" min="0" max="50" step="1"></label>
+        <label>Bilangan Gangsa<input id="tGANGSA" type="number" min="0" max="50" step="1"></label>
         <label style="grid-column:span 2">Penerima Best Duta Award<input id="tDUTA" type="text" maxlength="120" placeholder="Nama Duta FIB"></label>
       </div>
       <div class="tbl"><table>
@@ -219,7 +219,10 @@ async function fetchData(){
   if(!r.ok) throw new Error(r.error||'gagal');
   D=r; compute(); return r;
 }
-function medal(avg){const T=D.tetapan; if(avg>=+T.EMAS) return 'Emas'; if(avg>=+T.PERAK) return 'Perak'; if(avg>=+T.GANGSA) return 'Gangsa'; return 'Penyertaan';}
+function medal(){return null;}
+// Pingat ikut kedudukan (kuota): EMAS/PERAK/GANGSA dalam TETAPAN = bilangan booth
+function quota(){const T=D.tetapan||{};return [Math.max(0,parseInt(T.EMAS,10)||11),Math.max(0,parseInt(T.PERAK,10)||12),Math.max(0,parseInt(T.GANGSA,10)||13)];}
+function assignMedals(){const Q=quota();const order=rows.filter(r=>r.n>0).sort(byScore);let pk=null,pm=null;order.forEach((r,i)=>{const key=f1(r.avg)+'|'+r.crit[1]+'|'+r.crit[5];let m=i<Q[0]?'Emas':i<Q[0]+Q[1]?'Perak':i<Q[0]+Q[1]+Q[2]?'Gangsa':'Penyertaan';if(key===pk)m=pm;r.medal=m;pk=key;pm=m;});}
 function compute(){
   rows=D.booths.map(b=>{
     const s=D.markah.filter(m=>m.no===b.no);
@@ -229,8 +232,9 @@ function compute(){
     const crit=KRITERIA.map((k,i)=>got.length?got.reduce((a,m)=>a+m.k[i],0)/got.length:null);
     const meta=(D.meta||{})[b.no]||{};
     return {...b,j1,j2,n:got.length,avg,crit,kategori:meta.kategori||'',video:meta.video,meta,
-      beza:(j1&&j2)?Math.abs(j1.jumlah-j2.jumlah):0, medal:avg==null?null:medal(avg)};
+      beza:(j1&&j2)?Math.abs(j1.jumlah-j2.jumlah):0, medal:null};
   });
+  assignMedals();
 }
 // kedudukan: purata, kemudian impak, kemudian pembentangan
 const byScore=(a,b)=>(b.avg??-1)-(a.avg??-1)||(b.crit[1]??0)-(a.crit[1]??0)||(b.crit[5]??0)-(a.crit[5]??0)||kn(a)-kn(b);
@@ -250,7 +254,7 @@ function render(){
     <div class="kpi bronze"><b>${cnt('Gangsa')}</b><span>Gangsa</span></div>
     <div class="kpi"><b>${scored.length?f1(scored.reduce((a,r)=>a+r.avg,0)/scored.length):'–'}</b><span>Purata keseluruhan</span></div>`;
   const T=D.tetapan;
-  $('thrInfo').textContent='Pingat: Emas ≥ '+T.EMAS+' · Perak ≥ '+T.PERAK+' · Gangsa ≥ '+T.GANGSA+' (purata dua juri).';
+  const Q=quota(); $('thrInfo').textContent='Pingat ikut kedudukan: '+Q[0]+' teratas Emas · '+Q[1]+' berikutnya Perak · '+Q[2]+' berikutnya Gangsa (purata dua juri).';
   const list=rows.filter(r=>!katF||r.kategori===katF).sort(byScore);
   // ranking dengan kedudukan seri (purata sama berkongsi nombor)
   let rank=0, prev=null, seen=0;
@@ -336,7 +340,7 @@ $('btnSave').addEventListener('click',async()=>{
   const meta={};
   document.querySelectorAll('#atb tr').forEach(tr=>{const o={}; tr.querySelectorAll('[data-f]').forEach(el=>o[el.dataset.f]=el.value.trim()); meta[tr.dataset.no]=o;});
   const tet={EMAS:+$('tEMAS').value,PERAK:+$('tPERAK').value,GANGSA:+$('tGANGSA').value,DUTA:$('tDUTA').value.trim()};
-  if(!(tet.EMAS>tet.PERAK&&tet.PERAK>tet.GANGSA)){ $('saveMsg').className='msg err'; $('saveMsg').textContent='Had Emas mesti lebih tinggi daripada Perak, dan Perak lebih tinggi daripada Gangsa.'; $('saveMsg').hidden=false; return; }
+  if(![tet.EMAS,tet.PERAK,tet.GANGSA].every(n=>Number.isInteger(n)&&n>=0)){ $('saveMsg').className='msg err'; $('saveMsg').textContent='Bilangan pingat mesti nombor bulat 0 atau lebih.'; $('saveMsg').hidden=false; return; }
   $('btnSave').disabled=true; $('btnSave').textContent='Menyimpan…';
   try{
     const r=await (await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'tetapan',kod:KOD,tetapan:tet,meta})})).json();
