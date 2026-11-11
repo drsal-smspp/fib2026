@@ -64,13 +64,17 @@ button{font:inherit;cursor:pointer}
 .logos img{height:12cqw;width:auto;border-radius:50%;background:#fff}
 .logos img.fib{border-radius:12px;background:transparent;height:15cqw}
 .cv-k{font-family:var(--f-head);font-weight:700;letter-spacing:.08em;font-size:5.6cqw;color:var(--gold);margin-top:4px;text-shadow:0 2px 10px rgba(0,0,0,.25)}
-.cv-t{font-family:var(--f-script);font-size:12.5cqw;line-height:.95;color:#fff7e0;text-shadow:0 0 18px rgba(255,214,140,.55),0 3px 0 rgba(120,0,60,.35)}
-.cv-n{font-family:var(--f-head);font-weight:700;font-size:10cqw;color:var(--gold);line-height:1;text-shadow:0 3px 12px rgba(0,0,0,.3)}
+.cv-t{font-family:var(--f-script);font-size:11cqw;line-height:.95;color:#fff7e0;text-shadow:0 0 18px rgba(255,214,140,.55),0 3px 0 rgba(120,0,60,.35)}
+.cv-n{font-family:var(--f-head);font-weight:700;font-size:8.5cqw;color:var(--gold);line-height:1;text-shadow:0 3px 12px rgba(0,0,0,.3)}
 .cv-q{font-family:Georgia,serif;font-style:italic;color:#fff;font-size:3.2cqw}
-.cv-info{margin-top:1cqw;width:100%;display:grid;gap:1cqw;text-align:left;padding:2.4cqw 3.4cqw;border-radius:14px;background:rgba(70,0,38,.45);border-top:1.5px solid rgba(246,200,106,.6);border-bottom:1.5px solid rgba(246,200,106,.6)}
-.cv-info div{font-size:3cqw;letter-spacing:.04em}
-.cv-info b{font-family:var(--f-head);color:var(--gold);letter-spacing:.06em;margin-right:6px}
-.cv-by{margin-top:auto;display:grid;gap:2px}
+.cv-info{width:100%;display:grid;gap:1.2cqw;text-align:left;padding:2.4cqw 3cqw;border-radius:14px;background:rgba(70,0,38,.45);border-top:1.5px solid rgba(246,200,106,.6);border-bottom:1.5px solid rgba(246,200,106,.6)}
+.cv-info div{display:grid;font-size:3cqw;letter-spacing:.04em}
+.cv-info b{font-family:var(--f-head);color:var(--gold);letter-spacing:.08em;font-size:2.3cqw}
+.cv-by{display:grid;gap:2px;text-align:center}
+.cv-row{width:100%;display:grid;grid-template-columns:42% minmax(0,1fr);gap:3cqw;align-items:center;margin-top:1cqw}
+.cv-ph{margin:0;aspect-ratio:3/4;border-radius:50% 50% 3cqw 3cqw / 34% 34% 3cqw 3cqw;overflow:hidden;border:1cqw solid var(--gold);box-shadow:0 0 0 .5cqw rgba(255,243,201,.6),0 2cqw 5cqw rgba(0,0,0,.4);background:#fff}
+.cv-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block}
+.cv-side{display:grid;gap:3cqw;min-width:0}
 .cv-by small{font-family:var(--f-head);color:var(--gold-2);letter-spacing:.1em;font-size:2.5cqw}
 .cv-by strong{font-family:var(--f-head);font-size:3.5cqw;letter-spacing:.05em}
 .cv-by span{font-size:2.5cqw;letter-spacing:.08em;opacity:.9}
@@ -137,6 +141,11 @@ ol.obj li{line-height:1.6;font-size:clamp(13px,3.2vw,15px)}
 .eq i:nth-child(2){animation-delay:.2s}.eq i:nth-child(3){animation-delay:.4s}
 @keyframes eq{0%,100%{height:4px}50%{height:14px}}
 .paused .eq i{animation:none;height:4px}
+@media (max-width:640px){
+  #stage{padding:calc(60px + env(safe-area-inset-top,0px)) 8px calc(70px + env(safe-area-inset-bottom,0px))}
+  .book{width:100%;height:100%;aspect-ratio:auto;max-width:520px}
+  .pg{padding:9% 7% 9%}
+}
 @media (prefers-reduced-motion:reduce){.page{transition:opacity .3s}.page.past{transform:none}.sparkle{display:none}}
 </style>
 </head>
@@ -186,13 +195,18 @@ P.push(`<div class="pg cover">
   <div class="cv-t">Future Innovators<br>Bootcamp</div>
   <div class="cv-n">2.0</div>
   <div class="cv-q">“Innovative learning, inspire the future”</div>
-  <div class="cv-info">
-    <div><b>TARIKH:</b>12 NOVEMBER 2026</div>
-    <div><b>MASA:</b>12:30 P.M – 2:00 P.M</div>
-    <div><b>TEMPAT:</b>DEWAN SRI GEMILANG</div>
-    <div><b>ANJURAN:</b>KELAB INOVASI SMSPP</div>
+  <div class="cv-row">
+    <figure class="cv-ph"><img src="pengetua.jpg" alt="Pn. Rosilawati binti Yusof, Pengetua SM Sains Pasir Puteh"></figure>
+    <div class="cv-side">
+      <div class="cv-info">
+        <div><b>TARIKH</b>12 NOVEMBER 2026</div>
+        <div><b>MASA</b>12:30 – 2:00 PTG</div>
+        <div><b>TEMPAT</b>DEWAN SRI GEMILANG</div>
+        <div><b>ANJURAN</b>KELAB INOVASI SMSPP</div>
+      </div>
+      <div class="cv-by"><small>DISEMPURNAKAN OLEH</small><strong>PN. ROSILAWATI BINTI YUSOF</strong><span>PENGETUA SM SAINS PASIR PUTEH</span></div>
+    </div>
   </div>
-  <div class="cv-by"><small>DISEMPURNAKAN OLEH</small><strong>PN. ROSILAWATI BINTI YUSOF</strong><span>PENGETUA SM SAINS PASIR PUTEH</span></div>
 </div>`);
 P.push(`<div class="pg">
   <div class="ttl">Pengenalan</div>
@@ -222,7 +236,7 @@ P.push(`<div class="pg">
     <div><h4>SHOWCASE DAN PROTOKOL</h4><p>EN. MOHD YUSRI</p></div>
     <div><h4>DUTA FIB 2.0 DAN FASILITATOR</h4><p>PESERTA PROGRAM EDU X-CHANGE NUSANTARA 3.0</p></div>
     <div><h4>PERTANDINGAN DAN JURI</h4><p>PN. AZURAINI BT CHE BUSU</p></div>
-    <div><h4>TEKNIKAL DAN DIGITAL</h4><p>PN. HAMIZA BT</p></div>
+    <div><h4>TEKNIKAL DAN DIGITAL</h4><p>PN. NUR HAMIZA BT BAHARUDIN</p></div>
     <div><h4>MULTIMEDIA DAN DOKUMENTASI</h4><p>PN. SITI FAIRUZ BT DAUD</p></div>
     <div><h4>JAWATANKUASA PENGANJUR</h4><p>MURID-MURID KELAS 3 HAJAR</p></div>
     <div><h4>KEWANGAN DAN PENAJAAN</h4><p>PN. NORASMA BT MOHAMED SALLEH</p></div>
