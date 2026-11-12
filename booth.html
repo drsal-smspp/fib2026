@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Online Booth FIB Showcase</title>
+<link rel="icon" href="logo-fib.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#12000a;--bg2:#26001b;--card:rgba(255,255,255,.055);--line:rgba(255,120,200,.22);--pink:#ff1493;--pink2:#ff5ab4;--cy:#7df9ff;--fg:#fff2f9;--mut:#e3a6c6;--f-h:'Orbitron',system-ui,sans-serif;--f-b:'Poppins',system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;min-height:100vh;background:radial-gradient(110% 60% at 50% -5%,#6a0040 0%,var(--bg2) 40%,var(--bg) 100%) fixed;color:var(--fg);font-family:var(--f-b);font-size:15px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,20,147,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,20,147,.08) 1px,transparent 1px);background-size:44px 44px;mask-image:radial-gradient(90% 60% at 50% 0%,#000 0%,transparent 75%);pointer-events:none}
+.wrap{position:relative;max-width:1180px;margin:0 auto;padding-block:22px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{display:flex;align-items:center;gap:12px}
+.top img{width:46px;height:46px;border-radius:12px;object-fit:cover;box-shadow:0 0 0 2px var(--pink),0 0 20px rgba(255,20,147,.5)}
+.top div{font-size:12px;color:var(--mut);letter-spacing:.06em;line-height:1.3}
+.top b{display:block;color:var(--fg);font-size:13px;letter-spacing:.04em}
+.top a{margin-left:auto;font-size:13px;font-weight:600;color:#fff;text-decoration:none;border:1.5px solid var(--pink2);border-radius:99px;padding:8px 14px;white-space:nowrap}
+.hero{text-align:center;padding:34px 0 22px}
+.hero small{font-family:var(--f-h);letter-spacing:.32em;font-size:clamp(9px,2.4vw,12px);color:var(--cy)}
+.hero h1{margin:8px 0 4px;font-family:var(--f-h);font-weight:900;font-size:clamp(34px,9vw,76px);line-height:1;letter-spacing:.04em;background:linear-gradient(180deg,#fff 0%,#ffc2e3 55%,var(--pink) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(255,20,147,.55));text-wrap:balance}
+.hero h2{margin:0;font-family:var(--f-h);font-weight:600;font-size:clamp(12px,3vw,18px);letter-spacing:.2em;color:#fff}
+.hero p{margin:10px 0 0;color:var(--mut);font-size:13px}
+.stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0 6px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 18px;text-align:center;min-width:110px}
+.stat b{display:block;font-family:var(--f-h);font-size:24px;color:#fff}
+.stat span{font-size:11px;color:var(--mut);letter-spacing:.1em;text-transform:uppercase}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:22px 0 16px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;flex:1 1 400px}
+.chip{font:inherit;font-size:13px;font-weight:600;color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:99px;padding:7px 14px;cursor:pointer}
+.chip.on{color:#fff;background:var(--pink);border-color:var(--pink);box-shadow:0 0 16px rgba(255,20,147,.5)}
+.bar input{flex:1 1 220px;font:inherit;color:var(--fg);background:rgba(0,0,0,.35);border:1.5px solid var(--line);border-radius:99px;padding:10px 16px;outline:none;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.bc{position:relative;text-align:left;font:inherit;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;padding:0;transition:transform .18s,box-shadow .18s,border-color .18s;min-width:0}
+.bc:hover{transform:translateY(-4px);border-color:var(--pink2);box-shadow:0 14px 34px rgba(255,20,147,.28)}
+.th{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+.th img{width:100%;height:100%;object-fit:cover;display:block;opacity:.88;transition:opacity .2s,transform .3s}
+.bc:hover .th img{opacity:1;transform:scale(1.04)}
+.play{position:absolute;inset:0;display:grid;place-items:center}
+.play i{width:58px;height:58px;border-radius:50%;background:rgba(255,20,147,.88);display:grid;place-items:center;box-shadow:0 0 0 6px rgba(255,20,147,.25),0 0 30px rgba(255,20,147,.7);font-style:normal;font-size:22px;padding-left:4px}
+.kod{position:absolute;top:10px;left:10px;font-family:var(--f-h);font-weight:800;font-size:11px;letter-spacing:.06em;background:rgba(18,0,10,.82);border:1px solid var(--pink2);padding:5px 9px;border-radius:8px}
+.bd{padding:12px 14px 14px}
+.bd h3{margin:0;font-size:16px;line-height:1.3;text-wrap:balance}
+.bd p{margin:4px 0 0;font-size:12.5px;color:var(--mut)}
+.wait{margin-top:30px}
+.wait h4{font-family:var(--f-h);font-size:13px;letter-spacing:.14em;color:var(--mut);margin:0 0 10px}
+.wl{display:flex;flex-wrap:wrap;gap:8px}
+.wl span{font-size:12px;color:var(--mut);border:1px dashed var(--line);border-radius:10px;padding:6px 10px}
+.empty{text-align:center;color:var(--mut);padding:40px 10px}
+footer{text-align:center;font-size:12px;color:var(--mut);margin-top:36px;letter-spacing:.06em}
+/* booth detail */
+.ov{position:fixed;inset:0;z-index:20;background:rgba(10,0,6,.86);backdrop-filter:blur(6px);overflow:auto;padding-block:max(16px,env(safe-area-inset-top,0px)) 24px;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+.box{position:relative;max-width:980px;margin:0 auto;background:linear-gradient(180deg,#2a001c,#16000d);border:1px solid var(--pink2);border-radius:22px;box-shadow:0 0 60px rgba(255,20,147,.35);overflow:hidden}
+.bx-top{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.bx-top .kod{position:static}
+.bx-top span{font-family:var(--f-h);font-size:11px;letter-spacing:.2em;color:var(--cy)}
+.nav{margin-left:auto;display:flex;gap:6px}
+.nav button{font:inherit;color:#fff;background:var(--card);border:1px solid var(--line);border-radius:10px;width:38px;height:38px;cursor:pointer;font-size:16px}
+.vid{position:relative;aspect-ratio:16/9;background:#000;max-width:100%}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.info{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;padding:18px}
+.info>div{min-width:0}
+.info h2{margin:0;font-size:clamp(20px,4.5vw,28px);line-height:1.2;text-wrap:balance}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 14px}
+.meta span{font-size:12.5px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:5px 12px}
+.lbl{font-family:var(--f-h);font-size:10.5px;letter-spacing:.2em;color:var(--pink2);margin:14px 0 8px}
+.mem{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.mem li{display:flex;gap:10px;align-items:center;background:rgba(0,0,0,.25);border-radius:10px;padding:8px 10px;font-size:14px}
+.mem li b{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--pink);font-size:11px;flex:none}
+.mem li small{margin-left:auto;color:var(--mut);font-size:12px;white-space:nowrap}
+.pics{display:grid;gap:12px}
+.pic{background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.pic .im{aspect-ratio:4/3;background:#0b0006;display:grid;place-items:center;max-width:100%}
+.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.pic .fb{text-align:center;padding:14px;color:var(--mut);font-size:13px}
+.pic .cap{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;font-size:12.5px;font-weight:600}
+.pic a,.lnk{color:var(--cy);text-decoration:none;font-weight:600;font-size:12.5px}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.links a{font-size:13px;font-weight:600;color:#fff;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:8px 14px}
+@media (max-width:720px){.info{grid-template-columns:1fr}.top a{padding:7px 11px;font-size:12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <img src="logo-fib.jpg" alt="Logo FIB">
+    <div><b>SM Sains Pasir Puteh</b>Kelab Inovasi · FIB 2.0</div>
+    <a href="hantar.html">+ Hantar video</a>
+  </div>
+
+  <section class="hero">
+    <small>◆ VIRTUAL EXHIBITION HALL ◆</small>
+    <h1>ONLINE BOOTH</h1>
+    <h2>FUTURE INNOVATORS SHOWCASE 2026</h2>
+    <p>Tekan mana-mana booth untuk menonton video dan melihat maklumat penuh kumpulan.</p>
+    <div class="stats">
+      <div class="stat"><b id="sOn">–</b><span>Booth online</span></div>
+      <div class="stat"><b id="sAll">–</b><span>Kumpulan</span></div>
+      <div class="stat"><b id="sSub">–</b><span>Subjek</span></div>
+    </div>
+  </section>
+
+  <div class="bar">
+    <div class="chips" id="chips"></div>
+    <input id="cari" type="search" placeholder="Cari kod, produk atau nama murid…">
+  </div>
+  <div class="grid" id="grid"><div class="empty">Memuatkan booth…</div></div>
+  <div class="wait" id="wait" hidden><h4>MENUNGGU VIDEO</h4><div class="wl" id="wl"></div></div>
+
+  <footer>Powered by SMSPP YIC 2026</footer>
+</div>
+
+<div class="ov" id="ov" hidden>
+  <div class="box" id="box"></div>
+</div>
+
+<script>
+const GAS_URL='https://script.google.com/macros/s/AKfycbxOr96JYjq4h_O0QIif97x35_FL_x3nt4LtdYPbC20uqe_yXn-J3_3VuF9dO32hfH6ATA/exec';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ytId=u=>{const m=String(u||'').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|live\/|embed\/))([A-Za-z0-9_-]{11})/);return m?m[1]:''};
+const drvId=u=>{u=String(u||'');if(/\/folders\//.test(u))return '';const m=u.match(/\/d\/([A-Za-z0-9_-]{10,})/)||u.match(/[?&]id=([A-Za-z0-9_-]{10,})/);return m?m[1]:''};
+const safeUrl=u=>/^https:\/\//.test(String(u||''))?u:'#';
+let groups=[],sub='Semua',cur=null;
+
+async function load(){
+  try{
+    const r=await (await fetch(GAS_URL+'?action=booth',{cache:'no-store'})).json();
+    if(!r.ok) throw 0; groups=r.groups; render(); openHash();
+  }catch(_){ if(!groups.length) $('grid').innerHTML='<div class="empty">Gagal memuatkan booth. Muat semula halaman.</div>' }
+}
+const online=()=>groups.filter(g=>g.video&&ytId(g.video.yt));
+function render(){
+  const on=online(), subs=[...new Set(groups.map(g=>g.subjek).filter(Boolean))].sort();
+  $('sOn').textContent=on.length; $('sAll').textContent=groups.length; $('sSub').textContent=subs.length;
+  $('chips').innerHTML=['Semua',...subs].map(s=>`<button class="chip${s===sub?' on':''}" data-s="${esc(s)}">${esc(s)}</button>`).join('');
+  const q=$('cari').value.trim().toLowerCase();
+  const hit=g=>(sub==='Semua'||g.subjek===sub)&&(!q||(g.kod+' '+g.produk+' '+g.guru+' '+g.ahli.map(a=>a.nama).join(' ')).toLowerCase().includes(q));
+  const show=on.filter(hit);
+  $('grid').innerHTML=show.length?show.map(g=>`<button class="bc" data-no="${g.no}">
+    <div class="th"><img loading="lazy" src="https://i.ytimg.com/vi/${ytId(g.video.yt)}/hqdefault.jpg" alt=""><div class="play"><i>▶</i></div><span class="kod">${esc(g.kod)}</span></div>
+    <div class="bd"><h3>${esc(g.produk)}</h3><p>${esc(g.subjek)} · ${esc(g.guru)}</p></div></button>`).join('')
+    :`<div class="empty">${on.length?'Tiada booth sepadan.':'Belum ada booth online. Video akan dipaparkan sebaik sahaja kumpulan menghantar.'}</div>`;
+  const w=groups.filter(g=>!(g.video&&ytId(g.video.yt))&&hit(g));
+  $('wait').hidden=!w.length; $('wl').innerHTML=w.map(g=>`<span>${esc(g.kod)} · ${esc(g.produk)}</span>`).join('');
+}
+$('chips').addEventListener('click',e=>{const c=e.target.closest('.chip');if(c){sub=c.dataset.s;render()}});
+$('cari').addEventListener('input',render);
+$('grid').addEventListener('click',e=>{const b=e.target.closest('.bc');if(b)location.hash='b'+b.dataset.no});
+
+function pic(label,url){
+  const id=drvId(url);
+  return `<div class="pic"><div class="im">${id?`<img src="https://drive.google.com/thumbnail?id=${id}&sz=w1200" alt="${esc(label)}" referrerpolicy="no-referrer" onerror="this.parentNode.innerHTML='<div class=fb>Gambar tidak dapat dipaparkan.<br>Buka pautan di bawah.</div>'">`:'<div class="fb">📁 Folder Google Drive</div>'}</div>
+    <div class="cap"><span>${esc(label)}</span><a href="${esc(safeUrl(url))}" target="_blank" rel="noopener">Buka ↗</a></div></div>`;
+}
+function show(no){
+  const list=online(), g=list.find(x=>x.no===no); if(!g){close();return}
+  cur=no; const i=list.indexOf(g), id=ytId(g.video.yt);
+  $('box').innerHTML=`<div class="bx-top"><span class="kod">${esc(g.kod)}</span><span>BOOTH ${i+1} / ${list.length}</span>
+    <div class="nav"><button data-go="-1" aria-label="Booth sebelum">‹</button><button data-go="1" aria-label="Booth seterusnya">›</button><button data-x aria-label="Tutup">✕</button></div></div>
+    <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" title="${esc(g.produk)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+    <div class="info"><div>
+      <h2>${esc(g.produk)}</h2>
+      <div class="meta"><span>📚 ${esc(g.subjek)}</span><span>👩‍🏫 ${esc(g.guru)}</span><span>👥 ${g.ahli.length} ahli</span></div>
+      <div class="lbl">AHLI KUMPULAN</div>
+      <ul class="mem">${g.ahli.map((a,k)=>`<li><b>${k+1}</b><span>${esc(a.nama)}</span><small>${esc([a.tingkatan,a.kelas].filter(Boolean).join(' '))}</small></li>`).join('')}</ul>
+      <div class="lbl">GURU PEMBIMBING</div><div>${esc(g.guru)}</div>
+      <div class="links"><a href="${esc(safeUrl(g.video.yt))}" target="_blank" rel="noopener">▶ Tonton di YouTube</a></div>
+    </div><div class="pics">${pic('Gambar produk',g.video.produk)}${pic('Gambar ahli kumpulan',g.video.ahli)}</div></div>`;
+  $('ov').hidden=false; document.body.style.overflow='hidden'; $('ov').scrollTop=0;
+}
+function close(){ $('ov').hidden=true; $('box').innerHTML=''; document.body.style.overflow=''; cur=null; if(location.hash) history.replaceState(null,'',location.pathname+location.search) }
+function openHash(){ const m=location.hash.match(/^#b(\d+)$/); if(m) show(+m[1]); else if(cur!==null) close() }
+addEventListener('hashchange',openHash);
+$('ov').addEventListener('click',e=>{
+  if(e.target===$('ov')||e.target.closest('[data-x]')) return close();
+  const n=e.target.closest('[data-go]'); if(n){const l=online(),i=l.findIndex(x=>x.no===cur);const g=l[(i+ +n.dataset.go+l.length)%l.length];location.hash='b'+g.no}
+});
+addEventListener('keydown',e=>{if(cur===null)return;if(e.key==='Escape')close();if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const l=online(),i=l.findIndex(x=>x.no===cur);location.hash='b'+l[(i+(e.key==='ArrowRight'?1:-1)+l.length)%l.length].no}});
+load(); setInterval(()=>{if(cur===null)load()},60000);
+</script>
+</body>
+</html>

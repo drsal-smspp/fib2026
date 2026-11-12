@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Hantar Video FIB Showcase</title>
+<link rel="icon" href="logo-fib.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#14000c;--bg2:#24001a;--card:rgba(255,255,255,.06);--line:rgba(255,120,200,.22);--pink:#ff1493;--pink2:#ff5ab4;--fg:#fff2f9;--mut:#e7a9c8;--ok:#3ee6a0;--err:#ff6b6b;--f-h:'Orbitron',system-ui,sans-serif;--f-b:'Poppins',system-ui,sans-serif;color-scheme:dark}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;min-height:100vh;background:radial-gradient(120% 70% at 50% -10%,#5a0036 0%,var(--bg2) 45%,var(--bg) 100%) fixed;color:var(--fg);font-family:var(--f-b);font-size:15px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,20,147,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,20,147,.07) 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(180deg,#000 0%,transparent 70%);pointer-events:none}
+.wrap{position:relative;max-width:620px;margin:0 auto;padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+header img{width:58px;height:58px;border-radius:14px;object-fit:cover;box-shadow:0 0 0 2px var(--pink),0 0 24px rgba(255,20,147,.5)}
+header small{display:block;font-family:var(--f-h);letter-spacing:.18em;font-size:10px;color:var(--pink2)}
+header h1{margin:2px 0 0;font-family:var(--f-h);font-size:clamp(17px,4.6vw,22px);line-height:1.2;letter-spacing:.04em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;backdrop-filter:blur(8px);margin-bottom:14px}
+.step{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-weight:700;font-size:15px}
+.step b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--pink);font-family:var(--f-h);font-size:12px;box-shadow:0 0 14px rgba(255,20,147,.6);flex:none}
+input,select{width:100%;font:inherit;color:var(--fg);background:rgba(0,0,0,.35);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;outline:none;transition:border-color .15s}
+input:focus,select:focus{border-color:var(--pink2)}
+input.good{border-color:var(--ok)}input.bad{border-color:var(--err)}
+label{display:block;font-weight:600;font-size:14px;margin:14px 0 6px}
+.hint{font-size:12.5px;color:var(--mut);margin-top:6px}
+.hint.err{color:var(--err)}.hint.ok{color:var(--ok)}
+.list{display:grid;gap:8px;max-height:330px;overflow:auto;margin-top:10px;padding-right:2px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;width:100%;font:inherit;color:inherit;background:rgba(0,0,0,.28);border:1.5px solid transparent;border-radius:12px;padding:10px 12px;cursor:pointer}
+.opt:hover{border-color:var(--line)}
+.opt .k{font-family:var(--f-h);font-size:11px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--pink),#a1005c);padding:6px 8px;border-radius:8px;white-space:nowrap}
+.opt .p{font-weight:600;font-size:14px;min-width:0}
+.opt .s{font-size:12px;color:var(--mut)}
+.opt .done{margin-left:auto;font-size:11px;color:var(--ok);white-space:nowrap}
+.sel{display:flex;gap:12px;align-items:flex-start}
+.sel .k{font-family:var(--f-h);font-weight:800;font-size:13px;background:linear-gradient(135deg,var(--pink),#a1005c);padding:8px 10px;border-radius:10px;flex:none}
+.sel h3{margin:0;font-size:17px;line-height:1.3}
+.sel p{margin:2px 0 0;font-size:13px;color:var(--mut)}
+.sel ul{margin:8px 0 0;padding-left:18px;font-size:13.5px}
+.chg{margin-left:auto;background:none;border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:6px 12px;font:inherit;font-size:12px;cursor:pointer;flex:none}
+.prev{margin-top:10px;border-radius:12px;overflow:hidden;position:relative;aspect-ratio:16/9;max-width:100%;background:#000}
+.prev img{width:100%;height:100%;object-fit:cover;display:block}
+.prev span{position:absolute;inset:0;display:grid;place-items:center;font-size:42px;color:#fff;text-shadow:0 0 20px var(--pink)}
+.tip{font-size:12.5px;background:rgba(255,20,147,.1);border:1px dashed var(--line);border-radius:12px;padding:10px 12px;color:var(--mut);margin-top:14px}
+.tip b{color:var(--fg)}
+.btn{display:flex;justify-content:center;align-items:center;gap:8px;width:100%;border:0;border-radius:14px;padding:16px;font:inherit;font-weight:700;font-size:16px;color:#fff;background:linear-gradient(135deg,var(--pink) 0%,#c2006b 100%);box-shadow:0 10px 30px rgba(255,20,147,.4);cursor:pointer;text-decoration:none}
+.btn:disabled{opacity:.45;box-shadow:none;cursor:not-allowed}
+.btn.ghost{background:transparent;border:1.5px solid var(--pink2);box-shadow:none;margin-top:10px}
+.msg{margin-top:12px;font-size:14px;text-align:center}
+.ok-box{text-align:center;padding:26px 18px}
+.ok-box .ic{font-size:56px;line-height:1}
+.ok-box h2{font-family:var(--f-h);margin:10px 0 6px;font-size:20px}
+.ok-box p{color:var(--mut);margin:0 0 18px}
+footer{text-align:center;font-size:12px;color:var(--mut);margin-top:24px;letter-spacing:.06em}
+.load{text-align:center;color:var(--mut);padding:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="logo-fib.jpg" alt="Logo FIB">
+    <div><small>FUTURE INNOVATORS SHOWCASE 2026</small><h1>Hantar Video &amp; Gambar Booth</h1></div>
+  </header>
+
+  <div id="form">
+    <section class="card">
+      <p class="step"><b>1</b> Pilih kumpulan anda</p>
+      <div id="pickBox">
+        <input id="cari" type="search" placeholder="Taip kod atau nama produk…" autocomplete="off">
+        <div class="list" id="list"><div class="load">Memuatkan senarai kumpulan…</div></div>
+      </div>
+      <div id="selBox" hidden></div>
+    </section>
+
+    <section class="card">
+      <p class="step"><b>2</b> Pautan video YouTube</p>
+      <input id="yt" type="url" inputmode="url" placeholder="https://youtu.be/…" autocomplete="off">
+      <div class="hint" id="ytHint">Tampal pautan video YouTube (boleh juga Shorts). Tetapkan video sebagai <b>Public</b> atau <b>Unlisted</b>.</div>
+      <div class="prev" id="ytPrev" hidden><img id="ytImg" alt="Pratonton video"><span>▶</span></div>
+    </section>
+
+    <section class="card">
+      <p class="step"><b>3</b> Pautan gambar (Google Drive)</p>
+      <label for="gp">Gambar produk</label>
+      <input id="gp" type="url" inputmode="url" placeholder="https://drive.google.com/…" autocomplete="off">
+      <div class="hint" id="gpHint"></div>
+      <label for="ga">Gambar ahli kumpulan</label>
+      <input id="ga" type="url" inputmode="url" placeholder="https://drive.google.com/…" autocomplete="off">
+      <div class="hint" id="gaHint"></div>
+      <div class="tip">Di Google Drive: klik kanan gambar → <b>Kongsi</b> → tukar akses kepada <b>"Sesiapa sahaja yang mempunyai pautan"</b> → <b>Salin pautan</b>. Pautan satu gambar akan terpapar terus dalam booth.</div>
+    </section>
+
+    <section class="card">
+      <p class="step"><b>4</b> Kod pendaftaran</p>
+      <input id="kod" type="text" placeholder="Kod yang sama semasa daftar kumpulan" autocomplete="off" autocapitalize="characters">
+      <div class="hint">Kod ini diingati pada telefon ini.</div>
+    </section>
+
+    <button class="btn" id="hantar" disabled>Hantar 🚀</button>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <section class="card ok-box" id="done" hidden>
+    <div class="ic">🎉</div>
+    <h2>Berjaya dihantar!</h2>
+    <p id="doneTxt">Booth anda kini dipaparkan dalam Online Booth.</p>
+    <a class="btn" id="lihat" href="booth.html">Lihat Online Booth</a>
+    <button class="btn ghost" id="lagi">Hantar untuk kumpulan lain</button>
+  </section>
+
+  <footer>Powered by SMSPP YIC 2026</footer>
+</div>
+<script>
+const GAS_URL='https://script.google.com/macros/s/AKfycbxOr96JYjq4h_O0QIif97x35_FL_x3nt4LtdYPbC20uqe_yXn-J3_3VuF9dO32hfH6ATA/exec';
+const $=id=>document.getElementById(id);
+let groups=[],pick=null;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ytId=u=>{const m=String(u||'').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|live\/|embed\/))([A-Za-z0-9_-]{11})/);return m?m[1]:''};
+const isDrive=u=>/^https:\/\/(drive|docs)\.google\.com\//.test(String(u||'').trim());
+try{const k=localStorage.getItem('fibKod');if(k)$('kod').value=k}catch(_){}
+
+async function load(){
+  try{
+    const r=await (await fetch(GAS_URL+'?action=booth',{cache:'no-store'})).json();
+    if(!r.ok) throw 0; groups=r.groups; renderList();
+    const q=new URLSearchParams(location.search).get('k');
+    if(q){const g=groups.find(x=>x.kod.replace(/\s/g,'').toUpperCase()===q.replace(/\s/g,'').toUpperCase());if(g)choose(g.no)}
+  }catch(_){ $('list').innerHTML='<div class="load">Gagal memuatkan. <button class="chg" onclick="load()">Cuba lagi</button></div>' }
+}
+function renderList(){
+  const q=$('cari').value.trim().toLowerCase();
+  const f=groups.filter(g=>!q||(g.kod+' '+g.produk+' '+g.subjek).toLowerCase().includes(q));
+  $('list').innerHTML=f.length?f.map(g=>`<button class="opt" data-no="${g.no}"><span class="k">${esc(g.kod||'#'+g.no)}</span><span style="min-width:0"><div class="p">${esc(g.produk)}</div><div class="s">${esc(g.subjek)} · ${esc(g.guru)}</div></span>${g.video?'<span class="done">✓ dihantar</span>':''}</button>`).join(''):'<div class="load">Tiada padanan.</div>';
+}
+function choose(no){
+  pick=groups.find(g=>g.no===no); if(!pick) return;
+  $('pickBox').hidden=true; $('selBox').hidden=false;
+  $('selBox').innerHTML=`<div class="sel"><span class="k">${esc(pick.kod)}</span><div style="min-width:0"><h3>${esc(pick.produk)}</h3><p>${esc(pick.subjek)} · ${esc(pick.guru)}</p><ul>${pick.ahli.map(a=>`<li>${esc(a.nama)}</li>`).join('')}</ul></div><button class="chg" id="tukar">Tukar</button></div>${pick.video?'<div class="hint ok" style="margin-top:10px">Kumpulan ini sudah menghantar. Hantar semula untuk mengemas kini pautan.</div>':''}`;
+  $('tukar').onclick=()=>{pick=null;$('pickBox').hidden=false;$('selBox').hidden=true;check()};
+  if(pick.video){$('yt').value=pick.video.yt;$('gp').value=pick.video.produk;$('ga').value=pick.video.ahli}
+  check();
+}
+$('list').addEventListener('click',e=>{const b=e.target.closest('.opt');if(b)choose(+b.dataset.no)});
+$('cari').addEventListener('input',renderList);
+
+function mark(el,hint,ok,msgOk,msgBad,msgEmpty){
+  const v=el.value.trim();
+  el.classList.toggle('good',!!v&&ok); el.classList.toggle('bad',!!v&&!ok);
+  if(hint){hint.className='hint'+(v?(ok?' ok':' err'):'');hint.innerHTML=!v?msgEmpty:(ok?msgOk:msgBad)}
+}
+function check(){
+  const id=ytId($('yt').value);
+  mark($('yt'),$('ytHint'),!!id,'✓ Pautan YouTube sah','Pautan ini bukan pautan video YouTube.','Tampal pautan video YouTube (boleh juga Shorts). Tetapkan video sebagai <b>Public</b> atau <b>Unlisted</b>.');
+  $('ytPrev').hidden=!id; if(id) $('ytImg').src='https://i.ytimg.com/vi/'+id+'/hqdefault.jpg';
+  mark($('gp'),$('gpHint'),isDrive($('gp').value),'✓ Pautan Google Drive','Gunakan pautan Google Drive (drive.google.com).','');
+  mark($('ga'),$('gaHint'),isDrive($('ga').value),'✓ Pautan Google Drive','Gunakan pautan Google Drive (drive.google.com).','');
+  $('hantar').disabled=!(pick&&id&&isDrive($('gp').value)&&isDrive($('ga').value)&&$('kod').value.trim());
+}
+['yt','gp','ga','kod'].forEach(i=>$(i).addEventListener('input',check));
+
+$('hantar').onclick=async()=>{
+  const b=$('hantar'); b.disabled=true; b.textContent='Menghantar…'; $('msg').textContent='';
+  const kod=$('kod').value.trim().toUpperCase();
+  try{
+    const r=await (await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'video',kod,no:pick.no,yt:$('yt').value.trim(),produk:$('gp').value.trim(),ahli:$('ga').value.trim()})})).json();
+    if(!r.ok){
+      $('msg').innerHTML='<span style="color:var(--err)">'+({kod:'Kod pendaftaran salah.',youtube:'Pautan YouTube tidak sah.',drive:'Pautan gambar mesti dari Google Drive.',kumpulan:'Kumpulan tidak dijumpai.'}[r.error]||'Gagal dihantar. Cuba lagi.')+'</span>';
+    }else{
+      try{localStorage.setItem('fibKod',kod)}catch(_){}
+      pick.video={yt:$('yt').value.trim(),produk:$('gp').value.trim(),ahli:$('ga').value.trim()};
+      $('doneTxt').textContent=(r.kemaskini?'Pautan dikemas kini. ':'')+'Booth '+pick.kod+' · '+pick.produk+' kini dipaparkan dalam Online Booth.';
+      $('lihat').href='booth.html#b'+pick.no;
+      $('form').hidden=true; $('done').hidden=false; scrollTo(0,0);
+    }
+  }catch(_){ $('msg').innerHTML='<span style="color:var(--err)">Tiada sambungan. Cuba lagi.</span>' }
+  b.textContent='Hantar 🚀'; check();
+};
+$('lagi').onclick=()=>{pick=null;['yt','gp','ga'].forEach(i=>$(i).value='');$('pickBox').hidden=false;$('selBox').hidden=true;$('cari').value='';renderList();$('done').hidden=true;$('form').hidden=false;check()};
+load();
+</script>
+</body>
+</html>
