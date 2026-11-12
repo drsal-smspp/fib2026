@@ -7,12 +7,12 @@
 <link rel="icon" href="logo-fib.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
 <style>
-:root{--bg:#ffffff;--bg2:#fff5fb;--panel:#ffffff;--glass:#fff3f9;--line:rgba(214,0,143,.16);--pink:#e6007e;--mag:#c4006f;--blue:#0091d5;--pur:#7b2ff7;--fg:#2a2238;--ink:#1a1029;--mut:#6f6782;--gold:#c99400;--silver:#8c93a8;--bronze:#b8703e;--ok:#0f9d63;--f-h:'Orbitron',system-ui,sans-serif;--f-b:'Poppins',system-ui,sans-serif;color-scheme:light}
+:root{--bg:#ffffff;--bg2:#fff5fb;--panel:#ffffff;--glass:#fff3f9;--line:rgba(214,0,143,.16);--pink:#e6007e;--mag:#c4006f;--blue:#0091d5;--pur:#7b2ff7;--fg:#2a2238;--ink:#1a1029;--mut:#6f6782;--gold:#c99400;--silver:#8c93a8;--bronze:#b8703e;--ok:#0f9d63;--f-h:'Nunito','Segoe UI',system-ui,sans-serif;--f-b:'Nunito','Segoe UI',system-ui,sans-serif;color-scheme:light}
 *{box-sizing:border-box}
 html{background:var(--bg);scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(70% 40% at 90% -5%,rgba(230,0,126,.10),transparent 60%),radial-gradient(60% 40% at 0% 0%,rgba(0,145,213,.07),transparent 60%),var(--bg);background-attachment:fixed;color:var(--fg);font-family:var(--f-b);font-size:15px;line-height:1.6}
+body{margin:0;background:radial-gradient(70% 40% at 90% -5%,rgba(230,0,126,.10),transparent 60%),radial-gradient(60% 40% at 0% 0%,rgba(0,145,213,.07),transparent 60%),var(--bg);background-attachment:fixed;color:var(--fg);font-family:var(--f-b);font-size:17px;line-height:1.65}
 body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(230,0,126,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(230,0,126,.045) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(180deg,#000 0%,transparent 60%)}
 a{color:var(--blue)}
 button{font:inherit;cursor:pointer}
@@ -22,11 +22,11 @@ nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:r
 body::after{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#fff;z-index:31}
 nav.top .w{display:flex;align-items:center;gap:12px;padding-block:10px}
 nav.top img{width:38px;height:38px;border-radius:10px;box-shadow:0 0 0 2px var(--pink)}
-nav.top .brand{font-family:var(--f-h);font-size:12px;letter-spacing:.12em;line-height:1.25;white-space:nowrap}
+nav.top .brand{font-family:var(--f-h);font-weight:900;font-size:14px;letter-spacing:.06em;line-height:1.25;white-space:nowrap}
 nav.top .brand small{display:block;color:var(--mut);font-family:var(--f-b);letter-spacing:.04em;font-size:11px}
 .tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto;min-width:0}
 .tabs::-webkit-scrollbar{display:none}
-.tabs a{white-space:nowrap;text-decoration:none;color:var(--mut);font-size:13px;font-weight:600;padding:7px 11px;border-radius:99px}
+.tabs a{white-space:nowrap;text-decoration:none;color:var(--mut);font-size:15px;font-weight:800;padding:7px 11px;border-radius:99px}
 .tabs a.on{color:#fff;background:linear-gradient(135deg,var(--pink),var(--pur));box-shadow:0 6px 16px rgba(230,0,126,.3)}
 .adm-btn{flex:none;border:1px solid var(--line);background:var(--glass);color:var(--fg);border-radius:99px;padding:7px 12px;font-size:12.5px;font-weight:600}
 .adm-btn.on{border-color:var(--ok);color:var(--ok)}
@@ -34,9 +34,9 @@ nav.top .brand small{display:block;color:var(--mut);font-family:var(--f-b);lette
 section.pg{display:none;padding-block:28px 60px;animation:fade .35s ease}
 section.pg.on{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-h2.st{font-family:var(--f-h);font-size:clamp(20px,4vw,30px);margin:0 0 4px;letter-spacing:.04em;text-wrap:balance}
+h2.st{font-family:var(--f-h);font-weight:900;font-size:clamp(26px,4.6vw,40px);margin:0 0 6px;letter-spacing:.01em;color:var(--ink);text-wrap:balance}
 p.sd{margin:0 0 22px;color:var(--mut)}
-.eyebrow{font-family:var(--f-h);font-size:11px;letter-spacing:.3em;color:var(--blue)}
+.eyebrow{font-family:var(--f-h);font-weight:800;font-size:13px;letter-spacing:.22em;color:var(--blue)}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px;min-width:0;box-shadow:0 6px 24px rgba(230,0,126,.06)}
 .grid{display:grid;gap:16px}
 .g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
@@ -45,12 +45,12 @@ p.sd{margin:0 0 22px;color:var(--mut)}
 .stat{position:relative;overflow:hidden;background:linear-gradient(160deg,#fff,#fff0f8);box-shadow:0 6px 20px rgba(230,0,126,.07);border:1px solid var(--line);border-radius:18px;padding:16px;transition:transform .2s,border-color .2s}
 .stat:hover{transform:translateY(-3px);border-color:var(--pink)}
 .stat::after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(230,0,126,.14),transparent 70%)}
-.stat b{display:block;font-family:var(--f-h);font-size:30px;line-height:1.1;color:var(--mag)}
-.stat span{font-size:12px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase}
+.stat b{display:block;font-family:var(--f-h);font-weight:900;font-size:36px;line-height:1.1;color:var(--mag)}
+.stat span{font-size:13.5px;font-weight:800;color:var(--mut);letter-spacing:.06em;text-transform:uppercase}
 .stat small{display:block;font-size:11.5px;color:var(--mut);margin-top:4px}
-h3.ct{margin:0 0 12px;font-size:15px;font-family:var(--f-h);letter-spacing:.08em;color:var(--mag)}
+h3.ct{margin:0 0 14px;font-size:18px;font-weight:900;font-family:var(--f-h);letter-spacing:.04em;color:var(--mag)}
 .muted{color:var(--mut)}
-.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;background:var(--glass);border:1px solid var(--line)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:800;padding:4px 10px;border-radius:99px;background:var(--glass);border:1px solid var(--line)}
 .md-Emas{background:linear-gradient(135deg,#ffe58a,#e0a400);color:#2a1d00;border:0}
 .md-Perak{background:linear-gradient(135deg,#f6f8ff,#a9b0c6);color:#1d2030;border:0}
 .md-Gangsa{background:linear-gradient(135deg,#f6c49a,#b8703e);color:#2a1406;border:0}
@@ -64,8 +64,8 @@ h3.ct{margin:0 0 12px;font-size:15px;font-family:var(--f-h);letter-spacing:.08em
 .cv-logo img{width:64px;height:64px;border-radius:16px;box-shadow:0 0 0 2px var(--pink),0 0 30px rgba(255,20,147,.6)}
 .cv-logo div{font-size:13px;color:var(--mut);line-height:1.35}.cv-logo b{display:block;color:var(--ink);font-size:15px}
 .cover h1{margin:0;font-family:var(--f-h);font-weight:900;font-size:clamp(30px,6.2vw,64px);line-height:1.02;letter-spacing:.02em;background:linear-gradient(120deg,#c4006f 0%,#e6007e 45%,#7b2ff7 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-wrap:balance}
-.cover .dmd{margin-top:14px;font-family:var(--f-h);font-size:clamp(13px,2.4vw,20px);letter-spacing:.32em;color:var(--blue)}
-.cover .sch{margin-top:22px;font-family:var(--f-h);font-size:clamp(14px,2.4vw,19px);letter-spacing:.14em}
+.cover .dmd{margin-top:14px;font-family:var(--f-h);font-weight:900;font-size:clamp(15px,2.6vw,22px);letter-spacing:.2em;color:var(--blue)}
+.cover .sch{margin-top:22px;font-family:var(--f-h);font-weight:900;font-size:clamp(17px,2.6vw,22px);letter-spacing:.1em}
 .cover .sch span{display:block;color:var(--pink);font-size:.8em;letter-spacing:.3em;margin-top:4px}
 .cv-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
 .cv-photo{aspect-ratio:3/4;border-radius:22px;overflow:hidden;border:2px solid rgba(255,20,147,.6);box-shadow:0 14px 40px rgba(230,0,126,.22);background:#fff0f8;display:grid;place-items:center;max-width:100%}
@@ -73,15 +73,15 @@ h3.ct{margin:0 0 12px;font-size:15px;font-family:var(--f-h);letter-spacing:.08em
 .chip3d{position:absolute;font-family:var(--f-h);font-size:10px;letter-spacing:.2em;color:var(--blue);border:1px solid rgba(0,180,255,.5);border-radius:8px;padding:5px 8px;background:rgba(0,180,255,.08)}
 /* charts */
 .bars{display:grid;gap:8px}
-.bar-r{display:grid;grid-template-columns:minmax(80px,150px) 1fr 52px;gap:10px;align-items:center;font-size:13px}
+.bar-r{display:grid;grid-template-columns:minmax(90px,190px) 1fr 64px;gap:10px;align-items:center;font-size:15px}
 .bar-r>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bar-t{height:12px;border-radius:99px;background:#f6e6f0;overflow:hidden}
 .bar-t i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--pur),var(--pink));width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
-.bar-r b{text-align:right;font-family:var(--f-h);font-size:12px}
+.bar-r b{text-align:right;font-family:var(--f-h);font-weight:900;font-size:14px}
 .chart-wrap{overflow-x:auto}
 /* tables */
 .tbl-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}
-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
 th,td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(214,0,143,.08);vertical-align:top}
 th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);background:#fff5fb;position:sticky;top:0}
 td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
@@ -98,9 +98,11 @@ tr:hover td{background:rgba(230,0,126,.04)}
 .gc .th .k{position:absolute;top:10px;left:10px;font-family:var(--f-h);font-size:11px;font-weight:700;background:#fff;color:var(--mag);border:1px solid var(--pink);padding:5px 9px;border-radius:8px}
 .gc .th .m{position:absolute;top:10px;right:10px}
 .gc .th .ph{font-family:var(--f-h);font-size:26px;color:rgba(196,0,111,.25)}
-.gc .bd{padding:14px}
-.gc h4{margin:0;font-size:16px;line-height:1.3}
-.gc p{margin:4px 0 0;font-size:12.5px;color:var(--mut)}
+.gc .bd{padding:16px}
+.gc .nth{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 0}
+.gc .k2{font-family:var(--f-h);font-weight:900;font-size:13px;color:var(--mag);border:1px solid var(--pink);border-radius:8px;padding:4px 9px}
+.gc h4{margin:0;font-size:19px;font-weight:900;line-height:1.3}
+.gc p{margin:4px 0 0;font-size:14px;color:var(--mut)}
 .gc .sc{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px}
 .gc .sc b{font-family:var(--f-h);font-size:16px;color:var(--mag)}
 /* timeline */
@@ -109,10 +111,10 @@ tr:hover td{background:rgba(230,0,126,.04)}
 .tl-i{position:relative;margin-bottom:16px}
 .tl-i::before{content:"";position:absolute;left:-25px;top:18px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--pink);box-shadow:0 0 12px var(--pink)}
 .tl-i.und::before{border-color:var(--blue);box-shadow:0 0 12px var(--blue)}
-.tl-d{font-family:var(--f-h);font-size:12px;letter-spacing:.12em;color:var(--pink)}
+.tl-d{font-family:var(--f-h);font-weight:900;font-size:14px;letter-spacing:.06em;color:var(--pink)}
 .tl-i.und .tl-d{color:var(--blue)}
-.tl-i h4{margin:2px 0 4px;font-size:16px}
-.tl-i p{margin:0;color:var(--mut);font-size:13.5px}
+.tl-i h4{margin:2px 0 4px;font-size:19px;font-weight:900}
+.tl-i p{margin:0;color:var(--mut);font-size:15.5px}
 /* profile */
 .prof h4{margin:0 0 6px;font-family:var(--f-h);font-size:12px;letter-spacing:.16em;color:var(--pink)}
 .prof .txt{white-space:pre-line}
@@ -122,13 +124,13 @@ tr:hover td{background:rgba(230,0,126,.04)}
 .ajk b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--blue)}
 /* awards */
 .aw{position:relative;overflow:hidden}
-.aw .t{font-family:var(--f-h);font-size:12px;letter-spacing:.12em;color:var(--blue)}
-.aw h4{margin:8px 0 2px;font-size:17px}
-.aw p{margin:0;font-size:13px;color:var(--mut)}
+.aw .t{font-family:var(--f-h);font-weight:900;font-size:13px;letter-spacing:.12em;color:var(--blue)}
+.aw h4{margin:8px 0 2px;font-size:20px;font-weight:900}
+.aw p{margin:0;font-size:15px;color:var(--mut)}
 .aw .glow{position:absolute;right:-40px;bottom:-40px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,20,147,.4),transparent 70%)}
-.mlist{display:grid;gap:6px;font-size:13px}
+.mlist{display:grid;gap:8px;font-size:15px}
 .mlist div{display:flex;gap:8px;align-items:baseline}
-.mlist b{font-family:var(--f-h);font-size:11px;min-width:64px}
+.mlist b{font-family:var(--f-h);font-weight:900;font-size:14px;min-width:44px}
 /* photos */
 .photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
 .photo{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:#f6eef3;border:1px solid var(--line);max-width:100%;cursor:zoom-in}
@@ -137,7 +139,7 @@ tr:hover td{background:rgba(230,0,126,.04)}
 button.photo{padding:0;width:100%;font:inherit;text-align:left;display:block}
 .photo:hover img{transform:scale(1.05)}
 .gk{font:inherit;font-size:12.5px}
-.photo span{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 8px;font-size:12px;line-height:1.35;color:#fff;background:linear-gradient(transparent,rgba(26,16,41,.85))}
+.photo span{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 10px;font-size:13.5px;font-weight:700;line-height:1.35;color:#fff;background:linear-gradient(transparent,rgba(26,16,41,.85))}
 /* admin */
 .adm{display:none!important}
 body.admin .adm{display:inline-flex!important}
@@ -158,13 +160,13 @@ body.admin .adm-b{display:block!important}
 .f textarea{min-height:90px;resize:vertical}
 .vid{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000;margin:12px 0;max-width:100%}
 .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.det dl{display:grid;grid-template-columns:150px 1fr;gap:6px 14px;margin:12px 0;font-size:14px}
-.det dt{color:var(--mut);font-size:12.5px}
+.det dl{display:grid;grid-template-columns:170px 1fr;gap:8px 16px;margin:14px 0;font-size:16px}
+.det dt{color:var(--mut);font-size:14px;font-weight:800}
 .det dd{margin:0;white-space:pre-line;min-width:0}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.15);border:1px solid var(--ok);color:var(--ok);padding:10px 18px;border-radius:99px;font-size:13.5px;font-weight:600}
 footer{text-align:center;color:var(--mut);font-size:12px;letter-spacing:.08em;padding-block:20px 40px}
 .load{padding:60px 0;text-align:center;color:var(--mut)}
-.cmt{border-left:3px solid var(--pink);background:var(--glass);border-radius:0 10px 10px 0;padding:8px 12px;font-size:13px;margin-bottom:8px}
+.cmt{border-left:4px solid var(--pink);background:var(--glass);border-radius:0 12px 12px 0;padding:10px 14px;font-size:15.5px;margin-bottom:8px}
 .cmt b{font-size:11.5px;color:var(--blue)}
 @media (max-width:820px){.cover{grid-template-columns:1fr}.cv-photo{max-width:300px;margin:0 auto}.det dl{grid-template-columns:1fr}.det dt{margin-top:6px}nav.top .brand{display:none}}
 /* print report */
@@ -379,7 +381,7 @@ function special(){
     {t:'Best Pitching Team',r:top(scored,r=>r.crit[5]),b:'Purata tertinggi kriteria Pembentangan',v:r=>f1(r.crit[5])+'/15'},
     {t:'Best Innovation Video',r:vids[0]||null,b:'Markah video tertinggi',v:r=>f1(+r.vscore)+'/100',pend:'Penilaian video selepas tarikh akhir 18 November 2026.'},
     {t:'Best Duta Award',name:duta,b:'Pilihan urus setia',pend:'Ditentukan oleh urus setia.'}
-  ];
+  ].filter(a=>a.r||a.name);
 }
 function counts(){
   const scored=ROWS.filter(r=>r.n>0), juri=new Set();
@@ -445,14 +447,14 @@ function pUtama(){
   const sub=Object.entries(subj).sort((a,b)=>b[1]-a[1]);
   const md=['Emas','Perak','Gangsa'].map(m=>[m,scored.filter(r=>r.medal===m).length]);
   const ph=(DOC.gambar||[]).slice(0,4);
-  return head('EXECUTIVE DASHBOARD',esc(p.nama),`${esc(p.penganjur)} · ${esc(p.tarikh)} · ${esc(p.lokasi)}`,`<span class="pill ${st.pct===100?'badge-ok':''}">Status dokumentasi: ${esc(st.label)} · ${st.pct}%</span>`)+
+  return head('EXECUTIVE DASHBOARD',esc(p.nama),`${esc(p.penganjur)} · ${esc(p.tarikh)} · ${esc(p.lokasi)}`,'')+
   `<div class="stats">
     <div class="stat"><b>${c.peserta}</b><span>Peserta</span><small>murid berdaftar</small></div>
     <div class="stat"><b>${c.kumpulan}</b><span>Kumpulan inovasi</span></div>
     <div class="stat"><b>${c.projek}</b><span>Projek dinilai</span><small>${c.lengkap} lengkap 2 juri</small></div>
     <div class="stat"><b>${c.juri}</b><span>Juri</span><small>alumni Batch Estelle 2125</small></div>
     <div class="stat"><b>${c.anugerah}</b><span>Anugerah</span><small>${c.med} pingat · ${c.sp+c.custom} khas</small></div>
-    <div class="stat"><b>${c.video}</b><span>Video inovasi</span><small>daripada ${c.kumpulan} kumpulan</small></div>
+    ${c.video?`<div class="stat"><b>${c.video}</b><span>Video inovasi</span><small>daripada ${c.kumpulan} kumpulan</small></div>`:`<div class="stat"><b>${GALERI.length}</b><span>Gambar rasmi</span><small>+ 1 video montaj</small></div>`}
   </div>
   <div class="grid g2">
     <div class="card"><h3 class="ct">TABURAN PINGAT</h3>${bars(md.map(([m,n])=>[m,n,n]),Math.max(1,...md.map(x=>x[1])))}<p class="muted" style="font-size:12.5px;margin:12px 0 0">Kuota: ${quota()[0]} Emas · ${quota()[1]} Perak · ${quota()[2]} Gangsa (mengikut kedudukan)</p></div>
@@ -536,7 +538,7 @@ function pKron(){
 
 function gcard(r){
   const yt=r.video&&ytId(r.video.yt), gp=GALERI.find(g=>g.g===r.kod&&g.k==='Pameran & booth')||GALERI.find(g=>g.g===r.kod), img=(r.video&&drvImg(r.video.produk))||(gp?gImg(gp.id,700):'');
-  return `<button class="card gc" data-g="${r.no}"><div class="th">${img?`<img loading="lazy" referrerpolicy="no-referrer" src="${esc(img)}" alt="">`:yt?`<img loading="lazy" src="https://i.ytimg.com/vi/${yt}/hqdefault.jpg" alt="">`:`<span class="ph">${esc((r.kod||'').split(' ')[0])}</span>`}<span class="k">${esc(r.kod)}</span><span class="m">${r.medal&&r.medal!=='Penyertaan'?medalPill(r.medal):''}</span></div>
+  return `<button class="card gc" data-g="${r.no}">${img||yt?`<div class="th"><img loading="lazy" referrerpolicy="no-referrer" src="${esc(img||'https://i.ytimg.com/vi/'+yt+'/hqdefault.jpg')}" alt=""><span class="k">${esc(r.kod)}</span><span class="m">${r.medal&&r.medal!=='Penyertaan'?medalPill(r.medal):''}</span></div>`:`<div class="nth"><span class="k2">${esc(r.kod)}</span>${r.medal&&r.medal!=='Penyertaan'?medalPill(r.medal):''}</div>`}
   <div class="bd"><h4>${esc(r.produk)}</h4><p>${esc(r.subjek)} · ${esc(r.guru)}</p><div class="sc"><span class="muted">${r.n===2?'Selesai dinilai':r.n===1?'Sedang dinilai':'Belum dinilai'}</span><b>${r.avg!=null?f1(r.avg):'–'}</b></div></div></button>`;
 }
 function pKumpulan(){
@@ -557,14 +559,14 @@ function groupDetail(no){
   const status=r.n===2?`Selesai dinilai oleh dua juri · ${r.medal==='Penyertaan'?'Sijil penyertaan':'Anugerah '+r.medal}${r.rank?' · kedudukan #'+r.rank+' daripada '+ROWS.filter(x=>x.n).length:''}`:r.n===1?'Sedang dinilai':'Belum dinilai';
   modal(`<div class="eyebrow">${esc(r.kod)} · LEARNING INNOVATION</div><h2 class="st" style="font-size:24px;margin-top:4px">${esc(r.produk)}</h2>
    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0">${medalPill(r.medal)}<span class="pill">📚 ${esc(r.subjek)}</span><span class="pill">${r.avg!=null?'Markah '+f1(r.avg)+'/100':'Belum dinilai'}</span>${r.rank?`<span class="pill">Kedudukan #${r.rank}</span>`:''}</div>
-   ${yt?`<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/${yt}?rel=0&playsinline=1" title="${esc(r.produk)}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`:'<p class="muted">Video demonstrasi belum dihantar.</p>'}
+   ${yt?`<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/${yt}?rel=0&playsinline=1" title="${esc(r.produk)}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`:''}
    <div class="det"><dl><dt>Status penyertaan</dt><dd>${esc(status)}</dd><dt>Bidang</dt><dd>Learning Innovation · ${esc(r.subjek)}</dd><dt>Guru pembimbing</dt><dd>${esc(r.guru)}</dd><dt>Ahli kumpulan</dt><dd>${r.ahli.map((a,i)=>`${i+1}. ${esc(a.nama)}${a.tingkatan||a.kelas?' ('+esc([a.tingkatan,a.kelas].filter(Boolean).join(' '))+')':''}`).join('\n')}</dd>${dl}</dl></div>
    ${r.video?`<div class="photos">${[['Gambar produk',r.video.produk],['Gambar ahli kumpulan',r.video.ahli]].map(([c,u])=>photo({url:u,cap:c})).join('')}</div>`:''}
    ${gal.length?`<h3 class="ct" style="margin-top:18px">GAMBAR KUMPULAN</h3><div class="photos">${gal.map(gphoto).join('')}</div>`:''}
    ${r.n?`<h3 class="ct" style="margin-top:18px">MARKAH MENGIKUT KRITERIA (PURATA DUA JURI)</h3>${bars(KRITERIA.map((k,i)=>[k.n,r.crit[i],f1(r.crit[i])+'/'+k.m]).map(([l,v,lab],i)=>[l,v/KRITERIA[i].m*100,lab]),100)}
    <div class="tbl-wrap" style="margin-top:12px"><table style="min-width:520px"><thead><tr><th>Penilai</th>${KRITERIA.map((k,i)=>`<th class="n">K${i+1}<br><span style="font-size:9px">/${k.m}</span></th>`).join('')}<th class="n">Jumlah</th></tr></thead><tbody>${cm.map(({i,m})=>`<tr><td>Juri ${i}</td>${m.k.map(v=>`<td class="n">${f1(v)}</td>`).join('')}<td class="n"><b>${f1(m.jumlah)}</b></td></tr>`).join('')}<tr><td><b>Purata</b></td>${r.crit.map(v=>`<td class="n">${f1(v)}</td>`).join('')}<td class="n"><b>${f1(r.avg)}</b></td></tr></tbody></table></div>
    <p style="font-size:13.5px;margin:12px 0 0">Kekuatan utama: <b>${esc(sorted[0][0])}</b> (${f1(sorted[0][1]*100)}%). Ruang penambahbaikan: <b>${esc(sorted[5][0])}</b> (${f1(sorted[5][1]*100)}%).</p>
-   <h3 class="ct" style="margin-top:18px">KOMEN JURI</h3>${cm.map(({i,m})=>`<div class="cmt"><b>JURI ${i} · ${f1(m.jumlah)}/100</b><br>${String(m.catatan||'').trim()?esc(m.catatan):'<span class="muted">Tiada komen bertulis.</span>'}</div>`).join('')}`:''}
+   ${cm.some(({m})=>String(m.catatan||'').trim())?`<h3 class="ct" style="margin-top:18px">KOMEN JURI</h3>${cm.filter(({m})=>String(m.catatan||'').trim()).map(({i,m})=>`<div class="cmt"><b>JURI ${i} · ${f1(m.jumlah)}/100</b><br>${esc(m.catatan)}</div>`).join('')}`:''}`:''}
    <div style="margin-top:16px"><button class="btn adm" data-act="kedit" data-no="${r.no}">✎ Sunting butiran kumpulan</button></div>`);
 }
 
@@ -581,7 +583,7 @@ function pPenilaian(){
     const byJ={};jr.forEach(m=>{(byJ[m.juri]=byJ[m.juri]||[]).push(m)});
     det=`<h3 class="ct" style="margin-top:26px">REKOD PENILAIAN SETIAP JURI <span class="pill">Pentadbir</span></h3>
     <div class="tbl-wrap"><table><thead><tr><th>Kod</th><th>Projek</th><th>Juri</th><th>Tarikh</th>${KRITERIA.map((k,i)=>`<th class="n">K${i+1}</th>`).join('')}<th class="n">Jumlah</th><th class="n">%</th><th>Komen / cadangan</th></tr></thead><tbody>
-    ${jr.sort((a,b)=>kn(a.b)-kn(b.b)||a.slot-b.slot).map(m=>`<tr><td>${esc(m.b.kod)}</td><td>${esc(m.b.produk)}</td><td>${esc(m.juri)}</td><td>${esc(String(m.masa).slice(0,10))}</td>${m.k.map(v=>`<td class="n">${f1(v)}</td>`).join('')}<td class="n"><b>${f1(m.jumlah)}</b></td><td class="n">${f1(m.jumlah)}%</td><td>${esc(m.catatan)||'<span class="muted">–</span>'}</td></tr>`).join('')}</tbody></table></div>
+    ${jr.sort((a,b)=>kn(a.b)-kn(b.b)||a.slot-b.slot).map(m=>`<tr><td>${esc(m.b.kod)}</td><td>${esc(m.b.produk)}</td><td>${esc(m.juri)}</td><td>${esc(String(m.masa).slice(0,10))}</td>${m.k.map(v=>`<td class="n">${f1(v)}</td>`).join('')}<td class="n"><b>${f1(m.jumlah)}</b></td><td class="n">${f1(m.jumlah)}%</td><td>${esc(m.catatan)||''}</td></tr>`).join('')}</tbody></table></div>
     <h3 class="ct" style="margin-top:26px">PERBANDINGAN MARKAH ANTARA JURI</h3>
     <div class="tbl-wrap"><table><thead><tr><th>Kod</th><th>Projek</th><th>Juri 1</th><th class="n">Markah</th><th>Juri 2</th><th class="n">Markah</th><th class="n">Purata</th><th class="n">Beza</th></tr></thead><tbody>
     ${ROWS.filter(r=>r.n).sort((a,b)=>kn(a)-kn(b)).map(r=>{const a=jr.find(m=>m.no===r.no&&m.slot===1),b=jr.find(m=>m.no===r.no&&m.slot===2);return `<tr><td>${esc(r.kod)}</td><td>${esc(r.produk)}</td><td>${esc(a?a.juri:'–')}</td><td class="n">${a?f1(a.jumlah):'–'}</td><td>${esc(b?b.juri:'–')}</td><td class="n">${b?f1(b.jumlah):'–'}</td><td class="n"><b>${f1(r.avg)}</b></td><td class="n" style="${r.beza>=15?'color:#d12a2a':''}">${r.beza!=null?f1(r.beza):'–'}</td></tr>`}).join('')}</tbody></table></div>
@@ -591,7 +593,7 @@ function pPenilaian(){
   }
   return head('JUDGE SCORING SYSTEM','Sistem Penilaian Juri','Setiap booth dinilai oleh dua juri secara individu. Jumlah dan peratus dikira automatik; satu rekod bagi setiap juri setiap booth (tiada pengiraan berganda).',
     `<div style="display:flex;gap:8px;flex-wrap:wrap"><a class="eb adm" href="juri.html" target="_blank" rel="noopener">✎ Sistem juri</a><a class="eb adm" href="dashboard.html" target="_blank" rel="noopener">⟲ Edit / reset markah</a><button class="eb adm" data-act="sahkan">${sah?'↺ Batal pengesahan':'✓ Sahkan keputusan'}</button></div>`)+
-  `<div class="stats">${st.map(([l,n],i)=>`<div class="stat"><b>${n}</b><span>${l}</span></div>`).join('')}<div class="stat"><b>${D.markah.length}</b><span>Rekod penilaian</span></div><div class="stat"><b style="font-size:18px;${sah?'color:var(--ok)':''}">${sah?'DISAHKAN':'BELUM DISAHKAN'}</b><span>Status keputusan</span>${sah?`<small>${esc(new Date(DOC.sahkan.masa).toLocaleString('ms-MY'))}</small>`:''}</div></div>
+  `<div class="stats">${st.filter(([l,n])=>n>0).map(([l,n])=>`<div class="stat"><b>${n}</b><span>${l}</span></div>`).join('')}<div class="stat"><b>${D.markah.length}</b><span>Rekod penilaian</span></div><div class="stat"><b>15</b><span>Juri jemputan</span><small>alumni Batch Estelle 2125</small></div>${sah?`<div class="stat"><b style="font-size:20px;color:var(--ok)">DISAHKAN</b><span>Status keputusan</span><small>${esc(new Date(DOC.sahkan.masa).toLocaleString('ms-MY'))}</small></div>`:''}</div>
   <div class="card"><h3 class="ct">RUBRIK PENILAIAN</h3><div class="tbl-wrap" style="border:0"><table style="min-width:0"><thead><tr><th>#</th><th>Kriteria</th><th class="n">Markah maksimum</th></tr></thead><tbody>${KRITERIA.map((k,i)=>`<tr><td>K${i+1}</td><td>${esc(k.n)}</td><td class="n">${k.m}</td></tr>`).join('')}<tr><td></td><td><b>Jumlah</b> (purata dua juri = peratus keseluruhan)</td><td class="n"><b>100</b></td></tr></tbody></table></div>
   <p class="muted" style="font-size:12.5px;margin:10px 0 0">Rubrik ini telah digunakan oleh semua juri pada 12 November 2026, jadi markah maksimum dikunci supaya rekod sedia ada kekal sah. Panduan tahap terperinci: <a href="Rubrik_Pemarkahan_Juri_FIB2026.pdf" target="_blank" rel="noopener">Rubrik PDF</a>.</p></div>
   <h3 class="ct" style="margin-top:26px">STATUS PENILAIAN SETIAP PROJEK</h3>
@@ -652,10 +654,10 @@ function pLaporan(){
   return head('LAPORAN RASMI','Laporan & Galeri','Hasilkan laporan dokumentasi rasmi A4 lengkap daripada data semasa.')+
   `<div class="grid g2">
     <div class="card"><h3 class="ct">LAPORAN PDF</h3><p class="muted" style="margin:0 0 12px">Laporan mengandungi cover, profil, tentatif, senarai kumpulan, penilaian, ranking dan anugerah. Pilih "Simpan sebagai PDF" dalam tetingkap cetak.</p><button class="btn" data-act="print">🖨 Cetak / Simpan PDF</button></div>
-    <div class="card"><h3 class="ct">STATUS DOKUMENTASI · ${st.pct}%</h3><div class="mlist">${st.items.map(([l,ok])=>`<div><span style="color:${ok?'var(--ok)':'var(--mut)'}">${ok?'✓':'○'}</span><span>${esc(l)}</span></div>`).join('')}</div><div style="margin-top:10px"><button class="eb adm" data-act="status">✎ Tetapkan label status</button></div></div>
+    <div class="card"><h3 class="ct">KANDUNGAN LAPORAN</h3><div class="mlist">${['Cover rasmi','Profil program & jawatankuasa','Tentatif program','36 kumpulan inovasi','Penilaian juri & ranking','Anugerah','Galeri program'].map(l=>`<div><span style="color:var(--ok)">✓</span><span>${l}</span></div>`).join('')}</div></div>
   </div>
-  <div class="row-h" style="margin-top:26px"><h3 class="ct" style="margin:0">GAMBAR TAMBAHAN</h3><button class="eb adm" data-act="foto" data-i="-1">＋ Tambah gambar (pautan Google Drive)</button></div>
-  ${ph.length?`<div class="photos">${ph.map(g=>`<div>${photo(g)}<button class="eb adm" style="margin-top:6px" data-act="foto" data-i="${g.i}">✎ Sunting</button></div>`).join('')}</div>`:`<div class="card muted">${GALERI.length} gambar rasmi dipaparkan di halaman <a href="#galeri">Galeri</a>. Pentadbir boleh menambah gambar lain melalui pautan Google Drive.</div>`}`;
+  <div class="row-h adm-b" style="margin-top:26px"><h3 class="ct" style="margin:0">GAMBAR TAMBAHAN</h3><button class="eb adm" data-act="foto" data-i="-1">＋ Tambah gambar (pautan Google Drive)</button></div>
+  ${ph.length?`<div class="photos">${ph.map(g=>`<div>${photo(g)}<button class="eb adm" style="margin-top:6px" data-act="foto" data-i="${g.i}">✎ Sunting</button></div>`).join('')}</div>`:''}`;
 }
 
 /* ---------- print report ---------- */
