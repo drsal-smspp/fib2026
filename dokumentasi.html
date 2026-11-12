@@ -9,17 +9,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
-:root{--bg:#060819;--bg2:#0d1033;--panel:rgba(20,22,60,.55);--glass:rgba(255,255,255,.055);--line:rgba(140,120,255,.22);--pink:#ff1493;--mag:#d6008f;--blue:#00b4ff;--pur:#7b2ff7;--fg:#f3f1ff;--mut:#a9a6d6;--gold:#ffcf4a;--silver:#d8dcec;--bronze:#e7a46f;--ok:#3ee6a0;--f-h:'Orbitron',system-ui,sans-serif;--f-b:'Poppins',system-ui,sans-serif;color-scheme:dark}
+:root{--bg:#ffffff;--bg2:#fff5fb;--panel:#ffffff;--glass:#fff3f9;--line:rgba(214,0,143,.16);--pink:#e6007e;--mag:#c4006f;--blue:#0091d5;--pur:#7b2ff7;--fg:#2a2238;--ink:#1a1029;--mut:#6f6782;--gold:#c99400;--silver:#8c93a8;--bronze:#b8703e;--ok:#0f9d63;--f-h:'Orbitron',system-ui,sans-serif;--f-b:'Poppins',system-ui,sans-serif;color-scheme:light}
 *{box-sizing:border-box}
 html{background:var(--bg);scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(90% 60% at 85% -10%,rgba(255,20,147,.28),transparent 60%),radial-gradient(70% 50% at 0% 10%,rgba(0,180,255,.18),transparent 60%),radial-gradient(80% 60% at 50% 110%,rgba(123,47,247,.25),transparent 60%),var(--bg);background-attachment:fixed;color:var(--fg);font-family:var(--f-b);font-size:15px;line-height:1.6}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(0,180,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,180,255,.06) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(180deg,#000 0%,transparent 60%)}
+body{margin:0;background:radial-gradient(70% 40% at 90% -5%,rgba(230,0,126,.10),transparent 60%),radial-gradient(60% 40% at 0% 0%,rgba(0,145,213,.07),transparent 60%),var(--bg);background-attachment:fixed;color:var(--fg);font-family:var(--f-b);font-size:15px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(230,0,126,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(230,0,126,.045) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(180deg,#000 0%,transparent 60%)}
 a{color:var(--blue)}
 button{font:inherit;cursor:pointer}
 .w{position:relative;max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 /* nav */
-nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(6,8,25,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-body::after{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(6,8,25,.95);z-index:31}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);box-shadow:0 2px 18px rgba(230,0,126,.06);border-bottom:1px solid var(--line)}
+body::after{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#fff;z-index:31}
 nav.top .w{display:flex;align-items:center;gap:12px;padding-block:10px}
 nav.top img{width:38px;height:38px;border-radius:10px;box-shadow:0 0 0 2px var(--pink)}
 nav.top .brand{font-family:var(--f-h);font-size:12px;letter-spacing:.12em;line-height:1.25;white-space:nowrap}
@@ -27,7 +27,7 @@ nav.top .brand small{display:block;color:var(--mut);font-family:var(--f-b);lette
 .tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-left:auto;min-width:0}
 .tabs::-webkit-scrollbar{display:none}
 .tabs a{white-space:nowrap;text-decoration:none;color:var(--mut);font-size:13px;font-weight:600;padding:7px 11px;border-radius:99px}
-.tabs a.on{color:#fff;background:linear-gradient(135deg,var(--pink),var(--pur));box-shadow:0 0 16px rgba(255,20,147,.45)}
+.tabs a.on{color:#fff;background:linear-gradient(135deg,var(--pink),var(--pur));box-shadow:0 6px 16px rgba(230,0,126,.3)}
 .adm-btn{flex:none;border:1px solid var(--line);background:var(--glass);color:var(--fg);border-radius:99px;padding:7px 12px;font-size:12.5px;font-weight:600}
 .adm-btn.on{border-color:var(--ok);color:var(--ok)}
 /* layout */
@@ -37,18 +37,18 @@ section.pg.on{display:block}
 h2.st{font-family:var(--f-h);font-size:clamp(20px,4vw,30px);margin:0 0 4px;letter-spacing:.04em;text-wrap:balance}
 p.sd{margin:0 0 22px;color:var(--mut)}
 .eyebrow{font-family:var(--f-h);font-size:11px;letter-spacing:.3em;color:var(--blue)}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px;backdrop-filter:blur(10px);min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:20px;min-width:0;box-shadow:0 6px 24px rgba(230,0,126,.06)}
 .grid{display:grid;gap:16px}
 .g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
 .g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
-.stat{position:relative;overflow:hidden;background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:16px;transition:transform .2s,border-color .2s}
+.stat{position:relative;overflow:hidden;background:linear-gradient(160deg,#fff,#fff0f8);box-shadow:0 6px 20px rgba(230,0,126,.07);border:1px solid var(--line);border-radius:18px;padding:16px;transition:transform .2s,border-color .2s}
 .stat:hover{transform:translateY(-3px);border-color:var(--pink)}
-.stat::after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(255,20,147,.35),transparent 70%)}
-.stat b{display:block;font-family:var(--f-h);font-size:30px;line-height:1.1}
+.stat::after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(230,0,126,.14),transparent 70%)}
+.stat b{display:block;font-family:var(--f-h);font-size:30px;line-height:1.1;color:var(--mag)}
 .stat span{font-size:12px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase}
 .stat small{display:block;font-size:11.5px;color:var(--mut);margin-top:4px}
-h3.ct{margin:0 0 12px;font-size:15px;font-family:var(--f-h);letter-spacing:.08em;color:#fff}
+h3.ct{margin:0 0 12px;font-size:15px;font-family:var(--f-h);letter-spacing:.08em;color:var(--mag)}
 .muted{color:var(--mut)}
 .pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;background:var(--glass);border:1px solid var(--line)}
 .md-Emas{background:linear-gradient(135deg,#ffe58a,#e0a400);color:#2a1d00;border:0}
@@ -56,58 +56,58 @@ h3.ct{margin:0 0 12px;font-size:15px;font-family:var(--f-h);letter-spacing:.08em
 .md-Gangsa{background:linear-gradient(135deg,#f6c49a,#b8703e);color:#2a1406;border:0}
 .md-Penyertaan{background:var(--glass)}
 /* cover */
-.cover{position:relative;border-radius:28px;overflow:hidden;border:1px solid rgba(255,20,147,.4);background:linear-gradient(140deg,#1a0430 0%,#0a0f3a 55%,#04112e 100%);padding:clamp(24px,5vw,56px);min-height:520px;display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:center;box-shadow:0 0 80px rgba(255,20,147,.2)}
-.cover::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 70% at 100% 0%,rgba(255,20,147,.45),transparent 60%),radial-gradient(50% 60% at 0% 100%,rgba(0,180,255,.35),transparent 60%);pointer-events:none}
+.cover{position:relative;border-radius:28px;overflow:hidden;border:1px solid rgba(230,0,126,.25);background:linear-gradient(140deg,#ffffff 0%,#fff0f8 55%,#eef8ff 100%);padding:clamp(24px,5vw,56px);min-height:520px;display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:center;box-shadow:0 20px 60px rgba(230,0,126,.12)}
+.cover::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 65% at 100% 0%,rgba(230,0,126,.16),transparent 60%),radial-gradient(45% 55% at 0% 100%,rgba(0,145,213,.12),transparent 60%);pointer-events:none}
 .cover .orb{position:absolute;border-radius:50%;filter:blur(2px);opacity:.75;pointer-events:none}
 .cover>*{position:relative;min-width:0}
 .cv-logo{display:flex;gap:12px;align-items:center;margin-bottom:22px}
 .cv-logo img{width:64px;height:64px;border-radius:16px;box-shadow:0 0 0 2px var(--pink),0 0 30px rgba(255,20,147,.6)}
-.cv-logo div{font-size:13px;color:var(--mut);line-height:1.35}.cv-logo b{display:block;color:#fff;font-size:15px}
-.cover h1{margin:0;font-family:var(--f-h);font-weight:900;font-size:clamp(30px,6.2vw,64px);line-height:1.02;letter-spacing:.02em;background:linear-gradient(180deg,#fff 0%,#ffc4e6 45%,var(--pink) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 24px rgba(255,20,147,.5));text-wrap:balance}
+.cv-logo div{font-size:13px;color:var(--mut);line-height:1.35}.cv-logo b{display:block;color:var(--ink);font-size:15px}
+.cover h1{margin:0;font-family:var(--f-h);font-weight:900;font-size:clamp(30px,6.2vw,64px);line-height:1.02;letter-spacing:.02em;background:linear-gradient(120deg,#c4006f 0%,#e6007e 45%,#7b2ff7 100%);-webkit-background-clip:text;background-clip:text;color:transparent;text-wrap:balance}
 .cover .dmd{margin-top:14px;font-family:var(--f-h);font-size:clamp(13px,2.4vw,20px);letter-spacing:.32em;color:var(--blue)}
 .cover .sch{margin-top:22px;font-family:var(--f-h);font-size:clamp(14px,2.4vw,19px);letter-spacing:.14em}
 .cover .sch span{display:block;color:var(--pink);font-size:.8em;letter-spacing:.3em;margin-top:4px}
 .cv-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.cv-photo{aspect-ratio:3/4;border-radius:22px;overflow:hidden;border:2px solid rgba(255,20,147,.6);box-shadow:0 0 40px rgba(255,20,147,.4);background:#0b0d2a;display:grid;place-items:center;max-width:100%}
+.cv-photo{aspect-ratio:3/4;border-radius:22px;overflow:hidden;border:2px solid rgba(255,20,147,.6);box-shadow:0 14px 40px rgba(230,0,126,.22);background:#fff0f8;display:grid;place-items:center;max-width:100%}
 .cv-photo img{width:100%;height:100%;object-fit:cover}
 .chip3d{position:absolute;font-family:var(--f-h);font-size:10px;letter-spacing:.2em;color:var(--blue);border:1px solid rgba(0,180,255,.5);border-radius:8px;padding:5px 8px;background:rgba(0,180,255,.08)}
 /* charts */
 .bars{display:grid;gap:8px}
 .bar-r{display:grid;grid-template-columns:minmax(80px,150px) 1fr 52px;gap:10px;align-items:center;font-size:13px}
 .bar-r>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bar-t{height:12px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
+.bar-t{height:12px;border-radius:99px;background:#f6e6f0;overflow:hidden}
 .bar-t i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--pur),var(--pink));width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
 .bar-r b{text-align:right;font-family:var(--f-h);font-size:12px}
 .chart-wrap{overflow-x:auto}
 /* tables */
 .tbl-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}
 table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px}
-th,td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(140,120,255,.12);vertical-align:top}
-th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);background:rgba(255,255,255,.03);position:sticky;top:0}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(214,0,143,.08);vertical-align:top}
+th{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);background:#fff5fb;position:sticky;top:0}
 td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
-tr:hover td{background:rgba(255,20,147,.05)}
+tr:hover td{background:rgba(230,0,126,.04)}
 .rk{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;font-family:var(--f-h);font-size:12px;background:var(--glass);border:1px solid var(--line)}
 .rk.r1{background:linear-gradient(135deg,#ffe58a,#e0a400);color:#231800;border:0}.rk.r2{background:linear-gradient(135deg,#f6f8ff,#a9b0c6);color:#151826;border:0}.rk.r3{background:linear-gradient(135deg,#f6c49a,#b8703e);color:#231000;border:0}
 /* groups */
 .tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.tools input,.tools select{font:inherit;color:var(--fg);background:rgba(0,0,0,.35);border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;min-width:0;flex:1 1 180px}
+.tools input,.tools select{font:inherit;color:var(--fg);background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;min-width:0;flex:1 1 180px}
 .gc{text-align:left;color:inherit;padding:0;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s}
-.gc:hover{transform:translateY(-4px);border-color:var(--pink);box-shadow:0 14px 34px rgba(255,20,147,.25)}
-.gc .th{aspect-ratio:16/9;background:linear-gradient(135deg,#25064a,#062a52);position:relative;display:grid;place-items:center;overflow:hidden}
+.gc:hover{transform:translateY(-4px);border-color:var(--pink);box-shadow:0 14px 34px rgba(230,0,126,.15)}
+.gc .th{aspect-ratio:16/9;background:linear-gradient(135deg,#ffe0f0,#e3f3ff);position:relative;display:grid;place-items:center;overflow:hidden}
 .gc .th img{width:100%;height:100%;object-fit:cover}
-.gc .th .k{position:absolute;top:10px;left:10px;font-family:var(--f-h);font-size:11px;font-weight:700;background:rgba(6,8,25,.85);border:1px solid var(--pink);padding:5px 9px;border-radius:8px}
+.gc .th .k{position:absolute;top:10px;left:10px;font-family:var(--f-h);font-size:11px;font-weight:700;background:#fff;color:var(--mag);border:1px solid var(--pink);padding:5px 9px;border-radius:8px}
 .gc .th .m{position:absolute;top:10px;right:10px}
-.gc .th .ph{font-family:var(--f-h);font-size:26px;color:rgba(255,255,255,.18)}
+.gc .th .ph{font-family:var(--f-h);font-size:26px;color:rgba(196,0,111,.25)}
 .gc .bd{padding:14px}
 .gc h4{margin:0;font-size:16px;line-height:1.3}
 .gc p{margin:4px 0 0;font-size:12.5px;color:var(--mut)}
 .gc .sc{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px}
-.gc .sc b{font-family:var(--f-h);font-size:16px;color:#fff}
+.gc .sc b{font-family:var(--f-h);font-size:16px;color:var(--mag)}
 /* timeline */
 .tl{position:relative;padding-left:28px}
 .tl::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--pink),var(--pur),var(--blue))}
 .tl-i{position:relative;margin-bottom:16px}
-.tl-i::before{content:"";position:absolute;left:-25px;top:18px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--pink);box-shadow:0 0 12px var(--pink)}
+.tl-i::before{content:"";position:absolute;left:-25px;top:18px;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--pink);box-shadow:0 0 12px var(--pink)}
 .tl-i.und::before{border-color:var(--blue);box-shadow:0 0 12px var(--blue)}
 .tl-d{font-family:var(--f-h);font-size:12px;letter-spacing:.12em;color:var(--pink)}
 .tl-i.und .tl-d{color:var(--blue)}
@@ -118,7 +118,7 @@ tr:hover td{background:rgba(255,20,147,.05)}
 .prof .txt{white-space:pre-line}
 .empty-f{color:var(--mut);font-style:italic;font-size:13px}
 .ajk{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-.ajk div{background:rgba(0,0,0,.25);border-radius:12px;padding:10px 12px;font-size:13px}
+.ajk div{background:var(--glass);border-radius:12px;padding:10px 12px;font-size:13px}
 .ajk b{display:block;font-size:10.5px;letter-spacing:.14em;color:var(--blue)}
 /* awards */
 .aw{position:relative;overflow:hidden}
@@ -131,36 +131,40 @@ tr:hover td{background:rgba(255,20,147,.05)}
 .mlist b{font-family:var(--f-h);font-size:11px;min-width:64px}
 /* photos */
 .photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-.photo{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:#0b0d2a;border:1px solid var(--line);max-width:100%}
-.photo img{width:100%;height:100%;object-fit:cover}
-.photo span{position:absolute;left:0;right:0;bottom:0;padding:18px 10px 8px;font-size:12px;background:linear-gradient(transparent,rgba(0,0,0,.8))}
+.photo{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:#f6eef3;border:1px solid var(--line);max-width:100%;cursor:zoom-in}
+.photo img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.photo img,.gc .th img{color:transparent;font-size:0}
+button.photo{padding:0;width:100%;font:inherit;text-align:left;display:block}
+.photo:hover img{transform:scale(1.05)}
+.gk{font:inherit;font-size:12.5px}
+.photo span{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 8px;font-size:12px;line-height:1.35;color:#fff;background:linear-gradient(transparent,rgba(26,16,41,.85))}
 /* admin */
 .adm{display:none!important}
 body.admin .adm{display:inline-flex!important}
 body.admin .adm-b{display:block!important}
 .adm-b{display:none!important}
-.eb{border:1px dashed var(--pink);background:rgba(255,20,147,.1);color:#fff;border-radius:10px;padding:6px 12px;font-size:12.5px;font-weight:600;align-items:center;gap:6px}
-.btn{border:0;border-radius:12px;padding:11px 18px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--pink),var(--pur));box-shadow:0 8px 24px rgba(255,20,147,.35)}
-.btn.g{background:var(--glass);border:1px solid var(--line);box-shadow:none}
+.eb{border:1px dashed var(--pink);background:rgba(230,0,126,.07);color:var(--mag);border-radius:10px;padding:6px 12px;font-size:12.5px;font-weight:600;align-items:center;gap:6px}
+.btn{border:0;border-radius:12px;padding:11px 18px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--pink),var(--pur));box-shadow:0 8px 24px rgba(230,0,126,.25)}
+.btn.g{background:#fff;color:var(--mag);border:1px solid var(--line);box-shadow:none}
 .row-h{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
 .row-h>div{min-width:0}
 .badge-ok{color:var(--ok);border-color:var(--ok)}
 /* modal */
-.ov{position:fixed;inset:0;z-index:50;background:rgba(3,4,14,.8);backdrop-filter:blur(6px);overflow:auto;padding-block:max(16px,env(safe-area-inset-top,0px)) 24px;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
-.mbox{max-width:860px;margin:0 auto;background:linear-gradient(180deg,#141749,#0a0c2a);border:1px solid var(--pink);border-radius:22px;padding:22px;box-shadow:0 0 60px rgba(255,20,147,.3)}
-.mbox .x{float:right;border:1px solid var(--line);background:var(--glass);color:#fff;border-radius:10px;width:38px;height:38px}
+.ov{position:fixed;inset:0;z-index:50;background:rgba(26,16,41,.55);backdrop-filter:blur(6px);overflow:auto;padding-block:max(16px,env(safe-area-inset-top,0px)) 24px;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+.mbox{max-width:860px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 30px 80px rgba(26,16,41,.3)}
+.mbox .x{float:right;border:1px solid var(--line);background:var(--glass);color:var(--ink);border-radius:10px;width:38px;height:38px}
 .f label{display:block;font-size:12.5px;font-weight:600;color:var(--mut);margin:12px 0 5px}
-.f input,.f textarea,.f select{width:100%;font:inherit;color:var(--fg);background:rgba(0,0,0,.35);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
+.f input,.f textarea,.f select{width:100%;font:inherit;color:var(--fg);background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
 .f textarea{min-height:90px;resize:vertical}
 .vid{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000;margin:12px 0;max-width:100%}
 .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .det dl{display:grid;grid-template-columns:150px 1fr;gap:6px 14px;margin:12px 0;font-size:14px}
 .det dt{color:var(--mut);font-size:12.5px}
 .det dd{margin:0;white-space:pre-line;min-width:0}
-.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;background:#14183f;border:1px solid var(--ok);color:var(--ok);padding:10px 18px;border-radius:99px;font-size:13.5px;font-weight:600}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:60;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.15);border:1px solid var(--ok);color:var(--ok);padding:10px 18px;border-radius:99px;font-size:13.5px;font-weight:600}
 footer{text-align:center;color:var(--mut);font-size:12px;letter-spacing:.08em;padding-block:20px 40px}
 .load{padding:60px 0;text-align:center;color:var(--mut)}
-.cmt{border-left:3px solid var(--pink);background:rgba(0,0,0,.25);border-radius:0 10px 10px 0;padding:8px 12px;font-size:13px;margin-bottom:8px}
+.cmt{border-left:3px solid var(--pink);background:var(--glass);border-radius:0 10px 10px 0;padding:8px 12px;font-size:13px;margin-bottom:8px}
 .cmt b{font-size:11.5px;color:var(--blue)}
 @media (max-width:820px){.cover{grid-template-columns:1fr}.cv-photo{max-width:300px;margin:0 auto}.det dl{grid-template-columns:1fr}.det dt{margin-top:6px}nav.top .brand{display:none}}
 /* print report */
@@ -175,8 +179,8 @@ footer{text-align:center;color:var(--mut);font-size:12px;letter-spacing:.08em;pa
   #report table{min-width:0;font-size:9pt}
   #report th,#report td{border:1px solid #ddd;padding:4px 6px;color:#111;background:#fff}
   #report th{color:#555}
-  #report .rcover{height:265mm;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(140deg,#1a0430,#0a0f3a 55%,#04112e)!important;color:#fff;border-radius:6mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  #report .rcover h1{color:#fff;font-size:30pt;margin:10mm 0 2mm}
+  #report .rcover{height:265mm;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(150deg,#ffffff,#ffe6f3 60%,#e8f6ff)!important;color:#1a1029;border:1.5mm solid #e6007e;border-radius:6mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #report .rcover h1{color:#c4006f;font-size:30pt;margin:10mm 0 2mm}
   #report .rcover img{width:42mm;height:42mm;border-radius:6mm}
 }
 </style>
@@ -190,8 +194,9 @@ footer{text-align:center;color:var(--mut);font-size:12px;letter-spacing:.08em;pa
       <a href="#utama" data-p="utama">Dashboard</a>
       <a href="#cover" data-p="cover">Cover</a>
       <a href="#profil" data-p="profil">Profil</a>
-      <a href="#kronologi" data-p="kronologi">Kronologi</a>
+      <a href="#tentatif" data-p="tentatif">Tentatif</a>
       <a href="#kumpulan" data-p="kumpulan">Kumpulan</a>
+      <a href="#galeri" data-p="galeri">Galeri</a>
       <a href="#penilaian" data-p="penilaian">Penilaian Juri</a>
       <a href="#analisis" data-p="analisis">Analisis</a>
       <a href="#anugerah" data-p="anugerah">Anugerah</a>
@@ -212,34 +217,116 @@ const GAS_URL='https://script.google.com/macros/s/AKfycbxOr96JYjq4h_O0QIif97x35_
 const KRITERIA=[
   {n:'Keaslian & kreativiti idea',m:20},{n:'Impak inovasi',m:25},{n:'Fungsi, keberkesanan & kualiti prototaip',m:20},
   {n:'Reka bentuk & pengalaman pengguna',m:10},{n:'Kreativiti booth pameran',m:10},{n:'Pembentangan, demonstrasi & soal jawab',m:15}];
-/* Kandungan asal daripada buku program rasmi FIB 2.0. Medan kosong diisi pentadbir. */
+/* Kandungan rasmi FIB 2.0 — sumber: buku program, poster Taklimat & 7 Modul LDK, rekod pendaftaran dan penjurian. */
 const DEF_PROFIL={
   nama:'Future Innovators Bootcamp 2026 (FIB 2.0)',
-  tarikh:'12 November 2026', lokasi:'Dewan Sri Gemilang, SM Sains Pasir Puteh',
-  penganjur:'Kelab Inovasi SM Sains Pasir Puteh', bidang:'Learning Innovation',
+  tarikh:'3 – 18 November 2026', lokasi:'SM Sains Pasir Puteh · Showcase di Dewan Sri Gemilang (12 November 2026)',
+  penganjur:'Kelab Inovasi SM Sains Pasir Puteh', bidang:'Learning Innovation (Fizikal · Digital · AI)',
   tema:'Innovative learning, inspire the future',
-  sasaran:'Murid Tingkatan 1, 2 dan 3 SM Sains Pasir Puteh',
+  slogan:'Fun Learning, Infinite Possibilities',
+  sasaran:'Murid Tingkatan 1, 2 dan 3 SM Sains Pasir Puteh: 144 peserta dalam 36 kumpulan inovasi',
   pengenalan:'Future Innovators Bootcamp 2.0 anjuran Kelab Inovasi SM Sains Pasir Puteh merupakan program pembangunan inovasi murid berfokuskan Learning Innovation melalui teknologi digital dan pendekatan Project-Based Learning. Program ini melibatkan murid Tingkatan 1, 2 dan 3 untuk menghasilkan produk inovasi dengan bimbingan DUTA FIB. Murid turut didedahkan kepada penggunaan AI, pembangunan kandungan digital, penghasilan video, reka bentuk booth dan pembentangan produk melalui Showcase Future Innovators SMSPP.',
-  latar:'', rasional:'', matlamat:'',
+  latar:'Pembelajaran abad ke-21 menuntut murid bukan sekadar menguasai kandungan, malah mampu mengenal pasti masalah sebenar, berfikir secara kreatif dan membina penyelesaian dengan bantuan teknologi.\n\nTempoh selepas peperiksaan UASA dimanfaatkan oleh Kelab Inovasi SM Sains Pasir Puteh untuk menganjurkan siri kedua Future Innovators Bootcamp. Bermula dengan taklimat pada 3 November 2026 di Masjid Rabiatul Adawiah, murid dibimbing melalui tujuh modul Latihan Dalam Kumpulan (LDK) secara bersemuka dan dalam talian oleh DUTA FIB, iaitu peserta program Edu X-Change Nusantara 3.0.\n\nKemuncaknya, 36 kumpulan mempamerkan produk inovasi pembelajaran dalam tiga kategori (fizikal, digital dan berasaskan AI) di Future Innovators Showcase pada 12 November 2026. Produk dinilai oleh 15 juri jemputan alumni Batch Estelle 2125 dan dilawati guru serta murid sekolah jemputan.',
+  rasional:'1. Mengisi tempoh pasca UASA dengan aktiviti berimpak tinggi yang bermakna kepada murid.\n2. Membudayakan inovasi dan pemikiran reka bentuk (Design Thinking) dalam kalangan murid menengah rendah.\n3. Memperkukuh kemahiran digital serta penggunaan AI secara beretika dan bertanggungjawab.\n4. Memberi pengalaman autentik membina prototaip, mereka bentuk booth, membentang dan dinilai oleh juri.\n5. Membina kepimpinan murid melalui peranan DUTA FIB sebagai fasilitator rakan sebaya.\n6. Menghasilkan bahan bantu belajar inovatif yang boleh dimanfaatkan dalam pengajaran dan pembelajaran di sekolah.',
+  matlamat:'Melahirkan murid inovatif yang berupaya mengenal pasti masalah pembelajaran dan menghasilkan penyelesaian yang kreatif, berfungsi dan berimpak dengan memanfaatkan teknologi digital dan AI secara bertanggungjawab.',
   objektif:'1. Mengenal pasti sekurang-kurangnya satu masalah pembelajaran dan mencadangkan penyelesaian inovatif.\n2. Menggunakan AI untuk membantu proses penjanaan idea, pembangunan kandungan dan penghasilan bahan pembelajaran.\n3. Menghasilkan prototaip inovasi pembelajaran yang mempunyai fungsi yang boleh diuji.\n4. Mengaplikasikan sekurang-kurangnya satu teknologi digital seperti permainan interaktif, QR code, website atau chatbot dalam inovasi.\n5. Menghasilkan satu video promosi produk inovasi berdurasi 60–90 saat.',
-  impak:'',
-  ajk:'Pengerusi | Puan Rosilawati binti Yusof (Pengetua)\nTimbalan Pengerusi | Pn. Nik Aznida bt Awang (Penolong Kanan Kokurikulum)\nNaib Pengerusi I | En. Aziz bin Ab Rahman (Penolong Kanan Pentadbiran)\nNaib Pengerusi II | Puan S. Rosmawati binti Said (Penolong Kanan HEM)\nPenyelaras Program | Dr. Salbiah binti Mohamed Salleh; Puan Norasma bt Mohamed Salleh\nModul dan Akademik | Pn. Irni Harmiziati@Nasuha bt Iberahim\nShowcase dan Protokol | En. Mohd Yusri\nDuta FIB 2.0 dan Fasilitator | Peserta Program Edu X-Change Nusantara 3.0\nPertandingan dan Juri | Pn. Azuraini bt Che Busu\nTeknikal dan Digital | Pn. Nur Hamiza bt Baharudin\nMultimedia dan Dokumentasi | Pn. Siti Fairuz bt Daud\nJawatankuasa Penganjur | Murid-murid kelas 3 Hajar\nKewangan dan Penajaan | Pn. Norasma bt Mohamed Salleh\nKebajikan dan Keselamatan | En. Wan Md Fikeri'
+  impak:'1. Murid berkeyakinan mengenal pasti masalah dan membina penyelesaian sendiri melalui proses Design Thinking.\n2. Terhasil koleksi produk inovasi pembelajaran (fizikal, digital dan AI) yang boleh digunakan dalam PdP pelbagai subjek.\n3. Murid menguasai kemahiran abad ke-21: kolaborasi, komunikasi, pemikiran kritis, kreativiti dan literasi digital.\n4. Budaya inovasi dan keusahawanan ilmu terbina dalam ekosistem sekolah.\n5. Produk terbaik berpotensi diketengahkan ke pertandingan inovasi peringkat daerah, negeri dan kebangsaan.\n6. Jalinan kerjasama dengan sekolah jemputan dan alumni diperkukuh.',
+  ajk:'Pengerusi | Puan Rosilawati binti Yusof (Pengetua)\nTimbalan Pengerusi | Pn. Nik Aznida bt Awang (Penolong Kanan Kokurikulum)\nNaib Pengerusi I | En. Aziz bin Ab Rahman (Penolong Kanan Pentadbiran)\nNaib Pengerusi II | Puan S. Rosmawati binti Said (Penolong Kanan HEM)\nPenyelaras Program | Dr. Salbiah binti Mohamed Salleh; Puan Norasma bt Mohamed Salleh\nModul dan Akademik | Pn. Irni Harmiziati@Nasuha bt Iberahim\nShowcase dan Protokol | En. Mohd Yusri\nDuta FIB 2.0 dan Fasilitator | Peserta Program Edu X-Change Nusantara 3.0 (diketuai Umi Nurin Ilmanafia binti Ahmad Mursyid)\nPertandingan dan Juri | Pn. Azuraini bt Che Busu\nTeknikal dan Digital | Pn. Nur Hamiza bt Baharudin\nMultimedia dan Dokumentasi | Pn. Siti Fairuz bt Daud\nJawatankuasa Penganjur | Murid-murid kelas 3 Hajar (diketuai Husna Maisarah binti Mohd Khairudi)\nKewangan dan Penajaan | Pn. Norasma bt Mohamed Salleh\nKebajikan dan Keselamatan | En. Wan Md Fikeri\nJuri Jemputan | 15 alumni Batch Estelle 2125'
 };
 const DEF_KRON=[
-  {tarikh:'',masa:'',tajuk:'Pendaftaran peserta dan pembentukan kumpulan',ket:'',kat:'Aktiviti bootcamp'},
-  {tarikh:'',masa:'',tajuk:'Taklimat Future Innovators Bootcamp 2.0',ket:'',kat:'Aktiviti bootcamp'},
-  {tarikh:'',masa:'',tajuk:'LDK 1: Innovation Mindset, Idea Generation & Design Thinking',ket:'',kat:'Bengkel inovasi'},
-  {tarikh:'',masa:'',tajuk:'Pembentangan idea inovasi',ket:'',kat:'Sesi pembentangan'},
-  {tarikh:'',masa:'',tajuk:'LDK 2: AI-Powered Innovation',ket:'',kat:'Bengkel inovasi'},
-  {tarikh:'',masa:'',tajuk:'LDK 3: Game Design & QR Code Innovation',ket:'',kat:'Bengkel inovasi'},
-  {tarikh:'',masa:'',tajuk:'LDK 4: Website and Digital Learning Platform',ket:'',kat:'Bengkel inovasi'},
-  {tarikh:'',masa:'',tajuk:'LDK 5: Telegram Bot & Prototype Development',ket:'',kat:'Bengkel inovasi'},
-  {tarikh:'2026-11-12',masa:'',tajuk:'Future Innovators Showcase',ket:'Pameran booth inovasi dan penilaian oleh juri jemputan.',kat:'Penilaian juri'},
-  {tarikh:'2026-11-12',masa:'10:30 pagi',tajuk:'Lawatan guru ke booth inovasi',ket:'Guru dijemput melawat hasil kerja inovasi murid.',kat:'Aktiviti bootcamp'},
-  {tarikh:'2026-11-12',masa:'12:30 – 2:00 petang',tajuk:'Majlis Perasmian Penutup',ket:'Disempurnakan oleh Puan Rosilawati bt Yusof, Pengetua SM Sains Pasir Puteh.',kat:'Majlis penutup'},
-  {tarikh:'2026-11-18',masa:'Sebelum 6:00 petang',tajuk:'Tarikh akhir penghantaran video inovasi',ket:'Video dihantar melalui pautan Hantar Video.',kat:'Aktiviti bootcamp'}
+  {tarikh:'',masa:'Sebelum 3 November',tajuk:'Pendaftaran peserta dan pembentukan kumpulan',ket:'Pendaftaran dalam talian melalui laman pendaftaran FIB 2.0; 36 kumpulan disahkan.',kat:'Aktiviti bootcamp'},
+  {tarikh:'2026-11-03',masa:'7.40 – 10.10 pagi',tajuk:'Taklimat Program Future Innovators Bootcamp 2.0',ket:'Masjid Rabiatul Adawiah. PIC: Dr. Salbiah bt Mohamed Salleh dan Cikgu Norasma bt Mohamed Salleh. Tema: Fun Learning, Infinite Possibilities (Physical · Digital · AI).',kat:'Aktiviti bootcamp'},
+  {tarikh:'2026-11-03',masa:'8.00 – 10.10 pagi',tajuk:'LDK 1: Innovation Mindset & Idea Generation',ket:'Design Thinking, Learning Problem Hunt dan memilih idea terbaik.',kat:'Bengkel inovasi'},
+  {tarikh:'2026-11-03',masa:'3.00 – 4.30 petang',tajuk:'LDK 2: AI-Powered Innovation',ket:'AI generatif, prompt berkesan, semak fakta dan etika AI.',kat:'Bengkel inovasi'},
+  {tarikh:'2026-11-03',masa:'8.00 – 10.00 malam',tajuk:'LDK 3: Game Design',ket:'Mata, ganjaran, permainan dan kuiz interaktif.',kat:'Bengkel inovasi'},
+  {tarikh:'2026-11-04',masa:'3.00 – 4.30 petang',tajuk:'LDK 4: Website & Digital Learning Platform',ket:'Struktur laman, reka bentuk antara muka dan integrasi kuiz.',kat:'Bengkel inovasi'},
+  {tarikh:'2026-11-04',masa:'8.00 – 10.00 malam',tajuk:'LDK 5: Innovation Inspiration Lab',ket:'Inspirasi inovasi daripada board game sedia ada.',kat:'Bengkel inovasi'},
+  {tarikh:'2026-11-07',masa:'9.30 – 10.30 pagi (dalam talian)',tajuk:'LDK 6: Mastering Innovation Video',ket:'Skrip dan storyboard, rakaman telefon, suntingan CapCut / Canva.',kat:'Bengkel inovasi'},
+  {tarikh:'2026-11-07',masa:'10.30 – 11.30 pagi (dalam talian)',tajuk:'LDK 7: Innovation Pitching & Booth Design',ket:'Teknik pembentangan, poster dan booth, menjawab soalan juri.',kat:'Sesi pembentangan'},
+  {tarikh:'2026-11-12',masa:'Pagi',tajuk:'Persediaan akhir booth',ket:'36 booth inovasi disusun di Dewan Sri Gemilang.',kat:'Aktiviti bootcamp'},
+  {tarikh:'2026-11-12',masa:'Pagi',tajuk:'Penjurian booth oleh juri jemputan',ket:'15 juri alumni Batch Estelle 2125; setiap booth dinilai oleh dua juri menggunakan rubrik enam kriteria (72 penilaian).',kat:'Penilaian juri'},
+  {tarikh:'2026-11-12',masa:'10.30 pagi',tajuk:'Pameran dan lawatan guru serta sekolah jemputan',ket:'Guru dan murid SM Sains Machang, SM Sains Tengku Muhammad Faris Petra serta SK Kamil (1) melawat booth inovasi.',kat:'Aktiviti bootcamp'},
+  {tarikh:'2026-11-12',masa:'12.30 – 2.00 petang',tajuk:'Majlis Perasmian Penutup & penyampaian anugerah',ket:'Disempurnakan oleh Puan Rosilawati bt Yusof, Pengetua SM Sains Pasir Puteh. Tayangan montaj FIB 2.0 dan penyampaian anugerah Emas, Perak, Gangsa serta anugerah khas.',kat:'Majlis penutup'},
+  {tarikh:'2026-11-18',masa:'Sebelum 6.00 petang',tajuk:'Tarikh akhir penghantaran video inovasi',ket:'Penambahbaikan video berdasarkan maklum balas juri; video dihantar melalui pautan Hantar Video dan dipaparkan di Online Booth.',kat:'Aktiviti bootcamp'}
 ];
 const KAT_KRON=['Aktiviti bootcamp','Bengkel inovasi','Sesi pembentangan','Penilaian juri','Penyampaian hadiah','Majlis penutup'];
+const VIDEO_MONTAJ={id:'1wIkzFnFUn8AimR71QHfvcDjltHXNypx6',cap:'Montaj Future Innovators Bootcamp 2.0: detik taklimat, LDK, persediaan dan Showcase. Ditayangkan semasa Majlis Penutup, 12 November 2026.'};
+const GAL_KAT=['Majlis penutup','Penyampaian anugerah','Pameran & booth','Sekolah jemputan','Photobooth'];
+const GALERI=[
+ ['1-v7Fv5zgiJkur6ItRlPwo4wwsl0XKPSn','Jawatankuasa penganjur murid 3 Hajar bersama DUTA FIB 2.0 di pentas Dewan Sri Gemilang.','Majlis penutup'],
+ ['1Fn76ZXslzBcyDp8F7D8kYwcuroXHWW7E','Suasana Dewan Sri Gemilang dipenuhi peserta, guru dan tetamu ketika Majlis Penutup bermula.','Majlis penutup'],
+ ['1gIjQM9PfJbxhGjAyr8jSd74h0cwtbalR','Barisan tetamu kehormat dan peserta menanti acara penyampaian anugerah.','Majlis penutup'],
+ ['1rITJ1WvcvMuvT5nuI_ywAD1g3UOQ03A3','Pandangan dari pentas: booth pameran tersusun di kiri dan kanan dewan, tetamu di barisan hadapan.','Majlis penutup'],
+ ['1o2vOSfwhOxzO-sZVZRk9g1lP4cxFB0lK','Peserta berbaris menyambut ketibaan tetamu kehormat ke Dewan Sri Gemilang.','Majlis penutup'],
+ ['1v3Y36H43Kegz3-SIbQUD_TGZdyS6NOyG','Ketibaan tetamu ke Dewan Sri Gemilang diiringi DUTA FIB.','Majlis penutup'],
+ ['1GLmx3P5zBzKM1_ISOx6aZPmoltMwHOre','Tayangan montaj Future Innovators Bootcamp 2.0 di Dewan Sri Gemilang.','Majlis penutup'],
+ ['1tdC4dC47VEiFhgWHybl0eLIlt8gXbflM','Bacaan doa memulakan Majlis Perasmian Penutup.','Majlis penutup'],
+ ['1XMvxVlz_aRrU-KRbsF7aFGV5zErMSAlH','Pengacara majlis daripada kalangan murid di rostrum.','Majlis penutup'],
+ ['1nYqtdtXArjzvrqAZPVTl7OuT1tRxyyIo','Ucapan semasa Majlis Perasmian Penutup Future Innovators Showcase.','Majlis penutup'],
+ ['1XT70_DczfViw0ET-Y5B0Cv8VkweiH2fx','Penyampaian cenderahati tanda penghargaan semasa Majlis Penutup.','Majlis penutup'],
+ ['1Zx1PzXLM8H-BB3AL1lbI03jgsU9v_cfx','Sorakan peserta meraikan rakan yang naik ke pentas menerima anugerah.','Majlis penutup'],
+ ['1YUryZCFEoC3pxhzsOWIyiQfmnUhDgMOk','Peserta FIB 2.0 menyaksikan penyampaian anugerah dengan penuh debaran.','Majlis penutup'],
+ ['1H0AhNeJfmwivchCm2I2baQ06ei8jWn9S','Wajah ceria peserta sepanjang Majlis Penutup.','Majlis penutup'],
+ ['1jS3BEgwbbe3xXXcEpPkpvUFHaRTv3cao','Best Digital Innovation: NUTRI SMART (PJPK 035).','Penyampaian anugerah','PJPK 035'],
+ ['1sU26aafd2r8urg6BRUSkerQ1-HHdJY2N','Best Booth Design: ANSFORSE (MT 015).','Penyampaian anugerah','MT 015'],
+ ['1R531adTPoA0LdktRYad3OjwAq4entIdh','Gold Award: ANSFORSE (MT 015), kedudukan pertama keseluruhan.','Penyampaian anugerah','MT 015'],
+ ['1kBUrCw6Rb0hBIefAiS0J7cK66_QNpLl5','Gold Award: GLORY’S (GEO 023).','Penyampaian anugerah','GEO 023'],
+ ['1_Kyjs9J8gnf061BNlJZnd7iCCTa7zE9_','Gold Award: NUTRI SMART (PJPK 035).','Penyampaian anugerah','PJPK 035'],
+ ['1_DDyM2Ys7-E7iEgNEomY9k4z6_Dtxrym','Gold Award: CATCH THE FISH (PAI 006).','Penyampaian anugerah','PAI 006'],
+ ['1QFkvTi9kusj7Rmgm4BdSXUSYysS_BJTI','Gold Award: POLYGONIZE (MT 009).','Penyampaian anugerah','MT 009'],
+ ['1mnsiP74muuHx4ZM1Zsxi1pOV6jyaxy9I','Gold Award: GEN-MATH (MT 012).','Penyampaian anugerah','MT 012'],
+ ['1WrXFiBJlc_BlwY8p_2OId5GHxRN3cNOa','Gold Award: JELAJAH BANDAR PERIBAHASA (BM 025).','Penyampaian anugerah','BM 025'],
+ ['1Q9lsmKayCGb_SWMg4i5inDuU3VCcK_2Z','Gold Award: MATH TOPIA (MT 013).','Penyampaian anugerah','MT 013'],
+ ['1YVm8Mc2egMiGWNrtkBSHb8xN-RFkTALS','Silver Award: BRAIN LADDER (PAI 008).','Penyampaian anugerah','PAI 008'],
+ ['11weSaNODpOvh0SvViapugPGYFFVx2y4R','Silver Award: INSLINES (MUZIK 036).','Penyampaian anugerah','MUZIK 036'],
+ ['1mn19oYzTdjNafzf9v2t5M9ih-nW3eGRw','Silver Award: ASTRIX BOX (GEO 021).','Penyampaian anugerah','GEO 021'],
+ ['1LQFm4NyqnVeyFMpquAwI7w6IBKJgG_wr','Silver Award: MONO FLUTTER PINK (PAI 007).','Penyampaian anugerah','PAI 007'],
+ ['1zM_6lvu9TuWdNwT4mkYCD9HohMTzLD5-','Silver Award: DISASTER MAP (GEO 020).','Penyampaian anugerah','GEO 020'],
+ ['1XrfeWC8aBuQuAtCUjcHbcq7NXOYHUIxI','Silver Award: IGAUAN DIRAJA (SEJ 028).','Penyampaian anugerah','SEJ 028'],
+ ['1K744n0ixOm2v5EQ9vvzO7Ph-n67baHdP','Silver Award: MATHMORY (MT 014).','Penyampaian anugerah','MT 014'],
+ ['1m2-AC2sIIWvUBf3Sd-0PXU8Fd0t3DoQR','Silver Award: SQUID’S (GEO 026).','Penyampaian anugerah','GEO 026'],
+ ['1IT-fen5eUEjTN13B8x_7oDipJ_w2r8mb','Bronze Award: MATHS BUDDY (MT 010).','Penyampaian anugerah','MT 010'],
+ ['1gAhDfQOhEQ63pob4jYYiUG9n3169-zew','Dewan Sri Gemilang bertukar menjadi dewan pameran 36 booth inovasi pembelajaran.','Pameran & booth'],
+ ['143yKDybDIp5QFT7u_j2925fW0lI8dnY0','DUTA FIB dan peserta bersedia menyambut pelawat di dewan pameran.','Pameran & booth'],
+ ['1-TT0dUYzT9EbTAMF81Viq8aaQifolEca','Pelawat meninjau booth inovasi di sepanjang dewan pameran.','Pameran & booth'],
+ ['1CrYERXMj36pq3mRgArF9uKi-G4mXD1s5','Booth inovasi dihias bertemakan pink lengkap dengan belon dan banner produk.','Pameran & booth'],
+ ['12C2MyMDJPkpa_Q49CFEwCB9EDTWQ_SUp','Pelawat meneliti poster penyataan masalah dan cara guna produk di booth.','Pameran & booth'],
+ ['1wUMXaMv2jXqpJplfuTjunFzsb90y6eka','Peserta memperkenalkan produk inovasi kepada pelawat.','Pameran & booth'],
+ ['172geWivYHBVlRSR2-rZHt0PkdIw59dLP','Paparan produk dan bahan promosi di salah satu booth.','Pameran & booth'],
+ ['1MhpRp8YsjZ0JzklqCA2jVOpI0l5xueID','Hiasan booth inovasi dengan kotak produk dan pasu bunga.','Pameran & booth'],
+ ['1QmoSdT7jmpgb30mPwdVmhcGE2CNKghS4','Genius Jenga oleh GEN-MATH (MT 012): blok Jenga digabungkan dengan soalan Matematik dan permainan digital.','Pameran & booth','MT 012'],
+ ['16PT_0PkXvn7oOM0_BP_0F2jQYJMa1O7E','Catch the Fish (PAI 006): permainan memancing ikan dalam kolam mini sebagai bahan bantu belajar.','Pameran & booth','PAI 006'],
+ ['1uvzHmyPD7zpj4QwwaV5Q8n42SjK_i59J','Booth POLYGONIZE (MT 009) dengan set permainan dan kod QR.','Pameran & booth','MT 009'],
+ ['1-Fd2wbqgEqRkZh-0xAz5Ncwm8cTlqK66','Booth MUZIK 036 (INSLINES) bersama ahli kumpulan.','Pameran & booth','MUZIK 036'],
+ ['1cMySyGUTfubRdPQJD1Voqf3DhijrCAFn','Guru menurunkan tandatangan dan maklum balas di booth.','Pameran & booth'],
+ ['1ObNSDEMz7poM1Ri5aZ14DzuIpqrLajbe','Guru mencuba aplikasi inovasi melalui telefon pintar.','Pameran & booth'],
+ ['1LxyP3Cjc_OPJ3de0IfxtENqnQJlkwylx','Pelawat mengimbas kod QR untuk mencuba produk digital.','Pameran & booth'],
+ ['1kLlCprhrPfXRlyK5ZlplG7m629_dsGf9','Pelawat mengisi borang maklum balas produk inovasi.','Pameran & booth'],
+ ['1B0HJ2U6ncOJjDDNKTlNJXa2KhFt-T6u2','Murid sekolah rendah jemputan bersama guru pengiring di hadapan pentas Majlis Penutup Showcase FIB 2.0.','Sekolah jemputan'],
+ ['1Xy1M0ztSFLNlCwItHW8lJ3QPvfQHFNja','Kenangan rombongan murid sekolah rendah jemputan selepas lawatan ke Showcase.','Sekolah jemputan'],
+ ['1Ckdlb_uHli44MyiuhY66Zsx72DM9ZpVr','Rombongan murid sekolah jemputan tiba di dewan pameran.','Sekolah jemputan'],
+ ['111TCzrbQFZZwpk858jm_87bUW5Vj-u2-','Murid sekolah jemputan melawat booth inovasi.','Sekolah jemputan'],
+ ['1KLlMXgVDVwTAknRyL2cYQsAY6TIxe6m2','Murid sekolah rendah jemputan meneliti risalah produk inovasi.','Sekolah jemputan'],
+ ['1FWMwohWCXgDhucwH4aAtS9e8o1TuEqUd','Murid sekolah rendah jemputan mencuba kad permainan inovasi.','Sekolah jemputan'],
+ ['1W4HOQ-oKV8RYD8STv2qLhO921wWD2NrK','Keseronokan mencuba permainan kad di booth inovasi.','Sekolah jemputan'],
+ ['1YE3gLkz5ASaTCAeaPcybwJz60CxVZiBD','Foto kenangan rombongan sekolah menengah jemputan di hadapan blok AMAL SM Sains Pasir Puteh.','Sekolah jemputan'],
+ ['14pGuv6DGYVAgQ8dpPz_Hi7rD1ahQ_RKE','Rombongan sekolah menengah jemputan bergaya di hadapan blok AMAL.','Sekolah jemputan'],
+ ['1shmEmFaPl9p1ixOu8ZZQVbUDRrJYuSEd','Foto kenangan rombongan sekolah jemputan di hadapan blok AMAL SM Sains Pasir Puteh.','Sekolah jemputan'],
+ ['1-NAA6D68TGxNPuk-gFk7XLfBIq3VLXpL','Rombongan sekolah jemputan bersama cenderahati lawatan.','Sekolah jemputan'],
+ ['1IVFPvlpJ_NuTUJ0tpeFCKe7fqgGLl53a','Wakil murid sekolah jemputan selepas lawatan ke Showcase FIB 2.0.','Sekolah jemputan'],
+ ['1sysyE0pYW3o3CS3Tx4GRwHI0dJlMFOLH','Murid sekolah jemputan di photobooth Future Innovators Bootcamp 2.0.','Photobooth'],
+ ['1B9G3TIYf88r9e2rCXG1OHoqy5Vyybj3O','Gaya ceria dengan prop photobooth FIB 2.0.','Photobooth'],
+ ['1yNjzz-PJ1qhPNOdrbMaewNTaZUkbb7ac','Kenangan bersama rakan di photobooth Future Innovators Bootcamp 2.0.','Photobooth'],
+ ['1PvXr8gNiCN311SvFLiOk7UH5LCekUzYx','Murid sekolah jemputan bergaya dengan topeng prop photobooth.','Photobooth'],
+ ['1npucpG7CpaOkYshH4S84g_IuYvNcsZxw','Senyuman di photobooth FIB 2.0.','Photobooth'],
+ ['1DE6pL5NvWc8PPTNiQpN3A-7xKAgWrogr','Prop topeng dan kad “SWAG” menceriakan photobooth.','Photobooth'],
+ ['1E96N6uW2_5GdeHy_4BnAhSwvqufreNGp','Pose berkumpulan di photobooth Future Innovators Bootcamp 2.0.','Photobooth'],
+ ['1JUVLCtKD-Xb9_i2bESjqR96T5MGgeUDG','Detik kenangan pelawat di photobooth FIB 2.0.','Photobooth'],
+ ['1aqSmENuP0ozbiL6yvE6EgyhgH1WWIV7I','DUTA FIB 2.0 bersama guru di photobooth Future Innovators Bootcamp 2.0.','Photobooth']
+].map(([id,c,k,g])=>({id,c,k,g:g||''}));
+const FEAT=['1-v7Fv5zgiJkur6ItRlPwo4wwsl0XKPSn','1R531adTPoA0LdktRYad3OjwAq4entIdh','1gAhDfQOhEQ63pob4jYYiUG9n3169-zew','1QmoSdT7jmpgb30mPwdVmhcGE2CNKghS4','1Fn76ZXslzBcyDp8F7D8kYwcuroXHWW7E','1YE3gLkz5ASaTCAeaPcybwJz60CxVZiBD','1jS3BEgwbbe3xXXcEpPkpvUFHaRTv3cao','1aqSmENuP0ozbiL6yvE6EgyhgH1WWIV7I'];
+const gImg=(id,w=1200)=>'https://drive.google.com/thumbnail?id='+id+'&sz=w'+w;
+const gAlt=(id,w=1200)=>'https://lh3.googleusercontent.com/d/'+id+'=w'+w;
 const KFIELDS=[['nama','Nama kumpulan'],['ketua','Ketua kumpulan'],['sinopsis','Sinopsis inovasi','t'],['objektif','Objektif projek','t'],['masalah','Masalah yang diselesaikan','t'],['keunikan','Keunikan produk','t'],['pautan','Pautan produk digital'],['dokumen','Pautan dokumen (Google Drive)'],['status','Status penyertaan']];
 
 const $=id=>document.getElementById(id);
@@ -307,11 +394,11 @@ function docStatus(){
   const items=[
     ['Profil program',['pengenalan','latar','rasional','matlamat','objektif','impak'].every(k=>String(p[k]||'').trim())],
     ['Kronologi program',!!(DOC.kronologi||DEF_KRON).length],
-    ['Butiran kumpulan',ROWS.length&&ROWS.every(r=>r.ext&&r.ext.sinopsis)],
+    ['Komen juri direkod',D.markah.some(m=>String(m.catatan||'').trim())],
     ['Penilaian juri lengkap',ROWS.length&&ROWS.every(r=>r.n===2)],
     ['Keputusan disahkan',!!(DOC.sahkan&&DOC.sahkan.masa)],
     ['Anugerah khas lengkap',special().every(a=>a.r||a.name)],
-    ['Gambar program',!!(DOC.gambar||[]).length],
+    ['Gambar & video program',GALERI.length>0],
     ['Video inovasi',ROWS.length&&ROWS.every(r=>r.video&&ytId(r.video.yt))]
   ];
   const done=items.filter(i=>i[1]).length;
@@ -328,7 +415,7 @@ async function save(kunci,data){
 function toast(t,err){const d=document.createElement('div');d.className='toast';d.textContent=t;if(err){d.style.borderColor='#ff6b6b';d.style.color='#ff6b6b'}document.body.appendChild(d);setTimeout(()=>d.remove(),2400)}
 
 /* ---------- modal ---------- */
-function modal(html){$('mbox').innerHTML='<button class="x" data-close aria-label="Tutup">✕</button>'+html;$('ov').hidden=false;document.body.style.overflow='hidden';$('ov').scrollTop=0}
+function modal(html){$('mbox').innerHTML='<button class="x" data-close aria-label="Tutup">✕</button>'+html;$('ov').hidden=false;document.body.style.overflow='hidden';$('ov').scrollTop=0;requestAnimationFrame(()=>requestAnimationFrame(()=>$('mbox').querySelectorAll('.bar-t i[data-w]').forEach(i=>i.style.width=i.dataset.w)))}
 function closeM(){$('ov').hidden=true;$('mbox').innerHTML='';document.body.style.overflow=''}
 $('ov').addEventListener('click',e=>{if(e.target===$('ov')||e.target.closest('[data-close]'))closeM()});
 addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('ov').hidden)closeM()});
@@ -340,7 +427,7 @@ function form(title,fields,vals,onSave,extra=''){
 
 /* ---------- render pages ---------- */
 function render(){
-  const P={utama:pUtama,cover:pCover,profil:pProfil,kronologi:pKron,kumpulan:pKumpulan,penilaian:pPenilaian,analisis:pAnalisis,anugerah:pAnugerah,laporan:pLaporan};
+  const P={utama:pUtama,cover:pCover,profil:pProfil,tentatif:pKron,galeri:pGaleri,kumpulan:pKumpulan,penilaian:pPenilaian,analisis:pAnalisis,anugerah:pAnugerah,laporan:pLaporan};
   $('main').innerHTML=`<section class="pg on">${(P[PAGE]||pUtama)()}</section>`;
   document.querySelectorAll('#tabs a').forEach(a=>a.classList.toggle('on',a.dataset.p===PAGE));
   document.body.classList.toggle('admin',!!ADMIN);
@@ -377,8 +464,27 @@ function pUtama(){
     <div class="card"><h3 class="ct">OVERALL COMPETITION RESULTS</h3>${scored.length?`<div class="mlist">${scored.slice(0,10).map(r=>`<div><b>#${r.rank}</b><span style="flex:1;min-width:0">${esc(r.kod)} · ${esc(r.produk)}</span><span>${f1(r.avg)}</span></div>`).join('')}</div><p style="margin:12px 0 0"><a href="#analisis">Lihat ranking penuh →</a></p>`:'<p class="muted">Belum ada markah.</p>'}</div>
     <div class="card"><h3 class="ct">AWARD HIGHLIGHTS</h3><div class="mlist">${special().map(a=>`<div><span style="flex:1;min-width:0;color:var(--mut)">${esc(a.t)}</span><span style="text-align:right">${a.r?esc(a.r.kod):a.name?esc(a.name):'<i class="muted">Belum ditentukan</i>'}</span></div>`).join('')}</div><p style="margin:12px 0 0"><a href="#anugerah">Semua anugerah →</a></p></div>
   </div>
-  <h3 class="ct" style="margin-top:26px">PROGRAM PHOTO HIGHLIGHTS</h3>
-  ${ph.length?`<div class="photos">${ph.map(photo).join('')}</div>`:`<div class="card muted">Belum ada gambar program. <span class="adm-b" style="margin-top:6px">Tambah gambar di halaman <a href="#laporan">Laporan</a>.</span></div>`}`;
+  <h3 class="ct" style="margin-top:26px">PROGRAM PHOTO & VIDEO HIGHLIGHTS</h3>
+  <div class="grid g2">${videoCard()}<div class="photos" style="grid-template-columns:repeat(2,1fr)">${FEAT.slice(0,4).map(id=>gphoto(GALERI.find(g=>g.id===id))).join('')}</div></div>
+  <div class="photos" style="margin-top:12px">${FEAT.slice(4).map(id=>gphoto(GALERI.find(g=>g.id===id))).join('')}${ph.map(photo).join('')}</div>
+  <p style="margin:12px 0 0"><a href="#galeri">Lihat ${GALERI.length} gambar dalam galeri →</a></p>`;
+}
+function gphoto(g){if(!g)return '';return `<button class="photo" data-ph="${g.id}" aria-label="${esc(g.c)}"><img loading="lazy" referrerpolicy="no-referrer" src="${gImg(g.id,600)}" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='${gAlt(g.id,600)}'}" alt="${esc(g.c)}"><span>${esc(g.c)}</span></button>`}
+function videoCard(){return `<div class="card" style="padding:12px"><div class="vid" style="margin:0"><iframe src="https://drive.google.com/file/d/${VIDEO_MONTAJ.id}/preview" title="Montaj FIB 2.0" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe></div><p style="margin:10px 4px 2px;font-size:13.5px"><b>🎬 Video montaj FIB 2.0.</b> ${esc(VIDEO_MONTAJ.cap.replace(/^Montaj Future Innovators Bootcamp 2.0: /,''))} <a href="https://drive.google.com/file/d/${VIDEO_MONTAJ.id}/view" target="_blank" rel="noopener">Buka di Google Drive ↗</a></p></div>`}
+let GK='Semua';
+function pGaleri(){
+  const L=GK==='Semua'?GALERI:GALERI.filter(g=>g.k===GK);
+  return head('GALERI RASMI','Galeri Gambar & Video',`${GALERI.length} gambar rasmi dan video montaj Future Innovators Bootcamp 2.0. Tekan gambar untuk paparan penuh.`,`<a class="eb" href="https://drive.google.com/drive/folders/1Ldkt7EVlivUSCdnVkEU5anPZkc4HdI-u" target="_blank" rel="noopener">📁 Folder LENSA FIB 2026 ↗</a>`)+
+  `<div style="max-width:880px">${videoCard()}</div>
+  <div class="tools" style="margin-top:20px">${['Semua',...GAL_KAT].map(k=>`<button class="pill gk" data-gk="${k}" style="cursor:pointer;${k===GK?'background:var(--pink);color:#fff;border-color:var(--pink)':''}">${k} (${k==='Semua'?GALERI.length:GALERI.filter(g=>g.k===k).length})</button>`).join('')}</div>
+  <div class="photos">${L.map(gphoto).join('')}</div>`;
+}
+function lightbox(id){
+  const L=GK==='Semua'||PAGE!=='galeri'?GALERI:GALERI.filter(g=>g.k===GK); let i=L.findIndex(g=>g.id===id); if(i<0){i=GALERI.findIndex(g=>g.id===id);}
+  const g=(i>=0?L:GALERI)[i]||GALERI.find(x=>x.id===id); if(!g) return;
+  const grp=g.g?ROWS.find(r=>r.kod===g.g):null;
+  modal(`<div class="eyebrow">${esc(g.k).toUpperCase()}</div><div style="margin-top:10px;border-radius:14px;overflow:hidden;background:#f6eef3"><img referrerpolicy="no-referrer" style="width:100%;max-height:72vh;object-fit:contain;display:block" src="${gImg(g.id,1600)}" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='${gAlt(g.id,1600)}'}" alt="${esc(g.c)}"></div><p style="margin:12px 0 0;font-size:15px">${esc(g.c)}</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">${grp?`<button class="btn g" data-g="${grp.no}">Lihat kumpulan ${esc(grp.kod)}</button>`:''}<a class="btn g" style="text-decoration:none" href="https://drive.google.com/file/d/${g.id}/view" target="_blank" rel="noopener">Saiz penuh ↗</a><button class="btn g" data-lb="${(L[(i-1+L.length)%L.length]||g).id}">‹ Sebelum</button><button class="btn g" data-lb="${(L[(i+1)%L.length]||g).id}">Seterusnya ›</button></div>`);
 }
 function photo(g){const s=drvImg(g.url);return `<a class="photo" href="${esc(safe(g.url))}" target="_blank" rel="noopener">${s?`<img loading="lazy" referrerpolicy="no-referrer" src="${esc(s)}" alt="${esc(g.cap||'Gambar program')}">`:'<div style="display:grid;place-items:center;height:100%">📁</div>'}${g.cap?`<span>${esc(g.cap)}</span>`:''}</a>`}
 
@@ -411,7 +517,7 @@ function pProfil(){
   const ajk=String(p.ajk||'').split('\n').filter(Boolean).map(l=>l.split('|'));
   return head('PROFIL & LATAR BELAKANG','Profil Program','Maklumat rasmi Future Innovators Bootcamp 2026.',`<button class="eb adm" data-act="profil">✎ Sunting profil</button>`)+
   `<div class="grid g3" style="margin-bottom:16px">
-    ${[['Nama program',p.nama],['Penganjur',p.penganjur],['Bidang inovasi',p.bidang],['Tema',p.tema],['Sasaran peserta',p.sasaran],['Tarikh & lokasi',p.tarikh+' · '+p.lokasi]].map(([l,v])=>`<div class="card prof"><h4>${l.toUpperCase()}</h4><div>${esc(v)||'<span class="empty-f">Belum diisi</span>'}</div></div>`).join('')}
+    ${[['Nama program',p.nama],['Penganjur',p.penganjur],['Bidang inovasi',p.bidang],['Tema & slogan',p.tema+' · '+(p.slogan||'')],['Sasaran peserta',p.sasaran],['Tarikh & lokasi',p.tarikh+' · '+p.lokasi]].map(([l,v])=>`<div class="card prof"><h4>${l.toUpperCase()}</h4><div>${esc(v)||'<span class="empty-f">Belum diisi</span>'}</div></div>`).join('')}
   </div>
   <div class="grid g2">${F.map(([k,l])=>box(k,l)).join('')}</div>
   <div class="card prof" style="margin-top:16px"><h4>JAWATANKUASA PELAKSANA</h4><div class="ajk">${ajk.map(([j,n])=>`<div><b>${esc((j||'').trim().toUpperCase())}</b>${esc((n||'').trim())}</div>`).join('')}</div></div>`;
@@ -420,14 +526,16 @@ function pProfil(){
 function kronList(){return (DOC.kronologi||DEF_KRON).map((x,i)=>({...x,i}))}
 function pKron(){
   const L=kronList(), dated=L.filter(x=>x.tarikh).sort((a,b)=>a.tarikh.localeCompare(b.tarikh)||a.i-b.i), und=L.filter(x=>!x.tarikh);
-  const item=x=>`<div class="tl-i ${x.tarikh?'':'und'}"><div class="card"><div class="tl-d">${x.tarikh?esc(tglMs(x.tarikh)).toUpperCase():'TARIKH BELUM DIREKOD'}${x.masa?' · '+esc(x.masa):''}</div><h4>${esc(x.tajuk)}</h4>${x.ket?`<p>${esc(x.ket)}</p>`:''}<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><span class="pill">${esc(x.kat||'Aktiviti')}</span><button class="eb adm" data-act="kron" data-i="${x.i}">✎ Sunting</button></div></div></div>`;
-  return head('ATUR CARA & KRONOLOGI','Kronologi Program','Hanya tarikh dan masa yang telah disahkan direkodkan. Aktiviti tanpa tarikh ditanda untuk dilengkapkan.',`<button class="eb adm" data-act="kron" data-i="-1">＋ Tambah aktiviti</button>`)+
-  `<div class="grid g2"><div><h3 class="ct">AKTIVITI BERTARIKH</h3><div class="tl">${dated.map(item).join('')||'<p class="muted">Tiada.</p>'}</div></div>
-  <div><h3 class="ct">AKTIVITI BOOTCAMP (TARIKH BELUM DIREKOD)</h3><div class="tl">${und.map(item).join('')||'<p class="muted">Tiada.</p>'}</div></div></div>`;
+  const days=[...new Set(dated.map(x=>x.tarikh))];
+  const hari=t=>new Date(t+'T00:00:00').toLocaleDateString('ms-MY',{weekday:'long'});
+  const item=x=>`<div class="tl-i ${x.tarikh?'':'und'}"><div class="card"><div class="tl-d">${x.masa?esc(x.masa).toUpperCase():'MASA BELUM DIREKOD'}</div><h4>${esc(x.tajuk)}</h4>${x.ket?`<p>${esc(x.ket)}</p>`:''}<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><span class="pill">${esc(x.kat||'Aktiviti')}</span><button class="eb adm" data-act="kron" data-i="${x.i}">✎ Sunting</button></div></div></div>`;
+  return head('ATUR CARA PROGRAM','Tentatif Program','Future Innovators Bootcamp 2.0 · 3 hingga 18 November 2026. Sumber: poster Taklimat, poster 7 Modul LDK dan aturcara Showcase.',`<button class="eb adm" data-act="kron" data-i="-1">＋ Tambah aktiviti</button>`)+
+  (und.length?`<h3 class="ct">SEBELUM PROGRAM</h3><div class="tl">${und.map(item).join('')}</div>`:'')+
+  days.map(d=>`<h3 class="ct" style="margin-top:22px">${esc(hari(d)).toUpperCase()}, ${esc(tglMs(d)).toUpperCase()}</h3><div class="tl">${dated.filter(x=>x.tarikh===d).map(item).join('')}</div>`).join('');
 }
 
 function gcard(r){
-  const yt=r.video&&ytId(r.video.yt), img=r.video&&drvImg(r.video.produk);
+  const yt=r.video&&ytId(r.video.yt), gp=GALERI.find(g=>g.g===r.kod&&g.k==='Pameran & booth')||GALERI.find(g=>g.g===r.kod), img=(r.video&&drvImg(r.video.produk))||(gp?gImg(gp.id,700):'');
   return `<button class="card gc" data-g="${r.no}"><div class="th">${img?`<img loading="lazy" referrerpolicy="no-referrer" src="${esc(img)}" alt="">`:yt?`<img loading="lazy" src="https://i.ytimg.com/vi/${yt}/hqdefault.jpg" alt="">`:`<span class="ph">${esc((r.kod||'').split(' ')[0])}</span>`}<span class="k">${esc(r.kod)}</span><span class="m">${r.medal&&r.medal!=='Penyertaan'?medalPill(r.medal):''}</span></div>
   <div class="bd"><h4>${esc(r.produk)}</h4><p>${esc(r.subjek)} · ${esc(r.guru)}</p><div class="sc"><span class="muted">${r.n===2?'Selesai dinilai':r.n===1?'Sedang dinilai':'Belum dinilai'}</span><b>${r.avg!=null?f1(r.avg):'–'}</b></div></div></button>`;
 }
@@ -442,13 +550,21 @@ function pKumpulan(){
 function groupDetail(no){
   const r=ROWS.find(x=>x.no===no); if(!r) return;
   const yt=r.video&&ytId(r.video.yt), e=r.ext;
-  const dl=KFIELDS.map(([k,l])=>`<dt>${esc(l)}</dt><dd>${e[k]?(/^https:\/\//.test(e[k])?`<a href="${esc(e[k])}" target="_blank" rel="noopener">${esc(e[k])}</a>`:esc(e[k])):'<span class="empty-f">Belum diisi</span>'}</dd>`).join('');
+  const dl=KFIELDS.filter(([k])=>e[k]).map(([k,l])=>`<dt>${esc(l)}</dt><dd>${/^https:\/\//.test(e[k])?`<a href="${esc(e[k])}" target="_blank" rel="noopener">${esc(e[k])}</a>`:esc(e[k])}</dd>`).join('');
+  const gal=GALERI.filter(g=>g.g===r.kod);
+  const cm=[r.j1,r.j2].map((m,i)=>m?{i:i+1,m}:null).filter(Boolean);
+  const sorted=KRITERIA.map((k,i)=>[k.n,r.crit[i]/k.m]).sort((a,b)=>b[1]-a[1]);
+  const status=r.n===2?`Selesai dinilai oleh dua juri · ${r.medal==='Penyertaan'?'Sijil penyertaan':'Anugerah '+r.medal}${r.rank?' · kedudukan #'+r.rank+' daripada '+ROWS.filter(x=>x.n).length:''}`:r.n===1?'Sedang dinilai':'Belum dinilai';
   modal(`<div class="eyebrow">${esc(r.kod)} · LEARNING INNOVATION</div><h2 class="st" style="font-size:24px;margin-top:4px">${esc(r.produk)}</h2>
    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0">${medalPill(r.medal)}<span class="pill">📚 ${esc(r.subjek)}</span><span class="pill">${r.avg!=null?'Markah '+f1(r.avg)+'/100':'Belum dinilai'}</span>${r.rank?`<span class="pill">Kedudukan #${r.rank}</span>`:''}</div>
    ${yt?`<div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/${yt}?rel=0&playsinline=1" title="${esc(r.produk)}" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`:'<p class="muted">Video demonstrasi belum dihantar.</p>'}
-   <div class="det"><dl><dt>Guru pembimbing</dt><dd>${esc(r.guru)}</dd><dt>Ahli kumpulan</dt><dd>${r.ahli.map((a,i)=>`${i+1}. ${esc(a.nama)}${a.tingkatan||a.kelas?' ('+esc([a.tingkatan,a.kelas].filter(Boolean).join(' '))+')':''}`).join('\n')}</dd>${dl}</dl></div>
+   <div class="det"><dl><dt>Status penyertaan</dt><dd>${esc(status)}</dd><dt>Bidang</dt><dd>Learning Innovation · ${esc(r.subjek)}</dd><dt>Guru pembimbing</dt><dd>${esc(r.guru)}</dd><dt>Ahli kumpulan</dt><dd>${r.ahli.map((a,i)=>`${i+1}. ${esc(a.nama)}${a.tingkatan||a.kelas?' ('+esc([a.tingkatan,a.kelas].filter(Boolean).join(' '))+')':''}`).join('\n')}</dd>${dl}</dl></div>
    ${r.video?`<div class="photos">${[['Gambar produk',r.video.produk],['Gambar ahli kumpulan',r.video.ahli]].map(([c,u])=>photo({url:u,cap:c})).join('')}</div>`:''}
-   ${r.n?`<h3 class="ct" style="margin-top:18px">MARKAH MENGIKUT KRITERIA (PURATA)</h3>${bars(KRITERIA.map((k,i)=>[k.n,r.crit[i],f1(r.crit[i])+'/'+k.m]).map(([l,v,lab],i)=>[l,v/KRITERIA[i].m*100,lab]),100)}`:''}
+   ${gal.length?`<h3 class="ct" style="margin-top:18px">GAMBAR KUMPULAN</h3><div class="photos">${gal.map(gphoto).join('')}</div>`:''}
+   ${r.n?`<h3 class="ct" style="margin-top:18px">MARKAH MENGIKUT KRITERIA (PURATA DUA JURI)</h3>${bars(KRITERIA.map((k,i)=>[k.n,r.crit[i],f1(r.crit[i])+'/'+k.m]).map(([l,v,lab],i)=>[l,v/KRITERIA[i].m*100,lab]),100)}
+   <div class="tbl-wrap" style="margin-top:12px"><table style="min-width:520px"><thead><tr><th>Penilai</th>${KRITERIA.map((k,i)=>`<th class="n">K${i+1}<br><span style="font-size:9px">/${k.m}</span></th>`).join('')}<th class="n">Jumlah</th></tr></thead><tbody>${cm.map(({i,m})=>`<tr><td>Juri ${i}</td>${m.k.map(v=>`<td class="n">${f1(v)}</td>`).join('')}<td class="n"><b>${f1(m.jumlah)}</b></td></tr>`).join('')}<tr><td><b>Purata</b></td>${r.crit.map(v=>`<td class="n">${f1(v)}</td>`).join('')}<td class="n"><b>${f1(r.avg)}</b></td></tr></tbody></table></div>
+   <p style="font-size:13.5px;margin:12px 0 0">Kekuatan utama: <b>${esc(sorted[0][0])}</b> (${f1(sorted[0][1]*100)}%). Ruang penambahbaikan: <b>${esc(sorted[5][0])}</b> (${f1(sorted[5][1]*100)}%).</p>
+   <h3 class="ct" style="margin-top:18px">KOMEN JURI</h3>${cm.map(({i,m})=>`<div class="cmt"><b>JURI ${i} · ${f1(m.jumlah)}/100</b><br>${String(m.catatan||'').trim()?esc(m.catatan):'<span class="muted">Tiada komen bertulis.</span>'}</div>`).join('')}`:''}
    <div style="margin-top:16px"><button class="btn adm" data-act="kedit" data-no="${r.no}">✎ Sunting butiran kumpulan</button></div>`);
 }
 
@@ -468,7 +584,7 @@ function pPenilaian(){
     ${jr.sort((a,b)=>kn(a.b)-kn(b.b)||a.slot-b.slot).map(m=>`<tr><td>${esc(m.b.kod)}</td><td>${esc(m.b.produk)}</td><td>${esc(m.juri)}</td><td>${esc(String(m.masa).slice(0,10))}</td>${m.k.map(v=>`<td class="n">${f1(v)}</td>`).join('')}<td class="n"><b>${f1(m.jumlah)}</b></td><td class="n">${f1(m.jumlah)}%</td><td>${esc(m.catatan)||'<span class="muted">–</span>'}</td></tr>`).join('')}</tbody></table></div>
     <h3 class="ct" style="margin-top:26px">PERBANDINGAN MARKAH ANTARA JURI</h3>
     <div class="tbl-wrap"><table><thead><tr><th>Kod</th><th>Projek</th><th>Juri 1</th><th class="n">Markah</th><th>Juri 2</th><th class="n">Markah</th><th class="n">Purata</th><th class="n">Beza</th></tr></thead><tbody>
-    ${ROWS.filter(r=>r.n).sort((a,b)=>kn(a)-kn(b)).map(r=>{const a=jr.find(m=>m.no===r.no&&m.slot===1),b=jr.find(m=>m.no===r.no&&m.slot===2);return `<tr><td>${esc(r.kod)}</td><td>${esc(r.produk)}</td><td>${esc(a?a.juri:'–')}</td><td class="n">${a?f1(a.jumlah):'–'}</td><td>${esc(b?b.juri:'–')}</td><td class="n">${b?f1(b.jumlah):'–'}</td><td class="n"><b>${f1(r.avg)}</b></td><td class="n" style="${r.beza>=15?'color:#ff8a8a':''}">${r.beza!=null?f1(r.beza):'–'}</td></tr>`}).join('')}</tbody></table></div>
+    ${ROWS.filter(r=>r.n).sort((a,b)=>kn(a)-kn(b)).map(r=>{const a=jr.find(m=>m.no===r.no&&m.slot===1),b=jr.find(m=>m.no===r.no&&m.slot===2);return `<tr><td>${esc(r.kod)}</td><td>${esc(r.produk)}</td><td>${esc(a?a.juri:'–')}</td><td class="n">${a?f1(a.jumlah):'–'}</td><td>${esc(b?b.juri:'–')}</td><td class="n">${b?f1(b.jumlah):'–'}</td><td class="n"><b>${f1(r.avg)}</b></td><td class="n" style="${r.beza>=15?'color:#d12a2a':''}">${r.beza!=null?f1(r.beza):'–'}</td></tr>`}).join('')}</tbody></table></div>
     <p class="muted" style="font-size:12.5px">Beza ≥ 15 markah ditanda merah untuk semakan pentadbir. Ringkasan juri: ${Object.keys(byJ).length} juri telah menghantar ${jr.length} penilaian.</p>
     <h3 class="ct" style="margin-top:26px">SEJARAH PERUBAHAN MARKAH</h3>
     ${(D.log||[]).length?`<div class="tbl-wrap"><table><thead><tr><th>Masa</th><th>Tindakan</th><th>Kumpulan</th><th>Slot</th><th>Peranan</th><th>Juri</th><th>Markah K1–K6</th></tr></thead><tbody>${D.log.slice().reverse().map(l=>`<tr><td>${esc(new Date(l[0]).toLocaleString('ms-MY'))}</td><td>${esc(l[1])}</td><td>${esc((ROWS.find(r=>r.no===+l[2])||{}).kod||l[2])}</td><td>${esc(l[3])}</td><td>${esc(l[4])}</td><td>${esc(l[5])}</td><td>${esc(l[6])}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">Log perubahan bermula 12 November 2026, 9:28 malam. Belum ada perubahan markah selepas itu.</p>'}`;
@@ -479,9 +595,9 @@ function pPenilaian(){
   <div class="card"><h3 class="ct">RUBRIK PENILAIAN</h3><div class="tbl-wrap" style="border:0"><table style="min-width:0"><thead><tr><th>#</th><th>Kriteria</th><th class="n">Markah maksimum</th></tr></thead><tbody>${KRITERIA.map((k,i)=>`<tr><td>K${i+1}</td><td>${esc(k.n)}</td><td class="n">${k.m}</td></tr>`).join('')}<tr><td></td><td><b>Jumlah</b> (purata dua juri = peratus keseluruhan)</td><td class="n"><b>100</b></td></tr></tbody></table></div>
   <p class="muted" style="font-size:12.5px;margin:10px 0 0">Rubrik ini telah digunakan oleh semua juri pada 12 November 2026, jadi markah maksimum dikunci supaya rekod sedia ada kekal sah. Panduan tahap terperinci: <a href="Rubrik_Pemarkahan_Juri_FIB2026.pdf" target="_blank" rel="noopener">Rubrik PDF</a>.</p></div>
   <h3 class="ct" style="margin-top:26px">STATUS PENILAIAN SETIAP PROJEK</h3>
-  <div class="tbl-wrap"><table><thead><tr><th>Kod</th><th>Projek</th><th>Status</th>${KRITERIA.map((k,i)=>`<th class="n">K${i+1}<br><span style="font-size:9px">/${k.m}</span></th>`).join('')}<th class="n">Purata</th><th class="n">%</th></tr></thead><tbody>
-  ${ROWS.slice().sort((a,b)=>kn(a)-kn(b)).map(r=>`<tr><td>${esc(r.kod)}</td><td>${esc(r.produk)}</td><td><span class="pill" style="${r.n===2?'color:var(--ok)':''}">${r.n===2?'Selesai':r.n===1?'Sedang Dinilai':'Belum Dinilai'}</span></td>${r.crit.map(v=>`<td class="n">${f1(v)}</td>`).join('')}<td class="n"><b>${f1(r.avg)}</b></td><td class="n">${r.avg!=null?f1(r.avg)+'%':'–'}</td></tr>`).join('')}</tbody></table></div>
-  ${det||`<p class="muted adm-b" style="margin-top:14px">Memuatkan rekod juri…</p><p class="muted" style="margin-top:14px;font-size:13px">Nama juri, markah individu dan komen juri dipaparkan kepada pentadbir sahaja.</p>`}`;
+  <div class="tbl-wrap"><table><thead><tr><th>Kod</th><th>Projek</th><th>Status</th>${KRITERIA.map((k,i)=>`<th class="n">K${i+1}<br><span style="font-size:9px">/${k.m}</span></th>`).join('')}<th class="n">Purata</th><th class="n">%</th><th style="min-width:260px">Komen juri</th></tr></thead><tbody>
+  ${ROWS.slice().sort((a,b)=>kn(a)-kn(b)).map(r=>`<tr><td>${esc(r.kod)}</td><td><a href="#" data-g="${r.no}" style="color:inherit">${esc(r.produk)}</a></td><td><span class="pill" style="${r.n===2?'color:var(--ok)':''}">${r.n===2?'Selesai':r.n===1?'Sedang Dinilai':'Belum Dinilai'}</span></td>${r.crit.map(v=>`<td class="n">${f1(v)}</td>`).join('')}<td class="n"><b>${f1(r.avg)}</b></td><td class="n">${r.avg!=null?f1(r.avg)+'%':'–'}</td><td style="font-size:12.5px">${[r.j1,r.j2].map((m,i)=>m&&String(m.catatan||'').trim()?`<div style="margin-bottom:4px"><b style="color:var(--blue)">J${i+1}:</b> ${esc(m.catatan)}</div>`:'').join('')||'<span class="muted">–</span>'}</td></tr>`).join('')}</tbody></table></div>
+  ${det||`<p class="muted adm-b" style="margin-top:14px">Memuatkan rekod juri…</p><p class="muted" style="margin-top:14px;font-size:13px">Nama juri dan log perubahan markah dipaparkan kepada pentadbir sahaja.</p>`}`;
 }
 
 function pAnalisis(){
@@ -525,8 +641,8 @@ function pAnugerah(){
   const sc=ROWS.filter(r=>r.n>0).sort(byScore), sp=special(), cu=(DOC.anugerah||[]).map((a,i)=>({...a,i}));
   const ml=m=>sc.filter(r=>r.medal===m);
   return head('AWARDS & RECOGNITION','Anugerah & Penerimaan Hadiah','Pingat diberi mengikut kedudukan; anugerah khas dipilih automatik daripada kriteria rubrik yang berkaitan.',`<button class="eb adm" data-act="aw" data-i="-1">＋ Tambah kategori anugerah</button>`)+
-  `<div class="grid g3">${sp.map(a=>`<div class="card aw"><div class="glow"></div><div class="t">ANUGERAH KHAS</div><h4>${esc(a.t)}</h4>${a.r?`<p style="color:#fff;font-weight:600">${esc(a.r.kod)} · ${esc(a.r.produk)}</p><p>${esc(a.r.guru)}</p><p style="margin-top:6px">${esc(a.b)}: <b style="color:#fff">${a.v(a.r)}</b></p>`:a.name?`<p style="color:#fff;font-weight:600">${esc(a.name)}</p><p>${esc(a.b)}</p>`:`<p class="empty-f">${esc(a.pend)}</p>`}</div>`).join('')}
-  ${cu.map(a=>`<div class="card aw"><div class="glow"></div><div class="t">${esc(a.jenis||'ANUGERAH')}</div><h4>${esc(a.nama)}</h4>${a.penerima?`<p style="color:#fff;font-weight:600">${esc(a.penerima)}</p>`:'<p class="empty-f">Penerima belum direkod</p>'}${a.catatan?`<p>${esc(a.catatan)}</p>`:''}<div style="margin-top:8px"><button class="eb adm" data-act="aw" data-i="${a.i}">✎ Sunting</button></div></div>`).join('')}</div>
+  `<div class="grid g3">${sp.map(a=>`<div class="card aw"><div class="glow"></div><div class="t">ANUGERAH KHAS</div><h4>${esc(a.t)}</h4>${a.r?`<p style="color:var(--ink);font-weight:600">${esc(a.r.kod)} · ${esc(a.r.produk)}</p><p>${esc(a.r.guru)}</p><p style="margin-top:6px">${esc(a.b)}: <b style="color:var(--ink)">${a.v(a.r)}</b></p>`:a.name?`<p style="color:var(--ink);font-weight:600">${esc(a.name)}</p><p>${esc(a.b)}</p>`:`<p class="empty-f">${esc(a.pend)}</p>`}</div>`).join('')}
+  ${cu.map(a=>`<div class="card aw"><div class="glow"></div><div class="t">${esc(a.jenis||'ANUGERAH')}</div><h4>${esc(a.nama)}</h4>${a.penerima?`<p style="color:var(--ink);font-weight:600">${esc(a.penerima)}</p>`:'<p class="empty-f">Penerima belum direkod</p>'}${a.catatan?`<p>${esc(a.catatan)}</p>`:''}<div style="margin-top:8px"><button class="eb adm" data-act="aw" data-i="${a.i}">✎ Sunting</button></div></div>`).join('')}</div>
   <div class="grid g3" style="margin-top:16px">${['Emas','Perak','Gangsa'].map(m=>`<div class="card"><h3 class="ct">${medalPill(m)} &nbsp;${ml(m).length} KUMPULAN</h3><div class="mlist">${ml(m).map(r=>`<div><b>#${r.rank}</b><span style="flex:1;min-width:0">${esc(r.kod)} · ${esc(r.produk)}</span><span>${f1(r.avg)}</span></div>`).join('')||'<span class="muted">–</span>'}</div></div>`).join('')}</div>
   <p class="muted" style="font-size:12.5px;margin-top:12px">Kuota pingat: ${quota()[0]} Emas · ${quota()[1]} Perak · ${quota()[2]} Gangsa. Senarai penerima Excel/PDF telah disediakan berasingan.</p>`;
 }
@@ -535,32 +651,35 @@ function pLaporan(){
   const st=docStatus(), ph=(DOC.gambar||[]).map((g,i)=>({...g,i}));
   return head('LAPORAN RASMI','Laporan & Galeri','Hasilkan laporan dokumentasi rasmi A4 lengkap daripada data semasa.')+
   `<div class="grid g2">
-    <div class="card"><h3 class="ct">LAPORAN PDF</h3><p class="muted" style="margin:0 0 12px">Laporan mengandungi cover, profil, kronologi, senarai kumpulan, penilaian, ranking dan anugerah. Pilih "Simpan sebagai PDF" dalam tetingkap cetak.</p><button class="btn" data-act="print">🖨 Cetak / Simpan PDF</button></div>
+    <div class="card"><h3 class="ct">LAPORAN PDF</h3><p class="muted" style="margin:0 0 12px">Laporan mengandungi cover, profil, tentatif, senarai kumpulan, penilaian, ranking dan anugerah. Pilih "Simpan sebagai PDF" dalam tetingkap cetak.</p><button class="btn" data-act="print">🖨 Cetak / Simpan PDF</button></div>
     <div class="card"><h3 class="ct">STATUS DOKUMENTASI · ${st.pct}%</h3><div class="mlist">${st.items.map(([l,ok])=>`<div><span style="color:${ok?'var(--ok)':'var(--mut)'}">${ok?'✓':'○'}</span><span>${esc(l)}</span></div>`).join('')}</div><div style="margin-top:10px"><button class="eb adm" data-act="status">✎ Tetapkan label status</button></div></div>
   </div>
-  <div class="row-h" style="margin-top:26px"><h3 class="ct" style="margin:0">GALERI GAMBAR PROGRAM</h3><button class="eb adm" data-act="foto" data-i="-1">＋ Tambah gambar (pautan Google Drive)</button></div>
-  ${ph.length?`<div class="photos">${ph.map(g=>`<div>${photo(g)}<button class="eb adm" style="margin-top:6px" data-act="foto" data-i="${g.i}">✎ Sunting</button></div>`).join('')}</div>`:'<div class="card muted">Belum ada gambar. Pentadbir boleh menambah pautan gambar Google Drive (kongsi: sesiapa yang mempunyai pautan).</div>'}`;
+  <div class="row-h" style="margin-top:26px"><h3 class="ct" style="margin:0">GAMBAR TAMBAHAN</h3><button class="eb adm" data-act="foto" data-i="-1">＋ Tambah gambar (pautan Google Drive)</button></div>
+  ${ph.length?`<div class="photos">${ph.map(g=>`<div>${photo(g)}<button class="eb adm" style="margin-top:6px" data-act="foto" data-i="${g.i}">✎ Sunting</button></div>`).join('')}</div>`:`<div class="card muted">${GALERI.length} gambar rasmi dipaparkan di halaman <a href="#galeri">Galeri</a>. Pentadbir boleh menambah gambar lain melalui pautan Google Drive.</div>`}`;
 }
 
 /* ---------- print report ---------- */
 function buildReport(){
   const p={...DEF_PROFIL,...(DOC.profil||{})}, sc=ROWS.filter(r=>r.n>0).sort(byScore), sp=special(), L=kronList();
   const tb=(h,rows)=>`<table><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
-  $('report').innerHTML=`<div class="pgb"><div class="rcover"><img src="logo-fib.jpg" alt=""><h1>FUTURE INNOVATORS BOOTCAMP 2026</h1><div style="letter-spacing:.3em;color:#7fdcff">DIGITAL MASTER DOCUMENTATION</div><div style="margin-top:10mm;letter-spacing:.14em;font-weight:700">SM SAINS PASIR PUTEH</div><div style="letter-spacing:.3em;color:#ff6fc1">KELAB INOVASI</div><div style="margin-top:8mm">${esc(p.tarikh)} · ${esc(p.lokasi)}</div></div></div>
+  $('report').innerHTML=`<div class="pgb"><div class="rcover"><img src="logo-fib.jpg" alt=""><h1>FUTURE INNOVATORS BOOTCAMP 2026</h1><div style="letter-spacing:.3em;color:#0091d5">DIGITAL MASTER DOCUMENTATION</div><div style="margin-top:10mm;letter-spacing:.14em;font-weight:700">SM SAINS PASIR PUTEH</div><div style="letter-spacing:.3em;color:#e6007e">KELAB INOVASI</div><div style="margin-top:8mm">${esc(p.tarikh)} · ${esc(p.lokasi)}</div></div></div>
   <div class="pgb"><h2>1. Profil Program</h2>${[['Nama program',p.nama],['Penganjur',p.penganjur],['Bidang inovasi',p.bidang],['Tema',p.tema],['Sasaran peserta',p.sasaran]].map(([l,v])=>`<p><b>${l}:</b> ${esc(v)}</p>`).join('')}
   ${[['Pengenalan','pengenalan'],['Latar belakang','latar'],['Rasional','rasional'],['Matlamat','matlamat'],['Objektif','objektif'],['Impak yang diharapkan','impak']].filter(([,k])=>String(p[k]||'').trim()).map(([l,k])=>`<h3>${l}</h3><p style="white-space:pre-line">${esc(p[k])}</p>`).join('')}
   <h3>Jawatankuasa Pelaksana</h3>${tb(['Jawatan','Nama'],String(p.ajk).split('\n').filter(Boolean).map(l=>l.split('|').map(x=>esc(x.trim()))))}</div>
-  <div class="pgb"><h2>2. Kronologi Program</h2>${tb(['Tarikh','Masa','Aktiviti','Kategori'],L.slice().sort((a,b)=>(a.tarikh||'9').localeCompare(b.tarikh||'9')||a.i-b.i).map(x=>[x.tarikh?esc(tglMs(x.tarikh)):'—',esc(x.masa||'—'),esc(x.tajuk)+(x.ket?'<br><small>'+esc(x.ket)+'</small>':''),esc(x.kat||'')]))}</div>
+  <div class="pgb"><h2>2. Tentatif Program</h2>${tb(['Tarikh','Masa','Aktiviti','Kategori'],L.slice().sort((a,b)=>(a.tarikh||'9').localeCompare(b.tarikh||'9')||a.i-b.i).map(x=>[x.tarikh?esc(tglMs(x.tarikh)):'—',esc(x.masa||'—'),esc(x.tajuk)+(x.ket?'<br><small>'+esc(x.ket)+'</small>':''),esc(x.kat||'')]))}</div>
   <div class="pgb"><h2>3. Kumpulan Inovasi (${ROWS.length})</h2>${tb(['Kod','Projek','Subjek','Guru','Ahli'],ROWS.slice().sort((a,b)=>kn(a)-kn(b)).map(r=>[esc(r.kod),esc(r.produk),esc(r.subjek),esc(r.guru),r.ahli.map(a=>esc(a.nama)).join(', ')]))}</div>
   <div class="pgb"><h2>4. Penilaian Juri</h2>${tb(['Kriteria','Maks'],KRITERIA.map(k=>[esc(k.n),k.m]))}<br>${tb(['Kod','Projek',...KRITERIA.map((k,i)=>'K'+(i+1)),'Purata','Status'],ROWS.slice().sort((a,b)=>kn(a)-kn(b)).map(r=>[esc(r.kod),esc(r.produk),...r.crit.map(f1),'<b>'+f1(r.avg)+'</b>',r.n===2?'Selesai':r.n===1?'Sedang':'Belum']))}</div>
   <div class="pgb"><h2>5. Keputusan & Ranking</h2><p>Keputusan ${DOC.sahkan&&DOC.sahkan.masa?'disahkan pada '+esc(new Date(DOC.sahkan.masa).toLocaleString('ms-MY')):'belum disahkan'}. Pemecah seri: purata, Impak inovasi, Pembentangan.</p>${tb(['#','Kod','Projek','Juri 1','Juri 2','Purata','Pingat'],sc.map(r=>[r.rank,esc(r.kod),esc(r.produk),r.j1?f1(r.j1.jumlah):'–',r.j2?f1(r.j2.jumlah):'–','<b>'+f1(r.avg)+'</b>',r.medal]))}</div>
   <div><h2>6. Anugerah Khas</h2>${tb(['Anugerah','Penerima','Asas pemilihan'],[...sp.map(a=>[esc(a.t),a.r?esc(a.r.kod+' · '+a.r.produk):a.name?esc(a.name):'<i>'+esc(a.pend)+'</i>',esc(a.b)+(a.r?' ('+a.v(a.r)+')':'')]),...(DOC.anugerah||[]).map(a=>[esc(a.nama),esc(a.penerima||'—'),esc(a.catatan||'')])])}
+  </div>${window.__noGal?'':`<div style="page-break-before:always"><h2>7. Galeri Program</h2><p>Video montaj: https://drive.google.com/file/d/${VIDEO_MONTAJ.id}/view</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4mm">${GALERI.filter((g,i)=>FEAT.includes(g.id)||g.k==='Penyampaian anugerah').slice(0,18).map(g=>`<figure style="margin:0;break-inside:avoid"><img src="${gImg(g.id,600)}" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:2mm"><figcaption style="font-size:8pt;margin-top:1mm">${esc(g.c)}</figcaption></figure>`).join('')}</div>`}
   <p style="margin-top:12mm;text-align:center;color:#888">Powered by SMSPP YIC 2026 · Dijana ${esc(new Date().toLocaleString('ms-MY'))}</p></div>`;
 }
 
 /* ---------- actions ---------- */
 document.addEventListener('click',async e=>{
-  const g=e.target.closest('[data-g]'); if(g){groupDetail(+g.dataset.g);return}
+  const lb=e.target.closest('[data-ph],[data-lb]'); if(lb){e.preventDefault();lightbox(lb.dataset.ph||lb.dataset.lb);return}
+  const gk=e.target.closest('[data-gk]'); if(gk){GK=gk.dataset.gk;render();return}
+  const g=e.target.closest('[data-g]'); if(g){e.preventDefault();groupDetail(+g.dataset.g);return}
   const a=e.target.closest('[data-act]'); if(!a) return;
   const act=a.dataset.act, i=+a.dataset.i;
   if(act==='print'){buildReport();setTimeout(()=>print(),300);return}
@@ -591,7 +710,7 @@ $('admBtn').onclick=()=>{
   $('lk').focus();
   $('lg').onsubmit=async e=>{e.preventDefault();const k=$('lk').value.trim().toUpperCase();$('lm').textContent='Menyemak…';ADMIN=k;try{await load();if(!ADMIN){$('lm').textContent='Kod salah.';return}ss('fibAdm',k);closeM();render();toast('Mod pentadbir aktif')}catch(_){ADMIN='';$('lm').textContent='Tiada sambungan.'}};
 };
-function route(){const h=location.hash.slice(1);PAGE=['utama','cover','profil','kronologi','kumpulan','penilaian','analisis','anugerah','laporan'].includes(h)?h:'utama';if(D){render();scrollTo(0,0)}}
+function route(){if(!$('ov').hidden)closeM();const h=location.hash.slice(1);PAGE=h==='kronologi'?'tentatif':['utama','cover','profil','tentatif','galeri','kumpulan','penilaian','analisis','anugerah','laporan'].includes(h)?h:'utama';if(D){render();scrollTo(0,0)}}
 addEventListener('hashchange',route);
 route();
 load().then(render).catch(()=>{$('main').innerHTML='<div class="load">Gagal memuatkan data. <button class="btn g" onclick="location.reload()">Cuba lagi</button></div>'});
