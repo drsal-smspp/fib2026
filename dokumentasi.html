@@ -133,6 +133,38 @@ tr:hover td{background:rgba(230,0,126,.04)}
 .mlist b{font-family:var(--f-h);font-weight:900;font-size:14px;min-width:44px}
 /* photos */
 .photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+/* galeri besar + motion */
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:22px}
+.gi{display:block;width:100%;padding:0;border:0;text-align:left;font:inherit;color:inherit;background:#fff;border-radius:22px;overflow:hidden;cursor:zoom-in;box-shadow:0 10px 30px rgba(26,16,41,.10);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.gi:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(230,0,126,.20)}
+.gi .im{aspect-ratio:4/3;overflow:hidden;background:#f6eef3;max-width:100%}
+.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.8,.2,1);color:transparent;font-size:0}
+.gi:hover img{transform:scale(1.08)}
+.gi .cp{padding:14px 18px 18px;font-size:16px;font-weight:700;line-height:1.45;color:var(--ink)}
+.gi .cp small{display:block;font-size:12.5px;font-weight:900;letter-spacing:.12em;color:var(--pink);margin-bottom:4px;text-transform:uppercase}
+.rv{opacity:0;transform:translateY(34px) scale(.96)}
+.rv.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.sl{position:relative;border-radius:26px;overflow:hidden;aspect-ratio:16/9;max-height:74vh;width:100%;background:#1a1029;box-shadow:0 24px 60px rgba(26,16,41,.25)}
+.sl img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease;color:transparent;font-size:0}
+.sl img.on{opacity:1;animation:kb 7s ease-out forwards}
+@keyframes kb{from{transform:scale(1.02) translate(0,0)}to{transform:scale(1.14) translate(-2%,-2%)}}
+.sl .cap{position:absolute;left:0;right:0;bottom:0;padding:70px clamp(16px,4vw,40px) clamp(16px,3vw,30px);background:linear-gradient(transparent,rgba(26,16,41,.88));color:#fff;font-size:clamp(17px,2.4vw,26px);font-weight:900;line-height:1.3}
+.sl .cap small{display:block;font-size:13px;letter-spacing:.2em;color:#ff8cc8;margin-bottom:6px}
+.sl .nv{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:var(--mag);font-size:26px;font-weight:900;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.sl .nv.p{left:16px}.sl .nv.n{right:16px}
+.sl .ct2{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.9);color:var(--mag);font-weight:900;border-radius:99px;padding:6px 14px;font-size:14px}
+.lbimg{animation:lbz .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes lbz{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+/* butang 3D analisis */
+.b3bar{scroll-margin-top:90px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin:6px 0 30px}
+.b3d{--c:#ff2d95;--d:#b0005e;position:relative;border:0;border-radius:18px;padding:16px 18px 14px;text-align:left;color:#fff;font:inherit;font-weight:900;font-size:17px;line-height:1.25;background:linear-gradient(180deg,color-mix(in srgb,var(--c) 80%,#fff),var(--c));box-shadow:0 7px 0 var(--d),0 14px 26px rgba(26,16,41,.18);transition:transform .12s,box-shadow .12s;cursor:pointer;text-shadow:0 1px 2px rgba(0,0,0,.2)}
+.b3d i{display:block;font-style:normal;font-size:28px;margin-bottom:6px;text-shadow:none}
+.b3d small{display:block;font-size:12.5px;font-weight:700;opacity:.92;margin-top:3px}
+.b3d:hover{transform:translateY(-2px);box-shadow:0 9px 0 var(--d),0 18px 30px rgba(26,16,41,.22)}
+.b3d:active,.b3d.on{transform:translateY(6px);box-shadow:0 1px 0 var(--d),0 4px 10px rgba(26,16,41,.18)}
+.b3d.on::after{content:"";position:absolute;inset:5px;border-radius:14px;border:2.5px solid rgba(255,255,255,.85)}
+.anp{animation:lbz .4s ease}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.sl img.on{animation:none}.gi,.gi img,.b3d{transition:none}}
 .photo{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:#f6eef3;border:1px solid var(--line);max-width:100%;cursor:zoom-in}
 .photo img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
 .photo img,.gc .th img{color:transparent;font-size:0}
@@ -304,15 +336,15 @@ const GALERI=[
  ['1ObNSDEMz7poM1Ri5aZ14DzuIpqrLajbe','Guru mencuba aplikasi inovasi melalui telefon pintar.','Pameran & booth'],
  ['1LxyP3Cjc_OPJ3de0IfxtENqnQJlkwylx','Pelawat mengimbas kod QR untuk mencuba produk digital.','Pameran & booth'],
  ['1kLlCprhrPfXRlyK5ZlplG7m629_dsGf9','Pelawat mengisi borang maklum balas produk inovasi.','Pameran & booth'],
- ['1B0HJ2U6ncOJjDDNKTlNJXa2KhFt-T6u2','Murid sekolah rendah jemputan bersama guru pengiring di hadapan pentas Majlis Penutup Showcase FIB 2.0.','Sekolah jemputan'],
- ['1Xy1M0ztSFLNlCwItHW8lJ3QPvfQHFNja','Kenangan rombongan murid sekolah rendah jemputan selepas lawatan ke Showcase.','Sekolah jemputan'],
+ ['1B0HJ2U6ncOJjDDNKTlNJXa2KhFt-T6u2','Murid sekolah jemputan bersama guru pengiring di hadapan pentas Majlis Penutup Showcase FIB 2.0.','Sekolah jemputan'],
+ ['1Xy1M0ztSFLNlCwItHW8lJ3QPvfQHFNja','Kenangan rombongan murid sekolah jemputan selepas lawatan ke Showcase.','Sekolah jemputan'],
  ['1Ckdlb_uHli44MyiuhY66Zsx72DM9ZpVr','Rombongan murid sekolah jemputan tiba di dewan pameran.','Sekolah jemputan'],
  ['111TCzrbQFZZwpk858jm_87bUW5Vj-u2-','Murid sekolah jemputan melawat booth inovasi.','Sekolah jemputan'],
- ['1KLlMXgVDVwTAknRyL2cYQsAY6TIxe6m2','Murid sekolah rendah jemputan meneliti risalah produk inovasi.','Sekolah jemputan'],
- ['1FWMwohWCXgDhucwH4aAtS9e8o1TuEqUd','Murid sekolah rendah jemputan mencuba kad permainan inovasi.','Sekolah jemputan'],
+ ['1KLlMXgVDVwTAknRyL2cYQsAY6TIxe6m2','Murid sekolah jemputan meneliti risalah produk inovasi.','Sekolah jemputan'],
+ ['1FWMwohWCXgDhucwH4aAtS9e8o1TuEqUd','Murid sekolah jemputan mencuba kad permainan inovasi.','Sekolah jemputan'],
  ['1W4HOQ-oKV8RYD8STv2qLhO921wWD2NrK','Keseronokan mencuba permainan kad di booth inovasi.','Sekolah jemputan'],
- ['1YE3gLkz5ASaTCAeaPcybwJz60CxVZiBD','Foto kenangan rombongan sekolah menengah jemputan di hadapan blok AMAL SM Sains Pasir Puteh.','Sekolah jemputan'],
- ['14pGuv6DGYVAgQ8dpPz_Hi7rD1ahQ_RKE','Rombongan sekolah menengah jemputan bergaya di hadapan blok AMAL.','Sekolah jemputan'],
+ ['1YE3gLkz5ASaTCAeaPcybwJz60CxVZiBD','Foto kenangan rombongan sekolah jemputan di hadapan blok AMAL SM Sains Pasir Puteh.','Sekolah jemputan'],
+ ['14pGuv6DGYVAgQ8dpPz_Hi7rD1ahQ_RKE','Rombongan sekolah jemputan bergaya di hadapan blok AMAL.','Sekolah jemputan'],
  ['1shmEmFaPl9p1ixOu8ZZQVbUDRrJYuSEd','Foto kenangan rombongan sekolah jemputan di hadapan blok AMAL SM Sains Pasir Puteh.','Sekolah jemputan'],
  ['1-NAA6D68TGxNPuk-gFk7XLfBIq3VLXpL','Rombongan sekolah jemputan bersama cenderahati lawatan.','Sekolah jemputan'],
  ['1IVFPvlpJ_NuTUJ0tpeFCKe7fqgGLl53a','Wakil murid sekolah jemputan selepas lawatan ke Showcase FIB 2.0.','Sekolah jemputan'],
@@ -435,6 +467,7 @@ function render(){
   document.body.classList.toggle('admin',!!ADMIN);
   $('admBtn').textContent=ADMIN?'✓ Pentadbir':'🔒 Pentadbir'; $('admBtn').classList.toggle('on',!!ADMIN);
   requestAnimationFrame(()=>document.querySelectorAll('.bar-t i[data-w]').forEach(i=>i.style.width=i.dataset.w));
+  reveal(); slStart();
 }
 function head(eb,t,sd,act=''){return `<div class="row-h"><div><div class="eyebrow">${eb}</div><h2 class="st">${t}</h2>${sd?`<p class="sd" style="margin:0">${sd}</p>`:''}</div>${act}</div>`}
 function bars(list,max){return `<div class="bars">${list.map(([l,v,lab])=>`<div class="bar-r"><span title="${esc(l)}">${esc(l)}</span><div class="bar-t"><i data-w="${max?Math.max(0,Math.min(100,v/max*100)):0}%"></i></div><b>${lab??f1(v)}</b></div>`).join('')}</div>`}
@@ -474,18 +507,33 @@ function pUtama(){
 function gphoto(g){if(!g)return '';return `<button class="photo" data-ph="${g.id}" aria-label="${esc(g.c)}"><img loading="lazy" referrerpolicy="no-referrer" src="${gImg(g.id,600)}" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='${gAlt(g.id,600)}'}" alt="${esc(g.c)}"><span>${esc(g.c)}</span></button>`}
 function videoCard(){return `<div class="card" style="padding:12px"><div class="vid" style="margin:0"><iframe src="https://drive.google.com/file/d/${VIDEO_MONTAJ.id}/preview" title="Montaj FIB 2.0" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe></div><p style="margin:10px 4px 2px;font-size:13.5px"><b>🎬 Video montaj FIB 2.0.</b> ${esc(VIDEO_MONTAJ.cap.replace(/^Montaj Future Innovators Bootcamp 2.0: /,''))} <a href="https://drive.google.com/file/d/${VIDEO_MONTAJ.id}/view" target="_blank" rel="noopener">Buka di Google Drive ↗</a></p></div>`}
 let GK='Semua';
+function gtile(g,i){return `<button class="gi rv" style="transition-delay:${Math.min(i%3,2)*90}ms" data-ph="${g.id}"><div class="im"><img loading="lazy" referrerpolicy="no-referrer" src="${gImg(g.id,1000)}" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='${gAlt(g.id,1000)}'}" alt="${esc(g.c)}"></div><div class="cp"><small>${esc(g.k)}</small>${esc(g.c)}</div></button>`}
+let SL={i:0,t:null};
 function pGaleri(){
   const L=GK==='Semua'?GALERI:GALERI.filter(g=>g.k===GK);
   return head('GALERI RASMI','Galeri Gambar & Video',`${GALERI.length} gambar rasmi dan video montaj Future Innovators Bootcamp 2.0. Tekan gambar untuk paparan penuh.`,`<a class="eb" href="https://drive.google.com/drive/folders/1Ldkt7EVlivUSCdnVkEU5anPZkc4HdI-u" target="_blank" rel="noopener">📁 Folder LENSA FIB 2026 ↗</a>`)+
-  `<div style="max-width:880px">${videoCard()}</div>
-  <div class="tools" style="margin-top:20px">${['Semua',...GAL_KAT].map(k=>`<button class="pill gk" data-gk="${k}" style="cursor:pointer;${k===GK?'background:var(--pink);color:#fff;border-color:var(--pink)':''}">${k} (${k==='Semua'?GALERI.length:GALERI.filter(g=>g.k===k).length})</button>`).join('')}</div>
-  <div class="photos">${L.map(gphoto).join('')}</div>`;
+  `<div class="sl" id="sl"><img id="slA" alt=""><img id="slB" alt=""><div class="ct2" id="slN"></div><button class="nv p" data-sl="-1" aria-label="Gambar sebelum">‹</button><button class="nv n" data-sl="1" aria-label="Gambar seterusnya">›</button><div class="cap" id="slC"></div></div>
+  <div style="max-width:980px;margin:26px auto 0">${videoCard()}</div>
+  <div class="tools" style="margin-top:26px">${['Semua',...GAL_KAT].map(k=>`<button class="pill gk" data-gk="${k}" style="cursor:pointer;font-size:15px;padding:8px 16px;${k===GK?'background:var(--pink);color:#fff;border-color:var(--pink)':''}">${k} (${k==='Semua'?GALERI.length:GALERI.filter(g=>g.k===k).length})</button>`).join('')}</div>
+  <div class="gal">${L.map(gtile).join('')}</div>`;
 }
+function slShow(step){
+  const L=GK==='Semua'?GALERI:GALERI.filter(g=>g.k===GK), A=$('slA'), B=$('slB'); if(!A||!L.length) return;
+  SL.i=((SL.i+step)%L.length+L.length)%L.length; const g=L[SL.i];
+  const cur=A.classList.contains('on')?A:B.classList.contains('on')?B:null, nxt=cur===A?B:A;
+  nxt.onerror=function(){if(!this.dataset.f){this.dataset.f=1;this.src=gAlt(g.id,1600)}};
+  nxt.onload=()=>{nxt.classList.remove('on');void nxt.offsetWidth;nxt.classList.add('on');if(cur)cur.classList.remove('on')};
+  nxt.dataset.f='';nxt.dataset.id=g.id;nxt.alt=g.c;nxt.src=gImg(g.id,1600);
+  $('slC').innerHTML=`<small>${esc(g.k).toUpperCase()}</small>${esc(g.c)}`; $('slN').textContent=(SL.i+1)+' / '+L.length;
+  const nx=L[(SL.i+1)%L.length]; if(nx){const pre=new Image();pre.referrerPolicy='no-referrer';pre.src=gImg(nx.id,1600)}
+}
+function slStart(){clearInterval(SL.t);SL.t=null;if(PAGE!=='galeri'||!$('sl'))return;SL.i=-1;slShow(1);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)SL.t=setInterval(()=>{if($('ov').hidden&&!document.hidden)slShow(1)},5500)}
+function reveal(){const els=document.querySelectorAll('.rv:not(.in)');if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return}const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{rootMargin:'0px 0px -6% 0px'});els.forEach(e=>io.observe(e))}
 function lightbox(id){
   const L=GK==='Semua'||PAGE!=='galeri'?GALERI:GALERI.filter(g=>g.k===GK); let i=L.findIndex(g=>g.id===id); if(i<0){i=GALERI.findIndex(g=>g.id===id);}
   const g=(i>=0?L:GALERI)[i]||GALERI.find(x=>x.id===id); if(!g) return;
   const grp=g.g?ROWS.find(r=>r.kod===g.g):null;
-  modal(`<div class="eyebrow">${esc(g.k).toUpperCase()}</div><div style="margin-top:10px;border-radius:14px;overflow:hidden;background:#f6eef3"><img referrerpolicy="no-referrer" style="width:100%;max-height:72vh;object-fit:contain;display:block" src="${gImg(g.id,1600)}" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='${gAlt(g.id,1600)}'}" alt="${esc(g.c)}"></div><p style="margin:12px 0 0;font-size:15px">${esc(g.c)}</p>
+  modal(`<div class="eyebrow">${esc(g.k).toUpperCase()}</div><div style="margin-top:10px;border-radius:14px;overflow:hidden;background:#f6eef3"><img class="lbimg" referrerpolicy="no-referrer" style="width:100%;max-height:76vh;object-fit:contain;display:block" src="${gImg(g.id,1600)}" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='${gAlt(g.id,1600)}'}" alt="${esc(g.c)}"></div><p style="margin:14px 0 0;font-size:19px;font-weight:800;color:var(--ink)">${esc(g.c)}</p>
   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">${grp?`<button class="btn g" data-g="${grp.no}">Lihat kumpulan ${esc(grp.kod)}</button>`:''}<a class="btn g" style="text-decoration:none" href="https://drive.google.com/file/d/${g.id}/view" target="_blank" rel="noopener">Saiz penuh ↗</a><button class="btn g" data-lb="${(L[(i-1+L.length)%L.length]||g).id}">‹ Sebelum</button><button class="btn g" data-lb="${(L[(i+1)%L.length]||g).id}">Seterusnya ›</button></div>`);
 }
 function photo(g){const s=drvImg(g.url);return `<a class="photo" href="${esc(safe(g.url))}" target="_blank" rel="noopener">${s?`<img loading="lazy" referrerpolicy="no-referrer" src="${esc(s)}" alt="${esc(g.cap||'Gambar program')}">`:'<div style="display:grid;place-items:center;height:100%">📁</div>'}${g.cap?`<span>${esc(g.cap)}</span>`:''}</a>`}
@@ -602,6 +650,7 @@ function pPenilaian(){
   ${det||`<p class="muted adm-b" style="margin-top:14px">Memuatkan rekod juri…</p><p class="muted" style="margin-top:14px;font-size:13px">Nama juri dan log perubahan markah dipaparkan kepada pentadbir sahaja.</p>`}`;
 }
 
+let AN='ringkasan';
 function pAnalisis(){
   const sc=ROWS.filter(r=>r.n>0).sort(byScore);
   if(!sc.length) return head('ANALISIS','Analisis & Keputusan','')+'<div class="card muted">Belum ada markah.</div>';
@@ -611,28 +660,41 @@ function pAnalisis(){
   const strong=cp.slice().sort((a,b)=>b[1]-a[1]);
   const bz=sc.filter(r=>r.beza!=null), bzAvg=bz.length?bz.reduce((a,r)=>a+r.beza,0)/bz.length:null;
   const W=Math.max(640,sc.length*26), H=220, bw=W/sc.length;
-  const svg=`<svg viewBox="0 0 ${W} ${H+64}" width="${W}" height="${H+64}" role="img" aria-label="Carta markah purata setiap kumpulan"><defs><linearGradient id="gb" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#00b4ff"/><stop offset=".55" stop-color="#7b2ff7"/><stop offset="1" stop-color="#ff1493"/></linearGradient></defs>
-    ${[0,25,50,75,100].map(v=>`<line x1="0" x2="${W}" y1="${H-v/100*H+10}" y2="${H-v/100*H+10}" stroke="rgba(140,120,255,.15)"/><text x="2" y="${H-v/100*H+6}" fill="#a9a6d6" font-size="10">${v}</text>`).join('')}
-    <line x1="0" x2="${W}" y1="${H-mean/100*H+10}" y2="${H-mean/100*H+10}" stroke="#ffcf4a" stroke-dasharray="5 4"/>
-    ${sc.map((r,i)=>`<g><rect x="${i*bw+bw*.18}" y="${H-r.avg/100*H+10}" width="${bw*.64}" height="${r.avg/100*H}" rx="3" fill="url(#gb)"><title>${esc(r.kod)} · ${esc(r.produk)}: ${f1(r.avg)}</title></rect><text transform="translate(${i*bw+bw/2+3},${H+18}) rotate(-55)" fill="#a9a6d6" font-size="9.5" text-anchor="end">${esc((r.kod||'').replace(/\s/g,''))}</text></g>`).join('')}</svg>`;
-  return head('ANALISIS & KEPUTUSAN','Analisis Pertandingan','Ranking berdasarkan purata markah dua juri.')+
-  `<div class="stats">
+  const svg=`<svg viewBox="0 0 ${W} ${H+64}" width="${W}" height="${H+64}" role="img" aria-label="Carta markah purata setiap kumpulan"><defs><linearGradient id="gb" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#0091d5"/><stop offset=".55" stop-color="#7b2ff7"/><stop offset="1" stop-color="#e6007e"/></linearGradient></defs>
+    ${[0,25,50,75,100].map(v=>`<line x1="0" x2="${W}" y1="${H-v/100*H+10}" y2="${H-v/100*H+10}" stroke="rgba(214,0,143,.12)"/><text x="2" y="${H-v/100*H+6}" fill="#6f6782" font-size="11">${v}</text>`).join('')}
+    <line x1="0" x2="${W}" y1="${H-mean/100*H+10}" y2="${H-mean/100*H+10}" stroke="#e0a400" stroke-width="2" stroke-dasharray="6 4"/>
+    ${sc.map((r,i)=>`<g><rect x="${i*bw+bw*.16}" y="${H-r.avg/100*H+10}" width="${bw*.68}" height="${r.avg/100*H}" rx="4" fill="url(#gb)"><title>${esc(r.kod)} · ${esc(r.produk)}: ${f1(r.avg)}</title></rect><text transform="translate(${i*bw+bw/2+3},${H+18}) rotate(-55)" fill="#6f6782" font-size="10.5" font-weight="700" text-anchor="end">${esc((r.kod||'').replace(/\s/g,''))}</text></g>`).join('')}</svg>`;
+  const subj={};sc.forEach(r=>{(subj[r.subjek]=subj[r.subjek]||[]).push(r)});
+  const sub=Object.entries(subj).map(([k,L])=>({k,n:L.length,avg:L.reduce((a,r)=>a+r.avg,0)/L.length,best:L.slice().sort(byScore)[0],emas:L.filter(r=>r.medal==='Emas').length,perak:L.filter(r=>r.medal==='Perak').length,gangsa:L.filter(r=>r.medal==='Gangsa').length})).sort((a,b)=>b.avg-a.avg);
+  const md=['Emas','Perak','Gangsa'].map(m=>{const L=sc.filter(r=>r.medal===m);return {m,n:L.length,min:Math.min(...L.map(r=>r.avg)),max:Math.max(...L.map(r=>r.avg))}});
+  const B=[['ringkasan','📈','Ringkasan','Statistik utama','#ff2d95','#b0005e'],['carta','📊','Carta Markah','36 kumpulan','#1aa7ff','#0068a8'],['kriteria','🎯','Prestasi Kriteria','Kekuatan & kelemahan','#8b45ff','#5418b8'],['subjek','📚','Mengikut Subjek','Purata & terbaik','#ff9f1a','#c25f00'],['pingat','🏅','Analisis Pingat','Julat markah','#f5b800','#a67c00'],['ranking','🏆','Ranking Penuh','Kedudukan 1–36','#19c37d','#0c8a55']];
+  if(PJ) B.push(['komen','💬','Komen Juri','Pentadbir','#ff5a5a','#b32323']);
+  if(!B.some(x=>x[0]===AN)) AN='ringkasan';
+  const bar=`<div class="b3bar" id="anTop">${B.map(([k,i,t,d,c,dk])=>`<button class="b3d${AN===k?' on':''}" data-an="${k}" style="--c:${c};--d:${dk}"><i>${i}</i>${t}<small>${d}</small></button>`).join('')}</div>`;
+  const stats=`<div class="stats">
     <div class="stat"><b>${f1(hi.avg)}</b><span>Markah tertinggi</span><small>${esc(hi.kod)} · ${esc(hi.produk)}</small></div>
-    <div class="stat"><b>${f1(lo.avg)}</b><span>Markah terendah</span><small>${esc(lo.kod)}</small></div>
+    <div class="stat"><b>${f1(lo.avg)}</b><span>Markah terendah</span><small>${esc(lo.kod)} · ${esc(lo.produk)}</small></div>
     <div class="stat"><b>${f1(mean)}</b><span>Purata keseluruhan</span><small>sisihan piawai ${f1(sd)}</small></div>
     <div class="stat"><b>${f1(hi.avg-lo.avg)}</b><span>Julat markah</span><small>tertinggi − terendah</small></div>
-    <div class="stat"><b>${f1(bzAvg)}</b><span>Purata beza juri</span><small>${bz.length} booth 2 juri</small></div>
-  </div>
-  <div class="card"><h3 class="ct">CARTA MARKAH PURATA (GARIS KUNING = PURATA)</h3><div class="chart-wrap">${svg}</div></div>
-  <div class="grid g2" style="margin-top:16px">
-    <div class="card"><h3 class="ct">PRESTASI MENGIKUT KRITERIA (% DARIPADA MAKSIMUM)</h3>${bars(cp.map(([l,v])=>[l,v,f1(v)+'%']),100)}</div>
-    <div class="card"><h3 class="ct">ANALISIS KEKUATAN PROJEK</h3><p style="margin:0 0 8px">Kekuatan utama keseluruhan ialah <b>${esc(strong[0][0])}</b> (${f1(strong[0][1])}%), diikuti <b>${esc(strong[1][0])}</b> (${f1(strong[1][1])}%).</p><p style="margin:0">Ruang penambahbaikan terbesar ialah <b>${esc(strong[5][0])}</b> (${f1(strong[5][1])}%). Peratus dikira daripada purata markah semua projek yang dinilai.</p>
-    <h3 class="ct" style="margin-top:16px">PERATURAN PEMECAH SERI</h3><p class="muted" style="margin:0;font-size:13px">Seperti diluluskan urus setia: (1) purata markah keseluruhan, (2) markah Impak inovasi, (3) markah Pembentangan. Jika ketiga-tiga sama, kumpulan berkongsi kedudukan dan pingat yang sama.</p></div>
-  </div>
-  ${PJ?commentAnalysis():''}
-  <h3 class="ct" style="margin-top:26px">RANKING PENUH</h3>
-  <div class="tbl-wrap"><table><thead><tr><th>#</th><th>Kod</th><th>Projek</th><th>Subjek</th><th class="n">Juri 1</th><th class="n">Juri 2</th><th class="n">Purata</th><th class="n">Beza</th><th>Pingat</th></tr></thead><tbody>
-  ${sc.map(r=>`<tr><td><span class="rk ${r.rank<=3?'r'+r.rank:''}">${r.rank}</span></td><td>${esc(r.kod)}</td><td>${esc(r.produk)}</td><td>${esc(r.subjek)}</td><td class="n">${r.j1?f1(r.j1.jumlah):'–'}</td><td class="n">${r.j2?f1(r.j2.jumlah):'–'}</td><td class="n"><b>${f1(r.avg)}</b></td><td class="n">${r.beza!=null?f1(r.beza):'–'}</td><td>${medalPill(r.medal)}</td></tr>`).join('')}</tbody></table></div>`;
+    <div class="stat"><b>${f1(bzAvg)}</b><span>Purata beza juri</span><small>${bz.length} booth dinilai 2 juri</small></div>
+    <div class="stat"><b>${sc.filter(r=>r.avg>=80).length}</b><span>Markah ≥ 80</span><small>daripada ${sc.length} kumpulan</small></div></div>`;
+  const P={
+    ringkasan:()=>stats+`<div class="grid g2"><div class="card"><h3 class="ct">RUMUSAN</h3><p style="margin:0 0 10px">Sebanyak <b>${sc.length}</b> projek dinilai oleh dua juri setiap satu. Purata keseluruhan ialah <b>${f1(mean)}</b> markah, dengan <b>${esc(hi.kod)} · ${esc(hi.produk)}</b> mendahului pada <b>${f1(hi.avg)}</b>.</p><p style="margin:0">Kekuatan utama peserta ialah <b>${esc(strong[0][0])}</b> (${f1(strong[0][1])}%), manakala <b>${esc(strong[5][0])}</b> (${f1(strong[5][1])}%) menjadi fokus penambahbaikan siri akan datang.</p></div>
+      <div class="card"><h3 class="ct">3 TERATAS</h3><div class="mlist">${sc.slice(0,3).map(r=>`<div><span class="rk r${r.rank}">${r.rank}</span><span style="flex:1;min-width:0"><b style="font-size:16px;min-width:0">${esc(r.produk)}</b><br><span class="muted">${esc(r.kod)} · ${esc(r.subjek)}</span></span><b style="color:var(--mag);font-size:20px">${f1(r.avg)}</b></div>`).join('')}</div></div></div>`,
+    carta:()=>`<div class="card"><h3 class="ct">CARTA MARKAH PURATA SETIAP KUMPULAN</h3><p class="muted" style="margin:-6px 0 10px;font-size:14px">Garis kuning putus-putus = purata keseluruhan (${f1(mean)}).</p><div class="chart-wrap">${svg}</div></div>`,
+    kriteria:()=>`<div class="grid g2"><div class="card"><h3 class="ct">PRESTASI MENGIKUT KRITERIA (% DARIPADA MAKSIMUM)</h3>${bars(cp.map(([l,v])=>[l,v,f1(v)+'%']),100)}</div>
+      <div class="card"><h3 class="ct">ANALISIS KEKUATAN PROJEK</h3><p style="margin:0 0 8px">Kekuatan utama keseluruhan ialah <b>${esc(strong[0][0])}</b> (${f1(strong[0][1])}%), diikuti <b>${esc(strong[1][0])}</b> (${f1(strong[1][1])}%).</p><p style="margin:0">Ruang penambahbaikan terbesar ialah <b>${esc(strong[5][0])}</b> (${f1(strong[5][1])}%). Peratus dikira daripada purata markah semua projek yang dinilai.</p>
+      <h3 class="ct" style="margin-top:18px">PERATURAN PEMECAH SERI</h3><p style="margin:0;font-size:15px">Seperti diluluskan urus setia: (1) purata markah keseluruhan, (2) markah Impak inovasi, (3) markah Pembentangan. Jika ketiga-tiga sama, kumpulan berkongsi kedudukan dan pingat yang sama.</p></div></div>`,
+    subjek:()=>`<div class="grid g2"><div class="card"><h3 class="ct">PURATA MARKAH MENGIKUT SUBJEK</h3>${bars(sub.map(x=>[x.k,x.avg,f1(x.avg)]),100)}</div>
+      <div class="card"><h3 class="ct">KUMPULAN TERBAIK SETIAP SUBJEK</h3><div class="mlist">${sub.map(x=>`<div><span style="flex:1;min-width:0"><b style="font-size:15px;min-width:0">${esc(x.k)}</b><br><span class="muted">${esc(x.best.kod)} · ${esc(x.best.produk)}</span></span><b style="color:var(--mag)">${f1(x.best.avg)}</b></div>`).join('')}</div></div></div>
+      <div class="tbl-wrap" style="margin-top:16px"><table><thead><tr><th>Subjek</th><th class="n">Kumpulan</th><th class="n">Purata</th><th class="n">Emas</th><th class="n">Perak</th><th class="n">Gangsa</th></tr></thead><tbody>${sub.map(x=>`<tr><td>${esc(x.k)}</td><td class="n">${x.n}</td><td class="n"><b>${f1(x.avg)}</b></td><td class="n">${x.emas}</td><td class="n">${x.perak}</td><td class="n">${x.gangsa}</td></tr>`).join('')}</tbody></table></div>`,
+    pingat:()=>`<div class="grid g3">${md.map(x=>`<div class="card"><h3 class="ct">${medalPill(x.m)} &nbsp;${x.n} KUMPULAN</h3><p style="margin:0;font-size:17px">Julat markah <b>${f1(x.min)} – ${f1(x.max)}</b></p></div>`).join('')}</div>
+      <div class="card" style="margin-top:16px"><h3 class="ct">TABURAN PINGAT</h3>${bars(md.map(x=>[x.m,x.n,x.n]),Math.max(...md.map(x=>x.n)))}<p class="muted" style="margin:12px 0 0;font-size:14px">Pingat diberi mengikut kedudukan: ${quota()[0]} Emas, ${quota()[1]} Perak, ${quota()[2]} Gangsa.</p></div>`,
+    ranking:()=>`<div class="tbl-wrap"><table><thead><tr><th>#</th><th>Kod</th><th>Projek</th><th>Subjek</th><th class="n">Juri 1</th><th class="n">Juri 2</th><th class="n">Purata</th><th class="n">Beza</th><th>Pingat</th></tr></thead><tbody>
+      ${sc.map(r=>`<tr><td><span class="rk ${r.rank<=3?'r'+r.rank:''}">${r.rank}</span></td><td>${esc(r.kod)}</td><td><a href="#" data-g="${r.no}" style="color:inherit;font-weight:700">${esc(r.produk)}</a></td><td>${esc(r.subjek)}</td><td class="n">${r.j1?f1(r.j1.jumlah):''}</td><td class="n">${r.j2?f1(r.j2.jumlah):''}</td><td class="n"><b>${f1(r.avg)}</b></td><td class="n">${r.beza!=null?f1(r.beza):''}</td><td>${medalPill(r.medal)}</td></tr>`).join('')}</tbody></table></div>`,
+    komen:()=>commentAnalysis()
+  };
+  return head('ANALISIS & KEPUTUSAN','Analisis Pertandingan','Tekan butang untuk melihat setiap analisis. Ranking berdasarkan purata markah dua juri.')+bar+`<div class="anp">${P[AN]()}</div>`;
 }
 function commentAnalysis(){
   const c=PJ.markah.filter(m=>String(m.catatan||'').trim());
@@ -681,6 +743,9 @@ function buildReport(){
 document.addEventListener('click',async e=>{
   const lb=e.target.closest('[data-ph],[data-lb]'); if(lb){e.preventDefault();lightbox(lb.dataset.ph||lb.dataset.lb);return}
   const gk=e.target.closest('[data-gk]'); if(gk){GK=gk.dataset.gk;render();return}
+  const sb=e.target.closest('[data-sl]'); if(sb){slShow(+sb.dataset.sl);clearInterval(SL.t);SL.t=setInterval(()=>{if($('ov').hidden&&!document.hidden)slShow(1)},5500);return}
+  const sli=e.target.closest('#sl img.on'); if(sli){lightbox(sli.dataset.id);return}
+  const an=e.target.closest('[data-an]'); if(an){AN=an.dataset.an;render();document.getElementById('anTop').scrollIntoView({behavior:'smooth',block:'start'});return}
   const g=e.target.closest('[data-g]'); if(g){e.preventDefault();groupDetail(+g.dataset.g);return}
   const a=e.target.closest('[data-act]'); if(!a) return;
   const act=a.dataset.act, i=+a.dataset.i;
