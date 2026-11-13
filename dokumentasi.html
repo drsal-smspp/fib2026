@@ -469,6 +469,22 @@ async function load(){
 const kn=r=>{const n=parseInt(String(r.kod||'').replace(/\D/g,''),10);return isNaN(n)?1000+r.no:n};
 const byScore=(a,b)=>(b.avg??-1)-(a.avg??-1)||(b.crit[1]??0)-(a.crit[1]??0)||(b.crit[5]??0)-(a.crit[5]??0)||kn(a)-kn(b);
 function quota(){const T=D.tetapan||{};return [Math.max(0,parseInt(T.EMAS,10)||11),Math.max(0,parseInt(T.PERAK,10)||12),Math.max(0,parseInt(T.GANGSA,10)||13)]}
+/* Nama penuh guru pembimbing (diseragamkan daripada ejaan pendaftaran) */
+const GURU_PENUH=[
+  [/norasma|\basma\b/i,'Pn. Norasma binti Mohamed Salleh'],
+  [/ainien/i,'Cikgu Noorul Ainien'],
+  [/surina/i,'Cikgu Surina binti Saad'],
+  [/suhana/i,'Cikgu Siti Suhana'],
+  [/ismah|ismat/i,'Ustazah Ismah bt Mat'],
+  [/salbiah/i,'Dr. Salbiah binti Mohamed Salleh'],
+  [/siti fairuz/i,'Ustazah Siti Fairuz bt Daud'],
+  [/zaidi/i,'Ustaz Zaidi bin Husin'],
+  [/azuraini/i,'Pn. Azuraini bt Che Busu'],
+  [/rafiah/i,'Pn. Rafiah binti Abdul Wahab'],
+  [/hamiza|norhamiza/i,'Pn. Nur Hamiza bt Baharudin'],
+  [/anis liyana/i,'Madam Anis Liyana binti Abdul Rahim']
+];
+function guruNama(g){const t=String(g||'');for(const [re,n] of GURU_PENUH) if(re.test(t)) return n;return typeof tc==='function'?tc(t):t}
 function compute(){
   ROWS=D.groups.map(g=>{
     const s=D.markah.filter(m=>m.no===g.no);
@@ -476,7 +492,7 @@ function compute(){
     const avg=got.length?got.reduce((a,m)=>a+m.jumlah,0)/got.length:null;
     const crit=KRITERIA.map((k,i)=>got.length?got.reduce((a,m)=>a+m.k[i],0)/got.length:null);
     const meta=(D.meta||{})[g.no]||{};
-    return {...g,j1,j2,n:got.length,avg,crit,meta,kategori:meta.kategori||'',vscore:meta.video,beza:(j1&&j2)?Math.abs(j1.jumlah-j2.jumlah):null,medal:null,rank:null,ext:DOC['k'+g.no]||{}};
+    return {...g,guru:guruNama(g.guru),j1,j2,n:got.length,avg,crit,meta,kategori:meta.kategori||'',vscore:meta.video,beza:(j1&&j2)?Math.abs(j1.jumlah-j2.jumlah):null,medal:null,rank:null,ext:DOC['k'+g.no]||{}};
   });
   const Q=quota(); const order=ROWS.filter(r=>r.n>0).sort(byScore); let pk=null,pm=null,pr=0;
   order.forEach((r,i)=>{const key=f1(r.avg)+'|'+r.crit[1]+'|'+r.crit[5];let m=i<Q[0]?'Emas':i<Q[0]+Q[1]?'Perak':i<Q[0]+Q[1]+Q[2]?'Gangsa':'Penyertaan';if(key===pk){m=pm;r.rank=pr}else{r.rank=i+1}r.medal=m;pk=key;pm=m;pr=r.rank;});
