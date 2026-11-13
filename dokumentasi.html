@@ -225,6 +225,18 @@ h3.dh{font-weight:900;font-size:22px;color:var(--ink);margin:34px 0 14px;letter-
 .jg span{display:block;font-size:14px;font-weight:800;color:var(--ink)}
 @media (max-width:820px){.journey{grid-template-columns:1fr 1fr}.journey::before{display:none}.jg{grid-template-columns:1fr 1fr}.dhero img{display:none}}
 @media (max-width:460px){.journey{grid-template-columns:1fr}.sbj div{grid-template-columns:minmax(90px,120px) 1fr 24px 40px}}
+/* direktori guru */
+.dir{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:12px}
+.dc{position:relative;display:flex;flex-direction:column;gap:3px;text-align:left;font:inherit;color:inherit;cursor:pointer;background:#fff;border:2px solid color-mix(in srgb,var(--c) 30%,#fff);border-left:7px solid var(--c);border-radius:16px;padding:12px 14px;transition:transform .2s,box-shadow .2s;min-width:0}
+.dc:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(26,16,41,.12)}
+.dc .dk{font-weight:900;font-size:14px;color:var(--c);letter-spacing:.04em}
+.dc .pill{position:absolute;top:10px;right:10px;font-size:12px;padding:2px 9px}
+.dc b{font-size:17px;font-weight:900;color:var(--ink);line-height:1.25;overflow-wrap:anywhere}
+.dc .dg{font-size:15px;font-weight:800;color:var(--mag)}
+.dc .ds{font-size:13.5px;font-weight:700;color:var(--mut)}
+.dc em{font-style:normal;font-weight:900;color:var(--ink)}
+.pd .pg{font-size:12.5px;font-weight:800;color:var(--mag);margin:-4px 0 6px;line-height:1.2}
+.awc .ag{margin-top:6px;padding-top:6px;border-top:1px solid rgba(255,255,255,.4)}
 /* butang 3D analisis */
 .b3bar{scroll-margin-top:90px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin:6px 0 30px}
 .b3d{--c:#ff2d95;--d:#b0005e;position:relative;border:0;border-radius:18px;padding:16px 18px 14px;text-align:left;color:#fff;font:inherit;font-weight:900;font-size:17px;line-height:1.25;background:linear-gradient(180deg,color-mix(in srgb,var(--c) 80%,#fff),var(--c));box-shadow:0 7px 0 var(--d),0 14px 26px rgba(26,16,41,.18);transition:transform .12s,box-shadow .12s;cursor:pointer;text-shadow:0 1px 2px rgba(0,0,0,.2)}
@@ -550,6 +562,8 @@ function radar(vals,labels,size=300){const cx=size/2,cy=size/2+6,R=size/2-62,n=v
   return `<svg viewBox="0 0 ${size} ${size+10}" width="${size}" height="${size+10}" role="img" aria-label="Carta radar kriteria" style="max-width:100%">${[.25,.5,.75,1].map(f=>`<polygon points="${vals.map((v,i)=>pt(i,f).join(',')).join(' ')}" fill="${f===1?'#fff7fb':'none'}" stroke="rgba(214,0,143,.18)"/>`).join('')}${vals.map((v,i)=>`<line x1="${cx}" y1="${cy}" x2="${pt(i,1)[0]}" y2="${pt(i,1)[1]}" stroke="rgba(214,0,143,.15)"/>`).join('')}
   <polygon points="${vals.map((v,i)=>pt(i,v/100).join(',')).join(' ')}" fill="rgba(230,0,126,.22)" stroke="#e6007e" stroke-width="3" stroke-linejoin="round"/>${vals.map((v,i)=>{const [x,y]=pt(i,v/100);return `<circle cx="${x}" cy="${y}" r="5" fill="#fff" stroke="#e6007e" stroke-width="3"/>`}).join('')}
   ${labels.map((l,i)=>{const [x,y]=pt(i,1.22);return `<text x="${x}" y="${y}" text-anchor="middle" font-size="13" font-weight="800" fill="#1a1029">${esc(l)}</text><text x="${x}" y="${y+16}" text-anchor="middle" font-size="13" font-weight="900" fill="#e6007e">${f1(vals[i])}%</text>`}).join('')}</svg>`}
+const tc=t=>String(t||'').toLowerCase().replace(/\s+/g,' ').trim().replace(/(^|[\s(.'-])([a-z\u00c0-\u024f])/g,(m,a,b)=>a+b.toUpperCase()).replace(/\b(Bin|Binti|Bt|Bnti|Dan)\b/g,w=>w.toLowerCase());
+let DIRQ='';
 function pUtama(){
   const c=counts(), p={...DEF_PROFIL,...(DOC.profil||{})};
   const sc=ROWS.filter(r=>r.n>0).sort(byScore), top=sc.slice(0,3), sp=special();
@@ -571,7 +585,7 @@ function pUtama(){
 
   <div class="grid g3" style="margin-top:22px">
     <div class="card rv ig"><h3 class="ct">🏅 TABURAN PINGAT</h3><div class="dn">${donut(md,200,36,`<text x="100" y="96" text-anchor="middle" font-size="40" font-weight="900" fill="#1a1029">${md.reduce((a,x)=>a+x.v,0)}</text><text x="100" y="120" text-anchor="middle" font-size="14" font-weight="800" fill="#6f6782">PINGAT</text>`)}</div><div class="lg">${md.map(x=>`<div><i style="background:${x.c}"></i><span>${x.l}</span><b>${x.v}</b></div>`).join('')}</div></div>
-    <div class="card rv ig"><h3 class="ct">🥇 PODIUM 3 TERATAS</h3><div class="podium">${pod.map((r,k)=>r?`<div class="pd p${r.rank}"><div class="pn">${esc(r.produk)}</div><div class="pk">${esc(r.kod)}</div><div class="pb"><span>${r.rank}</span><b>${f1(r.avg)}</b></div></div>`:'').join('')}</div></div>
+    <div class="card rv ig"><h3 class="ct">🥇 PODIUM 3 TERATAS</h3><div class="podium">${pod.map((r,k)=>r?`<div class="pd p${r.rank}"><div class="pn">${esc(r.produk)}</div><div class="pk">${esc(r.kod)}</div><div class="pg">${esc(tc(r.guru))}</div><div class="pb"><span>${r.rank}</span><b>${f1(r.avg)}</b></div></div>`:'').join('')}</div></div>
     <div class="card rv ig"><h3 class="ct">📊 TABURAN MARKAH</h3><div class="hist">${bins.map((x,k)=>`<div><b>${x.v}</b><i style="height:${Math.max(4,x.v/bmax*150)}px;background:${PAL[k][0]}"></i><span>${x.l}</span></div>`).join('')}</div><p class="note">Purata keseluruhan <b>${f1(mean)}</b> markah</p></div>
   </div>
 
@@ -581,17 +595,24 @@ function pUtama(){
   </div>
 
   <h3 class="dh">🌟 ANUGERAH KHAS</h3>
-  <div class="awg">${sp.map((a,k)=>`<div class="awc rv" style="--c:${PAL[k][0]};--d:${PAL[k][1]};transition-delay:${k*60}ms"><i>${['💻','🤖','🧠','🎨','🎤','🎬','🌟'][k]||'🏆'}</i><span>${esc(a.t)}</span><b>${a.r?esc(a.r.produk):esc(a.name)}</b><small>${a.r?esc(a.r.kod)+' · '+a.v(a.r):''}</small></div>`).join('')}</div>
+  <div class="awg">${sp.map((a,k)=>`<div class="awc rv" style="--c:${PAL[k][0]};--d:${PAL[k][1]};transition-delay:${k*60}ms"><i>${['💻','🤖','🧠','🎨','🎤','🎬','🌟'][k]||'🏆'}</i><span>${esc(a.t)}</span><b>${a.r?esc(a.r.produk):esc(a.name)}</b><small>${a.r?esc(a.r.kod)+' · '+a.v(a.r):''}</small>${a.r?`<small class="ag">👩‍🏫 ${esc(tc(a.r.guru))}</small>`:''}</div>`).join('')}</div>
 
   <div class="grid g2" style="margin-top:22px">
-    <div class="card rv"><h3 class="ct">🏆 10 TERATAS</h3><div class="t10">${sc.slice(0,10).map(r=>`<div data-g="${r.no}"><span class="rk ${r.rank<=3?'r'+r.rank:''}">${r.rank}</span><span class="tn"><b>${esc(r.produk)}</b><small>${esc(r.kod)} · ${esc(r.subjek)}</small></span><span class="tb"><i style="width:${r.avg}%"></i></span><em>${f1(r.avg)}</em></div>`).join('')}</div><p style="margin:14px 0 0"><a href="#analisis">Analisis penuh →</a></p></div>
+    <div class="card rv"><h3 class="ct">🏆 10 TERATAS</h3><div class="t10">${sc.slice(0,10).map(r=>`<div data-g="${r.no}"><span class="rk ${r.rank<=3?'r'+r.rank:''}">${r.rank}</span><span class="tn"><b>${esc(r.produk)}</b><small>${esc(r.kod)} · 👩‍🏫 ${esc(tc(r.guru))}</small></span><span class="tb"><i style="width:${r.avg}%"></i></span><em>${f1(r.avg)}</em></div>`).join('')}</div><p style="margin:14px 0 0"><a href="#analisis">Analisis penuh →</a></p></div>
     <div class="card rv"><h3 class="ct">🧑‍⚖️ PENILAIAN JURI</h3><div class="jg">${[['15','juri jemputan'],['2','juri setiap booth'],['72','penilaian lengkap'],['6','kriteria rubrik'],[String(D.markah.filter(m=>String(m.catatan||'').trim()).length),'komen bertulis'],['100','markah maksimum']].map(([n,l],k)=>`<div style="--c:${PAL[k][0]}"><b>${n}</b><span>${l}</span></div>`).join('')}</div><p class="note" style="margin-top:14px">Rubrik: Keaslian 20 · Impak 25 · Fungsi 20 · Reka bentuk 10 · Booth 10 · Pembentangan 15</p></div>
   </div>
+
+  <h3 class="dh">👩‍🏫 KUMPULAN & GURU PEMBIMBING</h3>
+  <div class="card rv"><div class="tools" style="margin-bottom:14px"><input id="dirq" type="search" placeholder="Cari kumpulan, produk atau nama guru…" value="${esc(DIRQ)}"></div>
+  <div class="dir" id="dirL">${dirList()}</div>
+  <p class="note">${new Set(ROWS.map(r=>tc(r.guru))).size} nama guru pembimbing · ${ROWS.length} kumpulan · tekan kad untuk butiran kumpulan</p></div>
 
   <h3 class="dh">📸 SOROTAN GAMBAR & VIDEO</h3>
   <div class="grid g2">${videoCard()}<div class="photos" style="grid-template-columns:repeat(2,1fr)">${FEAT.slice(0,4).map(id=>gphoto(GALERI.find(g=>g.id===id))).join('')}</div></div>
   <p style="margin:14px 0 0"><a href="#galeri">Lihat ${GALERI.length} gambar dalam galeri →</a></p>`;
 }
+function dirList(){const q=DIRQ.toLowerCase();const L=ROWS.slice().sort((a,b)=>kn(a)-kn(b)).filter(r=>!q||(r.kod+' '+r.produk+' '+r.subjek+' '+r.guru).toLowerCase().includes(q));
+  return L.length?L.map(r=>{const k=['PAI','MT','GEO','SEJ','BM','IL','PJPK','MUZIK'].indexOf((r.kod||'').split(' ')[0]);const col=PAL[(k<0?8:k)%PAL.length][0];return `<button class="dc" data-g="${r.no}" style="--c:${col}"><span class="dk">${esc(r.kod)}</span>${r.medal&&r.medal!=='Penyertaan'?medalPill(r.medal):''}<b>${esc(r.produk)}</b><span class="dg">👩‍🏫 ${esc(tc(r.guru))}</span><span class="ds">${esc(r.subjek)}${r.avg!=null?' · <em>'+f1(r.avg)+'</em>':''}</span></button>`}).join(''):'<p class="muted">Tiada padanan.</p>'}
 function gphoto(g){if(!g)return '';return `<button class="photo" data-ph="${g.id}" aria-label="${esc(g.c)}"><img loading="lazy" referrerpolicy="no-referrer" src="${gImg(g.id,600)}" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='${gAlt(g.id,600)}'}" alt="${esc(g.c)}"><span>${esc(g.c)}</span></button>`}
 function videoCard(){return `<div class="card" style="padding:12px"><div class="vid" style="margin:0"><iframe src="https://drive.google.com/file/d/${VIDEO_MONTAJ.id}/preview" title="Montaj FIB 2.0" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe></div><p style="margin:10px 4px 2px;font-size:13.5px"><b>🎬 Video montaj FIB 2.0.</b> ${esc(VIDEO_MONTAJ.cap.replace(/^Montaj Future Innovators Bootcamp 2.0: /,''))} <a href="https://drive.google.com/file/d/${VIDEO_MONTAJ.id}/view" target="_blank" rel="noopener">Buka di Google Drive ↗</a></p></div>`}
 let GK='Semua';
@@ -855,6 +876,7 @@ document.addEventListener('click',async e=>{
   if(act==='sahkan'){const on=!(DOC.sahkan&&DOC.sahkan.masa);if(a.dataset.c){a.disabled=true;try{await save('sahkan',on?{masa:new Date().toISOString()}:null)}catch(err){toast('Gagal: '+err.message,1)}}else{a.dataset.c=1;a.textContent=on?'Tekan lagi untuk sahkan':'Tekan lagi untuk batal'}}
 });
 document.addEventListener('input',e=>{
+  if(e.target.id==='dirq'){DIRQ=e.target.value;$('dirL').innerHTML=dirList();return}
   if(e.target.id==='fq'){FIL.q=e.target.value;const p=e.target.selectionStart;render();const f=$('fq');f.focus();f.setSelectionRange(p,p)}
 });
 document.addEventListener('change',e=>{if(e.target.id==='fs'){FIL.s=e.target.value;render()}if(e.target.id==='fm2'){FIL.m=e.target.value;render()}});
